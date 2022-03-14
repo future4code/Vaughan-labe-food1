@@ -87,7 +87,7 @@ const SignUp = () => {
         />
         <TextField
           name={"password"}
-          value={fakePassword}
+          value={form.password}
 
           label={"Confirmar"}
           placeholder={"Confirme a senha anterior"}
