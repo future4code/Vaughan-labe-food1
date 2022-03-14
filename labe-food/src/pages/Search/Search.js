@@ -11,8 +11,6 @@ const Search = () => {
         setValue(event.target.value)
     }
 
-
-
     const filter = restaurant && restaurant.filter(restaurantes => {
       if(!inputValue){
           return false

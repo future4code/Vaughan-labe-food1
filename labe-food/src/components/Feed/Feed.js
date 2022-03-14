@@ -1,11 +1,11 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { baseURL } from "../../constants/baseurl";
-import useRequestData from "../../hooks/useRequestData";
+import { CardContent, CardMedia, Typography } from "@mui/material";
+import { useContext } from "react";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
 import { CardStyled, DivStyled, BodyContainer } from "./styled-feed";
 
 const Feed = () => {
-    const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`)
+    const {restaurants, isLoading, error} = useContext(GlobalStateContext);
 
     console.log(restaurants);
 
