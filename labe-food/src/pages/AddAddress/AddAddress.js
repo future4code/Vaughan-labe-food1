@@ -2,9 +2,9 @@ import React from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BasicCard, StyledForm, StyledCabecalho } from "./styled-addaddress";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-
+import useForm from "../../hooks/useform";
 const AddAddress = () => {
-  const { form, onChange, clear } = useform({
+  const { form, onChange, clear } = useForm({
     street: "",
     number: "",
     neighbourhood: "",
