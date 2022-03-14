@@ -1,6 +1,7 @@
 import { baseURL } from "../../constants/baseurl";
 import useRequestData from "../../hooks/useRequestData";
 import { useState } from "react";
+import {SearchIconStyled} from './styled-search'
 const Search = () => {
 
     const [restaurant, setRestaurant] = useRequestData([], `${baseURL}/restaurants`)
