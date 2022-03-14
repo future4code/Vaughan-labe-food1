@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { MainContainer } from "./styled-signup";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const { form, onChange, clear } = useForm({
     name: "",
     email: "",
@@ -15,7 +17,11 @@ const SignUp = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
+  const [fakePassword, setFakePassword] = useState("");
+
+  const onChangeFake = (event) => {
+    setFakePassword(event.target.value);
+  };
 
   const signUp = () => {
     axios
@@ -29,19 +35,24 @@ const SignUp = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    signUp();
-    clear();
+    if (fakePassword !== form.password) {
+      alert("As senhas precisam ser iguais");
+    } else {
+      signUp();
+      clear();
+    }
   };
 
   return (
     <MainContainer>
-      <header>lalalalalala</header>
+      <header>HEADER</header>
       <img src={logocolor} />
       <Typography variant="subtitle1" mt={1}>
         Cadastrar
       </Typography>
       <form onSubmit={onSubmitForm}>
         <TextField
+          id="outlined-required"
           name={"name"}
           value={form.name}
           onChange={onChange}
@@ -87,8 +98,8 @@ const SignUp = () => {
         />
         <TextField
           name={"password"}
-          value={form.password}
-
+          value={fakePassword}
+          onChange={onChangeFake}
           label={"Confirmar"}
           placeholder={"Confirme a senha anterior"}
           fullWidth
