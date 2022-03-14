@@ -62,7 +62,7 @@ const SignUp = () => {
         label={"Senha"}
         placeholder={"Mínimo 6 caracteres"}
         fullWidth
-        type="text"
+        type="password"
         margin={"normal"}
         required
       />
@@ -73,13 +73,14 @@ const SignUp = () => {
         label={"Confirmar"}
         placeholder={"Confirme a senha anterior"}
         fullWidth
-        type="text"
+        type="password"
         margin={"normal"}
         required
       />
       <Button
         variant="contained"
         type="submit"
+        color="primary"
         margin={"normal"}
         fullWidth
       >
