@@ -84,6 +84,7 @@ const SignUp = () => {
           type="text"
           margin={"normal"}
           required
+          inputProps={{pattern:"[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}"}}
         />
         <TextField
           name={"password"}
