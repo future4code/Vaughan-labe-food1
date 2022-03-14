@@ -7,6 +7,9 @@ export const MainStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h2{
+        margin-top: 10px;
+    }
 `
 
 export const ButtonNoStyle = styled.button`
@@ -16,11 +19,17 @@ export const ButtonNoStyle = styled.button`
 
 export const SearchIconStyled = styled(SearchIcon)`
     position: absolute;
+    padding: 10px;
 `
 
 export const TextFieldStyled = styled(TextField)`
     position: relative;
+    width: 85vw;
+`
+
+export const Search = styled.div`
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
+    margin: 10px;
 `
