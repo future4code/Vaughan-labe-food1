@@ -7,4 +7,7 @@ export const MainContainer = styled.div`
     max-width: 6.5rem;
   }
   align-items: center;
+  header {
+      height: 4rem;
+  }
 `;

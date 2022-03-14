@@ -1,38 +1,61 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { baseURL } from "../../constants/baseurl";
-import useRequestData from "../../hooks/useRequestData";
-import { CardStyled } from "./styled-feed";
+import { CardContent, CardMedia, Typography } from "@mui/material";
+import { useContext, useState } from "react";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
+import { ButtonNoStyle } from "../../pages/Home/styled-home";
+import { CardStyled, DivStyled, BodyContainer } from "./styled-feed";
 
-const Feed = () => {
-    const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`)
-    
-    console.log(restaurants);
+const Feed = ({isSearch}) => {
+    const {restaurants, isLoading, error} = useContext(GlobalStateContext);
+    const [inputValue, setValue] = useState("")
 
-    const renderRestaurants = restaurants && restaurants.map((restaurant) => {
-        console.log(restaurant.name)
+    const onChangeValue = (event) => {
+        setValue(event.target.value)
+    }
+
+    const renderRestaurants = restaurants && restaurants.filter(restaurantes => {
+        if(isSearch)
+        if(!inputValue){
+            return false
+        }
+          return  restaurantes.name.toLowerCase().includes(inputValue.toLowerCase())
+        
+        })
+    .map((restaurant) => {
         return (
-            <CardStyled>
-                <CardMedia
-                component="img"
-                width="10" 
-                image={restaurant.logoUrl}
-                alt="Foto do Restaurante"
-                />
-                <CardContent>
-                <Typography variant="h5" component="div">
-                    {restaurant.name}
-                    </Typography>
-                <Typography variant="body2">Tempo de entrega: {restaurant.deliveryTime} min</Typography>
-                <Typography variant="body2">Frete: R${restaurant.shipping},00</Typography>
-                </CardContent>
-            </CardStyled>
+            <div>
+                <ButtonNoStyle>
+                    <CardStyled>
+
+                        <CardMedia
+                            component="img"
+                            height="150"
+                            image={restaurant.logoUrl}
+                            alt="Foto do Restaurante"
+                        />
+                        <CardContent>
+                            <Typography variant="body" component="div" color="primary">
+                                {restaurant.name}
+                            </Typography>
+                            <BodyContainer>
+                                <Typography variant="body2" color="secondary">Tempo de entrega: {restaurant.deliveryTime} min</Typography>
+                                <Typography variant="body2" color="secondary">Frete: R${restaurant.shipping},00</Typography>
+                            </BodyContainer>
+                        </CardContent>
+                    </CardStyled>
+                </ButtonNoStyle>
+            </div>
         )
     })
     return (
-        <div>
+        <DivStyled>
+
+                {isSearch ? <input
+                onChange={onChangeValue}
+                value={inputValue}
+            /> : <></>}
             {renderRestaurants}
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
-        </div>
+        </DivStyled>
     )
 };
 

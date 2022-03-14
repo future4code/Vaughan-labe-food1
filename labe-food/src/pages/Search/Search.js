@@ -1,44 +1,19 @@
+<<<<<<< HEAD
 import { baseURL } from "../../constants/baseurl";
 import useRequestData from "../../hooks/useRequestData";
 import { useState } from "react";
 import {SearchIconStyled} from './styled-search'
+=======
+import Feed from "../../components/Feed/Feed";
+
+>>>>>>> b210c859083d87414b340476d77b27bd4ba591c2
 const Search = () => {
-
-    const [restaurant, setRestaurant] = useRequestData([], `${baseURL}/restaurants`)
-    console.log(restaurant)
-    const [inputValue, setValue] = useState("")
-
-    const onChangeValue = (event) => {
-        setValue(event.target.value)
-    }
-
-
-
-    const filter = restaurant && restaurant.filter(restaurantes => {
-      if(!inputValue){
-          return false
-      }
-        return  restaurantes.name.toLowerCase().includes(inputValue.toLowerCase())
-    }).map(restaurantes => {
-        return(
-            <p>  {restaurantes.name} </p>
-        )
-        }) 
-        console.log('filter', filter)
-
-
-    
 
     return (
         <div>
-
-            <input
-                onChange={onChangeValue}
-                value={inputValue}
+            <Feed
+                isSearch="true"
             />
-
-            {filter}
-
         </div>
     )
 };
