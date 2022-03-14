@@ -3,6 +3,10 @@ import { Button, TextField, Typography } from "@mui/material";
 import { BasicCard, StyledForm, StyledCabecalho } from "./styled-addaddress";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import useForm from "../../hooks/useform";
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd31c41cff144cbae4f9174b077e7bf96dcb6db5
 const AddAddress = () => {
   const { form, onChange, clear } = useForm({
     street: "",

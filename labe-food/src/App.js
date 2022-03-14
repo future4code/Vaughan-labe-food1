@@ -1,10 +1,12 @@
-import Router from './routes/Router';
+import { ThemeProvider } from "@mui/material";
+import theme from './constants/theme'
+import Router from "./routes/Router";
 
 function App() {
   return (
-    <div>
-     <Router />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
   );
 }
 
