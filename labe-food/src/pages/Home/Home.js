@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import Feed from "../../components/Feed/Feed";
 import { goToSearch } from "../../routes/coordinator";
-import { ButtonNoStyle } from "./styled-home";
+import { ButtonNoStyle, MainStyle, SearchIconStyled, TextFieldStyled } from "./styled-home";
 import { TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -11,14 +11,16 @@ const Home = () => {
 
     return (
         <div>
+            <MainStyle>
             <h2>Ifuture</h2>
 
             <ButtonNoStyle onClick={() => { goToSearch(navigate) }
             }>
-                    <SearchIcon />
-                <TextField label="Restaurante" />
+                    <SearchIconStyled />
+                <TextFieldStyled label="Restaurante" />
                 
             </ButtonNoStyle>
+            </MainStyle>
             <Feed />
         </div>
     )
