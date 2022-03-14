@@ -14,11 +14,11 @@ export const goToProfile = (navigate) => {
     navigate("/profile");
 };
 
-export const goToEditProfile = (navigate, id) => {
+export const goToEditProfile = (navigate) => {
     navigate("/profile/edit/user");
 };
 
-export const goToDetails = (navigate) => {
+export const goToDetails = (navigate, id) => {
     navigate(`/restaurant/${id}`);
 };
 

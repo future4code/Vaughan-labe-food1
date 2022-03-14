@@ -11,7 +11,9 @@ const Feed = () => {
         return (
             <div>
                 <p>{restaurant.name}</p>
-                <img src={restaurant.logoUrl} alt="Foto " />
+                <img src={restaurant.logoUrl} alt="Foto do Restaurante" />
+                <p>Tempo de entrega: {restaurant.deliveryTime} min</p>
+                <p>Frete: R${restaurant.shipping},00</p>
             </div>
         )
     })
