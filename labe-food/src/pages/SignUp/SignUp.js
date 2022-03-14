@@ -4,7 +4,8 @@ import { baseURL } from "../../constants/baseurl";
 import { Button, TextField, Typography } from "@mui/material";
 import logocolor from "../../assets/images/logocolor.png";
 import useForm from "../../hooks/useform.js";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { MainContainer } from "./styled-signup";
 
 const SignUp = () => {
   const { form, onChange, clear } = useForm({
@@ -14,16 +15,14 @@ const SignUp = () => {
     password: "",
   });
 
-  const [token, setToken] = useState("")
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const signUp = () => {
     axios
       .post(`${baseURL}/signup`, form)
       .then((res) => {
-        setToken(res.data.token)
-        navigate('/address')
+        window.localStorage.setItem("token", res.data.token);
+        navigate("/address");
       })
       .catch((err) => alert(err.response.data.message));
   };
@@ -31,13 +30,16 @@ const SignUp = () => {
   const onSubmitForm = (event) => {
     event.preventDefault();
     signUp();
-    clear()
+    clear();
   };
 
   return (
-    <div>
+    <MainContainer>
+      <header>lalalalalala</header>
       <img src={logocolor} />
-      <Typography>Cadastrar</Typography>
+      <Typography variant="subtitle1" mt={1}>
+        Cadastrar
+      </Typography>
       <form onSubmit={onSubmitForm}>
         <TextField
           name={"name"}
@@ -85,8 +87,8 @@ const SignUp = () => {
         />
         <TextField
           name={"password"}
-          value={form.password}
-          onChange={onChange}
+          value={fakePassword}
+
           label={"Confirmar"}
           placeholder={"Confirme a senha anterior"}
           fullWidth
@@ -104,7 +106,7 @@ const SignUp = () => {
           Criar
         </Button>
       </form>
-    </div>
+    </MainContainer>
   );
 };
 
