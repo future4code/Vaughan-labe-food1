@@ -16,11 +16,16 @@ export const ButtonNoStyle = styled.button`
 
 export const SearchIconStyled = styled(SearchIcon)`
     position: absolute;
+    margin-left: 10px;
 `
 
 export const TextFieldStyled = styled(TextField)`
     position: relative;
+    padding-left: 10px !important;
+`
+
+export const Search = styled.div`
     display: flex;
+    /* justify-content: center; */
     align-items: center;
-    justify-content: center;
 `

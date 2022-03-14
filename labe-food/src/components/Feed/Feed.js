@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { baseURL } from "../../constants/baseurl";
 import useRequestData from "../../hooks/useRequestData";
-import { CardStyled } from "./styled-feed";
+import { CardStyled, DivStyled } from "./styled-feed";
 
 const Feed = () => {
     const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`)
@@ -14,7 +14,8 @@ const Feed = () => {
             <CardStyled>
                 <CardMedia
                 component="img"
-                width="10" 
+                // sx={{ maxWidth: 450}}
+                height="150"
                 image={restaurant.logoUrl}
                 alt="Foto do Restaurante"
                 />
@@ -29,10 +30,10 @@ const Feed = () => {
         )
     })
     return (
-        <div>
+        <DivStyled>
             {renderRestaurants}
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
-        </div>
+        </DivStyled>
     )
 };
 
