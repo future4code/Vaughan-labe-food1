@@ -18,9 +18,9 @@ const Home = () => {
                 <ButtonNoStyle onClick={() => { goToSearch(navigate) }
                 }>
                     <Search>
-                        <SearchIconStyled />
+                        <SearchIconStyled sx={{ fontSize: 40 }} color="secondary" />
                         <TextFieldStyled 
-                        label="Restaurante"
+                        placeholder="Restaurante..."
                         />
                     </Search>
                 </ButtonNoStyle>
