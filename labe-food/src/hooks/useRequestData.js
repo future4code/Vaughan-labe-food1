@@ -26,6 +26,8 @@ const useRequestData = (initialData, url) => {
             setIsLoading(false);
         }
     }
+
+    return [data, setData, isLoading, error]
 };
 
 export default useRequestData;
