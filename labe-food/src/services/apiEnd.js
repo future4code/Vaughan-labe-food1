@@ -9,8 +9,8 @@ import { baseURL } from "../constants/baseurl";
 
 // form that comes from a form - An Object with name and values
 //dataUp is a function to take date back to who called.
-export const PutAdress = (form , dataUp) => {
-  const url = `${baseURL}/address`;
+export const PutAdress = (form , addressUrl  , dataUp) => {
+  const url = `${baseURL}/${addressUrl}`;
 //   console.log(form);
 //   console.log(token);
   axios
