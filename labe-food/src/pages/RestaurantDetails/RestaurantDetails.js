@@ -1,7 +1,9 @@
+import Restaurant from "../../components/Restaurant/Restaurant";
+
 const RestaurantDetails = () => {
     return (
         <div>
-            RestaurantDetails
+            <Restaurant />
         </div>
     )
 };
