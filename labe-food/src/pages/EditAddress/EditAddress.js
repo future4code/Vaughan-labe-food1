@@ -1,9 +1,13 @@
+import React from "react";
+import Address from "../../components/AdressPage/Address";
+
+
 const EditAddress = () => {
-    return (
-        <div>
-            EditAddress
-        </div>
-    )
+  return ( 
+
+    <Address 
+    title="Endereço"/>
+  )
 };
 
 export default EditAddress;
