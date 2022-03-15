@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { StyledForm , StyledBoxImag} from "./styled-login";
 import { Button, TextField, Typography } from "@mui/material";
 import useForm from '../../hooks/useform';
@@ -11,7 +11,7 @@ import logocolor from "../../assets/images/logocolor.png"
 
 const Login = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [loginDataUp , setLoginDataUp] = useState('');
     const { form, onChange, clear } = useForm({
         email: "",
@@ -21,6 +21,7 @@ const Login = () => {
      
       const dataUp = (data) => { 
           console.log(data.user.hasAdress)
+          console.log(data.user)
 
       }
     
@@ -28,6 +29,7 @@ const Login = () => {
       const onSubmit = (e) => {
         e.preventDefault()
         LoginData(form, dataUp)
+        goToHome(navigate)
      
       }
     
