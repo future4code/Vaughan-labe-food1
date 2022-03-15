@@ -23,7 +23,6 @@ export const SearchIconStyled = styled(SearchIcon)`
 `
 
 export const TextFieldStyled = styled(TextField)`
-    position: relative;
     width: 85vw;
 `
 
