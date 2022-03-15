@@ -1,14 +1,36 @@
 import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { baseURL } from "../../constants/baseurl";
 import useRequestData from "../../hooks/useRequestData";
-import { ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage, ProductText, TypographyStyled } from "./styled-restaurant";
+import { ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage, 
+    ProductText, ShippingAndTime, TimeStyled, TypographyStyled } from "./styled-restaurant";
 
 const Restaurant = () => {
     const params = useParams();
     const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
 
     const cardRestaurant = restaurantDetails.restaurant
+
+    // Tentando separar os produtos por categoria!!
+
+    // useEffect(() => {
+    //     addingCategory()
+    // }, [restaurantDetails])
+
+    // const addingCategory = () => {
+    //     if (cardRestaurant) {
+    //         let category = []
+    //         let p = 0
+    //         for (let i = 0; i < cardRestaurant.products.length; i++) {
+    //             console.log(cardRestaurant.products[i].category)
+    //             if (cardRestaurant.products[i].category !== category.name) {
+    //                 category.push({ name: cardRestaurant.products[i].category, products: [cardRestaurant.products[i]] })
+    //             }
+    //         }
+    //         console.log(category)
+    //     }
+    // }
 
     const renderProducts = cardRestaurant && cardRestaurant.products.map((product) => {
         return (
@@ -22,7 +44,7 @@ const Restaurant = () => {
                 <ProductText>
                     <TypographyStyled variant="body" color="primary">{product.name}</TypographyStyled>
                     <TypographyStyled variant="body2" color="secondary">{product.description}</TypographyStyled>
-                    <TypographyStyled variant="body">R${product.price}</TypographyStyled>
+                    <TypographyStyled variant="body">R${product.price}0</TypographyStyled>
                 </ProductText>
                 <ButtonDiv>
                     <ButtonAdd variant="outlined" color="inherit">Adicionar</ButtonAdd>
@@ -48,13 +70,15 @@ const Restaurant = () => {
                             {cardRestaurant.name}
                         </Typography>
                         <Typography variant="body2" color="secondary">{cardRestaurant.category}</Typography>
-                        <Typography variant="body2" color="secondary">{cardRestaurant.deliveryTime} min</Typography>
-                        <Typography variant="body2" color="secondary">Frete: R${cardRestaurant.shipping},00</Typography>
+                        <ShippingAndTime>
+                            <TimeStyled variant="body2" color="secondary">{cardRestaurant.deliveryTime} min</TimeStyled>
+                            <Typography variant="body2" color="secondary">Frete R${cardRestaurant.shipping},00</Typography>
+                        </ShippingAndTime>
                         <Typography variant="body2" color="secondary">{cardRestaurant.address}</Typography>
                     </CardContent>
                 </CardRestaurant>
             }
-            {renderProducts}
+            {cardRestaurant && renderProducts}
         </MainDiv>
     )
 };

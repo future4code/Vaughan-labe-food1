@@ -49,3 +49,11 @@ export const ButtonAdd = styled(Button)`
     height: 6vh;
     width: 20vw;
 `
+
+export const ShippingAndTime = styled.div`
+    display: flex;
+`
+
+export const TimeStyled = styled(Typography)`
+    padding-right: 30px;
+`
