@@ -21,11 +21,13 @@ const AddAddress = () => {
 
       <StyledForm>
         <TextField
+          sx={{fontSize:"2px"}}
           name='street'
           value={form.street}
           onChange={onChange}
           label='Logradouro'
           required
+          color="secondary"
           variant='outlined'
           placeholder='Rua / Av'
           margin='dense'
@@ -37,11 +39,13 @@ const AddAddress = () => {
           label='Número'
           required
           variant='outlined'
+          color="secondary"
           placeholder='Número'
           margin='dense'
         />
         <TextField
           name='complement'
+          color="secondary"
           value={form.complement}
           onChange={onChange}
           label='Complemento'
@@ -54,6 +58,7 @@ const AddAddress = () => {
           onChange={onChange}
           label='Bairro'
           required
+          color="secondary"
           variant='outlined'
           placeholder='Bairro'
           margin='dense'
@@ -64,6 +69,7 @@ const AddAddress = () => {
           value={form.city}
           onChange={onChange}
           label='Cidade'
+          color="secondary"
           required
           variant='outlined'
           placeholder='Cidade'
@@ -74,6 +80,7 @@ const AddAddress = () => {
           value={form.state}
           onChange={onChange}
           label='Estado'
+          color="secondary"
           required
           variant='outlined'
           placeholder='Estado'
