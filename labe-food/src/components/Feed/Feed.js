@@ -1,8 +1,9 @@
-import { CardContent, CardMedia, Typography } from "@mui/material";
+import { CardContent, CardMedia, InputAdornment, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
 import { CardStyled, DivStyled, BodyContainer } from "./styled-feed";
+import SearchIcon from '@mui/icons-material/Search';
 
 const Feed = ({ isSearch }) => {
     const { restaurants, isLoading, error } = useContext(GlobalStateContext);
@@ -22,7 +23,7 @@ const Feed = ({ isSearch }) => {
     })
         .map((restaurant) => {
             return (
-                <div>
+                <div key={restaurant.id}>
                     <ButtonNoStyle>
                         <CardStyled>
 
@@ -37,7 +38,7 @@ const Feed = ({ isSearch }) => {
                                     {restaurant.name}
                                 </Typography>
                                 <BodyContainer>
-                                    <Typography variant="body2" color="secondary">Tempo de entrega: {restaurant.deliveryTime} min</Typography>
+                                    <Typography variant="body2" color="secondary">{restaurant.deliveryTime} min</Typography>
                                     <Typography variant="body2" color="secondary">Frete: R${restaurant.shipping},00</Typography>
                                 </BodyContainer>
                             </CardContent>
@@ -49,9 +50,17 @@ const Feed = ({ isSearch }) => {
     return (
         <DivStyled>
 
-            {isSearch ? <input
-                onChange={onChangeValue}
-                value={inputValue}
+            {isSearch ? <TextField
+                id="input-with-icon-textfield"
+                placeholder="Restaurante..."
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+                variant="outlined"
             /> : <></>}
             {renderRestaurants}
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
