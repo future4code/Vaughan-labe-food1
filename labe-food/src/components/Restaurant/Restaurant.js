@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { baseURL } from "../../constants/baseurl";
 import useRequestData from "../../hooks/useRequestData";
-import { ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage, 
-    ProductText, ShippingAndTime, TimeStyled, TypographyStyled } from "./styled-restaurant";
-
+import {
+    ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage,
+    ProductText, ShippingAndTime, TimeStyled, TypographyStyled
+} from "./styled-restaurant";
 
 const Restaurant = () => {
     const params = useParams();
