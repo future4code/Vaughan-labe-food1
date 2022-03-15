@@ -2,6 +2,8 @@ import React from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BasicCard, StyledForm, StyledCabecalho } from "./styled-addaddress";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+import { PutAdress } from "../../services/apiEnd";
+import useform from '../../hooks/useform';
 
 const AddAddress = () => {
   const { form, onChange, clear } = useform({
@@ -13,19 +15,32 @@ const AddAddress = () => {
     complement: "",
   });
 
+     
+  const onSubmit = (e) => {
+    e.preventDefault()
+    PutAdress(form)
+    console.log( "submit")
+  }
+
+
+
   return (
+
+
+
+
     <BasicCard>
       <ArrowBackIosRoundedIcon />
       <hr />
       <Typography align='center'>Meu endereço</Typography>
 
-      <StyledForm>
+      <StyledForm onSubmit={onSubmit}>
         <TextField
           name='street'
           value={form.street}
           onChange={onChange}
           label='Logradouro'
-          required
+          
           variant='outlined'
           placeholder='Rua / Av'
           margin='dense'
@@ -35,7 +50,7 @@ const AddAddress = () => {
           value={form.number}
           onChange={onChange}
           label='Número'
-          required
+          
           variant='outlined'
           placeholder='Número'
           margin='dense'
@@ -53,7 +68,7 @@ const AddAddress = () => {
           value={form.neighbourhood}
           onChange={onChange}
           label='Bairro'
-          required
+          
           variant='outlined'
           placeholder='Bairro'
           margin='dense'
@@ -64,7 +79,7 @@ const AddAddress = () => {
           value={form.city}
           onChange={onChange}
           label='Cidade'
-          required
+          
           variant='outlined'
           placeholder='Cidade'
           margin='dense'
@@ -74,7 +89,7 @@ const AddAddress = () => {
           value={form.state}
           onChange={onChange}
           label='Estado'
-          required
+          
           variant='outlined'
           placeholder='Estado'
           margin='dense'
