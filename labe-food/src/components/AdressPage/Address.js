@@ -35,7 +35,7 @@ const Address = ({title}) => {
      
   const onSubmit = (e) => {
     e.preventDefault()
-    PutAdress(form, response)
+    PutAdress(form, "address" ,response)
   }
 
 
@@ -46,7 +46,8 @@ const Address = ({title}) => {
 
 
     <>
-      <ArrowBackIosRoundedIcon />
+    {/* Olhar esta navegacao depois  */}
+      <ArrowBackIosRoundedIcon  onClick={()=>navigate(-1)} />
       <hr />
       <Typography align='center'>{title}</Typography>
 

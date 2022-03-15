@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { AccountCircle } from "@mui/icons-material";
+import Navigation from "../../components/Navigation/Navigation";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Home = () => {
 
             </MainStyle>
             <Feed />
+            <Navigation />
         </div>
     )
 };
