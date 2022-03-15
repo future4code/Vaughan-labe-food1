@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 
 export const StyledForm = styled.form`
-margin: 10px;
+margin: 1rem;
 display: flex;
 flex-direction: column;
 `

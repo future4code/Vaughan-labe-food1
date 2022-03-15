@@ -5,8 +5,26 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
 
+
+
+// const styles = {
+//   "&.MuiButton-root": {
+//     // border: "2px black solid"
+//     padding: "10px",
+//   },
+//   "&.MuiButton-text": {
+//     color: "red"
+//   },
+//   "&.MuiButton-contained": {
+//     color: "black"
+//   },
+//   "&.MuiButton-outlined": {
+//     color: "brown"
+//   }
+// };
+
 const AddAddress = () => {
-  const { form, onChange, clear } = useForm({
+  const { form, onChange, clear } = useform({
     street: "",
     number: "",
     neighbourhood: "",
@@ -15,11 +33,16 @@ const AddAddress = () => {
     complement: "",
   });
 
+
+  const response =(data)=> 
+  { 
+    console.log(data.data.token)
+    console.log(data.data.user)
+  }
      
   const onSubmit = (e) => {
     e.preventDefault()
-    PutAdress(form)
-    console.log( "submit")
+    PutAdress(form, response)
   }
 
 
@@ -29,25 +52,25 @@ const AddAddress = () => {
 
 
 
-    <BasicCard>
+    <>
       <ArrowBackIosRoundedIcon />
       <hr />
       <Typography align='center'>Meu endereço</Typography>
 
       <StyledForm onSubmit={onSubmit}>
         <TextField
-          sx={{fontSize:"2px"}}
+          required
           name='street'
           value={form.street}
           onChange={onChange}
           label='Logradouro'
-          required
           color="secondary"
           variant='outlined'
           placeholder='Rua / Av'
           margin='dense'
         />
         <TextField
+          required
           name='number'
           value={form.number}
           onChange={onChange}
@@ -68,11 +91,11 @@ const AddAddress = () => {
           margin='dense'
         />
         <TextField
+          required
           name='neighbourhood'
           value={form.neighbourhood}
           onChange={onChange}
           label='Bairro'
-          required
           color="secondary"
           variant='outlined'
           placeholder='Bairro'
@@ -80,32 +103,35 @@ const AddAddress = () => {
         />
 
         <TextField
+          required
           name='city'
           value={form.city}
           onChange={onChange}
           label='Cidade'
           color="secondary"
-          required
           variant='outlined'
           placeholder='Cidade'
           margin='dense'
         />
         <TextField
+          required
           name='state'
           value={form.state}
           onChange={onChange}
           label='Estado'
           color="secondary"
-          required
           variant='outlined'
           placeholder='Estado'
           margin='dense'
         />
-        <Button type='form' color='secondary' variant='contained' size='small'>
+        <Button type='form' 
+        font="black"
+        color='primary' 
+        variant='contained' >
           Salvar
         </Button>
       </StyledForm>
-    </BasicCard>
+    </>
   );
 };
 
