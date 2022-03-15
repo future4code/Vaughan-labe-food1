@@ -22,7 +22,7 @@ const theme = createTheme({
           root: {
             fontSize: '1rem',
             padding: "0.6rem",
-            margin: " 1rem 0",
+            marginTop:"0.65rem",
             borderRadius: 2,
             textTransform: "capitalize",
           },
