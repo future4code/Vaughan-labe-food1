@@ -1,7 +1,12 @@
+import Feed from "../../components/Feed/Feed";
+
 const Search = () => {
+
     return (
         <div>
-            Search
+            <Feed
+                isSearch="true"
+            />
         </div>
     )
 };

@@ -2,11 +2,15 @@ import React from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { BasicCard, StyledForm, StyledCabecalho } from "./styled-addaddress";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+<<<<<<< HEAD
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
 
+=======
+import useForm from "../../hooks/useform";
+>>>>>>> master
 const AddAddress = () => {
-  const { form, onChange, clear } = useform({
+  const { form, onChange, clear } = useForm({
     street: "",
     number: "",
     neighbourhood: "",
@@ -36,11 +40,13 @@ const AddAddress = () => {
 
       <StyledForm onSubmit={onSubmit}>
         <TextField
+          sx={{fontSize:"2px"}}
           name='street'
           value={form.street}
           onChange={onChange}
           label='Logradouro'
-          
+          required
+          color="secondary"
           variant='outlined'
           placeholder='Rua / Av'
           margin='dense'
@@ -52,11 +58,13 @@ const AddAddress = () => {
           label='Número'
           
           variant='outlined'
+          color="secondary"
           placeholder='Número'
           margin='dense'
         />
         <TextField
           name='complement'
+          color="secondary"
           value={form.complement}
           onChange={onChange}
           label='Complemento'
@@ -68,7 +76,8 @@ const AddAddress = () => {
           value={form.neighbourhood}
           onChange={onChange}
           label='Bairro'
-          
+          required
+          color="secondary"
           variant='outlined'
           placeholder='Bairro'
           margin='dense'
@@ -79,7 +88,8 @@ const AddAddress = () => {
           value={form.city}
           onChange={onChange}
           label='Cidade'
-          
+          color="secondary"
+          required
           variant='outlined'
           placeholder='Cidade'
           margin='dense'
@@ -89,7 +99,8 @@ const AddAddress = () => {
           value={form.state}
           onChange={onChange}
           label='Estado'
-          
+          color="secondary"
+          required
           variant='outlined'
           placeholder='Estado'
           margin='dense'
