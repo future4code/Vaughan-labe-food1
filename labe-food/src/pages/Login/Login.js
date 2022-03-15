@@ -59,7 +59,7 @@ const Login = () => {
             value={form.email}
             onChange={onChange}
             label='E-mail'
-            color="secondary"
+            color="primary"
             variant='outlined'
             placeholder='email@email.com'
             margin='dense'
@@ -74,7 +74,7 @@ const Login = () => {
             label='Senha'
             variant='outlined'
             inputProps={{pattern:"[a-zA-Z0-9]{6,}"}}
-            color="secondary"
+            color="primary"
             placeholder='Minimo 6 caracteres'
             margin='dense'
             />
