@@ -1,35 +1,42 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { useContext } from "react";
+import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useParams } from "react-router";
 import { baseURL } from "../../constants/baseurl";
-import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
-import { BodyContainer } from "../Feed/styled-feed";
+import { ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage, ProductText, TypographyStyled } from "./styled-restaurant";
 
 const Restaurant = () => {
     const params = useParams();
     const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
 
-    console.log(restaurantDetails.restaurant)
-
     const cardRestaurant = restaurantDetails.restaurant
 
     const renderProducts = cardRestaurant && cardRestaurant.products.map((product) => {
         return (
-            <div key={product.id}>
-                <p>{product.name}</p>
-                <p>{product.description}</p>
-                <p>R${product.price},00</p>
-            </div>
+            <CardProducts key={product.id} variant="outlined">
+                <ProductImage
+                    component="img"
+                    height="150"
+                    image={product.photoUrl}
+                    alt="Foto do Restaurante"
+                />
+                <ProductText>
+                    <TypographyStyled variant="body" color="primary">{product.name}</TypographyStyled>
+                    <TypographyStyled variant="body2" color="secondary">{product.description}</TypographyStyled>
+                    <TypographyStyled variant="body">R${product.price}</TypographyStyled>
+                </ProductText>
+                <ButtonDiv>
+                    <ButtonAdd variant="outlined" color="inherit">Adicionar</ButtonAdd>
+                </ButtonDiv>
+            </CardProducts>
         )
-    })
+    });
 
     return (
-        <div>
+        <MainDiv>
             <h2>Restaurante</h2>
             {cardRestaurant &&
 
-                <Card>
+                <CardRestaurant>
                     <CardMedia
                         component="img"
                         height="150"
@@ -45,10 +52,10 @@ const Restaurant = () => {
                         <Typography variant="body2" color="secondary">Frete: R${cardRestaurant.shipping},00</Typography>
                         <Typography variant="body2" color="secondary">{cardRestaurant.address}</Typography>
                     </CardContent>
-                </Card>
+                </CardRestaurant>
             }
             {renderProducts}
-        </div>
+        </MainDiv>
     )
 };
 
