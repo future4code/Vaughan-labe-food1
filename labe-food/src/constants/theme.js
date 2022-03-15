@@ -21,7 +21,7 @@ const theme = createTheme({
           // Name of the slot
           root: {
             fontSize: '1rem',
-            padding: "1rem",
+            padding: "0.6rem",
             margin: " 1rem 0",
             borderRadius: 2,
             textTransform: "capitalize",

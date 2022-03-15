@@ -1,8 +1,8 @@
 import axios from "axios";
 import { baseURL } from "../constants/baseurl";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklTVGc4ZUZBTVhBM1NXZ2NxaWxaIiwibmFtZSI6ImdhYnJpZWwiLCJlbWFpbCI6ImdhYnJpZWwxM0BnYWJyaWVsLmNvbSIsImNwZiI6IjkxMS4xMTEuMTU0LTExIiwiaGFzQWRkcmVzcyI6ZmFsc2UsImlhdCI6MTY0NzI3OTk2MX0.-nDYfespw-YgrUCbFYi-DzKATeIQZGDQ2ndxyGuQqQw";
+// const token = localStorage.getItem("token")
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklTVGc4ZUZBTVhBM1NXZ2NxaWxaIiwibmFtZSI6ImdhYnJpZWwiLCJlbWFpbCI6ImdhYnJpZWwxM0BnYWJyaWVsLmNvbSIsImNwZiI6IjkxMS4xMTEuMTU0LTExIiwiaGFzQWRkcmVzcyI6ZmFsc2UsImlhdCI6MTY0NzI3OTk2MX0.-nDYfespw-YgrUCbFYi-DzKATeIQZGDQ2ndxyGuQqQw";
 
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklTVGc4ZUZBTVhBM1NXZ2NxaWxaIiwibmFtZSI6ImdhYnJpZWwiLCJlbWFpbCI6ImdhYnJpZWwxM0BnYWJyaWVsLmNvbSIsImNwZiI6IjkxMS4xMTEuMTU0LTExIiwiaGFzQWRkcmVzcyI6ZmFsc2UsImlhdCI6MTY0NzI3OTk2MX0.-nDYfespw-YgrUCbFYi-DzKATeIQZGDQ2ndxyGuQqQw"
 
@@ -18,7 +18,7 @@ export const PutAdress = (form , dataUp) => {
     .put(
       url,
       form,
-      { headers: { auth: token } }
+      { headers: { auth: localStorage.getItem("token") } }
     )
     .then((res) => {
       dataUp(res) 

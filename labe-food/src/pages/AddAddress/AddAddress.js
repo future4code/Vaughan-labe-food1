@@ -1,9 +1,11 @@
 import React from "react";
+import {useNavigate} from 'react-router-dom';
 import { Button, TextField, Typography } from "@mui/material";
 import { BasicCard, StyledForm, StyledCabecalho } from "./styled-addaddress";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
+import { goToHome } from "../../routes/coordinator";
 
 
 
@@ -24,6 +26,7 @@ import useform from '../../hooks/useform';
 // };
 
 const AddAddress = () => {
+  const navigate = useNavigate();
   const { form, onChange, clear } = useform({
     street: "",
     number: "",
@@ -37,7 +40,14 @@ const AddAddress = () => {
   const response =(data)=> 
   { 
     console.log(data.data.token)
+    localStorage.setItem("token", data.data.token)
     console.log(data.data.user)
+    console.log(data.data.user.hasAddress)
+     if( data.data.user.hasAddress && data.data.token){ 
+      goToHome(navigate)
+     }else { 
+       return; 
+     }
   }
      
   const onSubmit = (e) => {
