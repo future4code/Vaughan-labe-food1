@@ -4,8 +4,11 @@ import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
 import { CardStyled, DivStyled, BodyContainer } from "./styled-feed";
 import SearchIcon from '@mui/icons-material/Search';
+import { goToDetails } from "../../routes/coordinator";
+import { useNavigate } from "react-router";
 
 const Feed = ({ isSearch }) => {
+    const navigate = useNavigate();
     const { restaurants, isLoading, error } = useContext(GlobalStateContext);
     const [inputValue, setValue] = useState("")
 
@@ -13,7 +16,7 @@ const Feed = ({ isSearch }) => {
         setValue(event.target.value)
     }
 
-    const renderRestaurants = restaurants && restaurants.filter(restaurantes => {
+    const renderRestaurants = restaurants.restaurants && restaurants.restaurants.filter(restaurantes => {
         if (isSearch)
             if (!inputValue) {
                 return false
@@ -24,7 +27,7 @@ const Feed = ({ isSearch }) => {
         .map((restaurant) => {
             return (
                 <div key={restaurant.id}>
-                    <ButtonNoStyle>
+                    <ButtonNoStyle onClick={() => {goToDetails(navigate, restaurant.id)}}>
                         <CardStyled>
 
                             <CardMedia
