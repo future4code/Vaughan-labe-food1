@@ -3,17 +3,25 @@ import axios from 'axios';
 import { Typography } from "@mui/material";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
+import { baseURL } from "../../constants/baseurl";
 
 const Cart = () => {
-    
-    
-    
-
-
+    const {restaurants} = useContext(GlobalStateContext)
+    const [profile] = useRequestData([], `${baseURL}/profile`)
+ 
+    // PEGAR APENAS UM ENDEREÇO - filter
+    // const getRestaurantDetails = restaurants.restaurants.map((item) => {
+    //     return (
+    //         <div key={item.id}>
+    //             <Typography>{item.address}</Typography>
+    //         </div>
+    //     )
+    // })
+   
     return (
         <div>
             <Typography variant="subtitle1" mt={1}>Meu Carrinho</Typography>
-            <p>GET ENDEREÇO DE ENTREGA</p>
+            <p>endereço da pessoa</p>
             <p>GET NOME, ENDEREÇO E TEMPO DE ENTREGA DO REST</p>
             <p>CARD DE CADA ITEM</p>
             <p>FRETE</p>
