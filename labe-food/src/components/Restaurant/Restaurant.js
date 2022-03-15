@@ -6,6 +6,7 @@ import useRequestData from "../../hooks/useRequestData";
 import { ButtonAdd, ButtonDiv, CardProducts, CardRestaurant, MainDiv, ProductImage, 
     ProductText, ShippingAndTime, TimeStyled, TypographyStyled } from "./styled-restaurant";
 
+
 const Restaurant = () => {
     const params = useParams();
     const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
@@ -74,6 +75,7 @@ const Restaurant = () => {
                             <TimeStyled variant="body2" color="secondary">{cardRestaurant.deliveryTime} min</TimeStyled>
                             <Typography variant="body2" color="secondary">Frete R${cardRestaurant.shipping},00</Typography>
                         </ShippingAndTime>
+
                         <Typography variant="body2" color="secondary">{cardRestaurant.address}</Typography>
                     </CardContent>
                 </CardRestaurant>

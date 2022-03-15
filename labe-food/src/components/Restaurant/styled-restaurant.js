@@ -57,3 +57,4 @@ export const ShippingAndTime = styled.div`
 export const TimeStyled = styled(Typography)`
     padding-right: 30px;
 `
+
