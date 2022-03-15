@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../constants/baseurl";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, FormHelperText, TextField, Typography } from "@mui/material";
 import logocolor from "../../assets/images/logocolor.png";
 import useForm from "../../hooks/useform.js";
 import { useNavigate } from "react-router-dom";
@@ -35,12 +35,8 @@ const SignUp = () => {
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    if (fakePassword !== form.password) {
-      alert("As senhas precisam ser iguais");
-    } else {
-      signUp();
-      clear();
-    }
+    signUp();
+    clear();
   };
 
   return (
@@ -59,7 +55,7 @@ const SignUp = () => {
           label={"Nome"}
           placeholder={"Nome e sobrenome"}
           type="text"
-          margin={"normal"}
+          margin={"dense"}
           required
           fullWidth
         />
@@ -69,10 +65,10 @@ const SignUp = () => {
           onChange={onChange}
           label={"E-mail"}
           placeholder={"email@email.com"}
-          fullWidth
           type="text"
-          margin={"normal"}
+          margin={"dense"}
           required
+          fullWidth
         />
         <TextField
           name={"cpf"}
@@ -80,11 +76,11 @@ const SignUp = () => {
           onChange={onChange}
           label={"CPF"}
           placeholder={"000.000.000-00"}
-          fullWidth
           type="text"
-          margin={"normal"}
+          margin={"dense"}
           required
           inputProps={{pattern:"[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}"}}
+          fullWidth
         />
         <TextField
           name={"password"}
@@ -92,10 +88,10 @@ const SignUp = () => {
           onChange={onChange}
           label={"Senha"}
           placeholder={"Mínimo 6 caracteres"}
-          fullWidth
           type="password"
-          margin={"normal"}
+          margin={"dense"}
           required
+          fullWidth
         />
         <TextField
           name={"password"}
@@ -103,16 +99,19 @@ const SignUp = () => {
           onChange={onChangeFake}
           label={"Confirmar"}
           placeholder={"Confirme a senha anterior"}
+          type="password"
+          margin={"dense"}
           fullWidth
-          type="text"
-          margin={"normal"}
           required
         />
+        {form.password !== fakePassword  ? 
+            <FormHelperText color="primary" id="component-error-text">Deve ser a mesma que a anterior</FormHelperText> : 
+            <></>}
         <Button
           variant="contained"
           type="submit"
           color="primary"
-          margin={"normal"}
+          margin={"dense"}
           fullWidth
         >
           Criar
