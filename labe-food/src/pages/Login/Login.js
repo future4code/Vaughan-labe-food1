@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import { StyledForm , StyledBoxImag} from "./styled-login";
 import { Button, TextField, Typography } from "@mui/material";
 import useForm from '../../hooks/useform';
-import { goToHome } from "../../routes/coordinator";
+import { goToAddress, goToHome, goToSignUp } from "../../routes/coordinator";
 import {LoginData} from "../../services/login";
 import logocolor from "../../assets/images/logocolor.png"
 
@@ -20,8 +20,18 @@ const Login = () => {
   
      
       const dataUp = (data) => { 
-          console.log(data.user.hasAdress)
+         if(data.token && data.user.hasAddress){ 
+          goToHome(navigate)
+          return;
+         }else if( data.token ) { 
+           goToAddress(navigate)
+         } else return 
+         
+          console.log(data.user.hasAddress)
           console.log(data.user)
+          // console.log(data.token)
+          // // goToHome(navigate)
+     
 
       }
     
@@ -29,8 +39,7 @@ const Login = () => {
       const onSubmit = (e) => {
         e.preventDefault()
         LoginData(form, dataUp)
-        goToHome(navigate)
-     
+       
       }
     
 
@@ -64,6 +73,7 @@ const Login = () => {
             onChange={onChange}
             label='Senha'
             variant='outlined'
+            inputProps={{pattern:"[a-zA-Z0-9]{6,}"}}
             color="secondary"
             placeholder='Minimo 6 caracteres'
             margin='dense'
@@ -80,6 +90,7 @@ const Login = () => {
           </StyledForm>
 
           <Button
+          onClick={()=>goToSignUp(navigate)}
           style={{textTransform:"none"}}
           color="inherit"
           size="small"

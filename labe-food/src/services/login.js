@@ -15,5 +15,9 @@ export const LoginData =(body ,dataUp )=> {
             localStorage.setItem("token", res.data.token )
            
          })
-        .catch(err => console.log(err.response))
+        .catch(err => {
+            console.log(err.response)
+            alert(err.response.data.message)
+        
+        })
 }
