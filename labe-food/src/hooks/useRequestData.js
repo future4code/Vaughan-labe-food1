@@ -23,8 +23,8 @@ const useRequestData = (initialData, url) => {
 
         try {
             const response = await axios.get(url, config)
-            console.log(response.data.restaurants)
-            setData(response.data.restaurants)
+            console.log(response.data)
+            setData(response.data)
             setIsLoading(false);
         } catch (error) {
             setError(error.response)
