@@ -10,4 +10,5 @@ export const MainContainer = styled.div`
   header {
       height: 4rem;
   }
+  margin: 1rem;
 `;
