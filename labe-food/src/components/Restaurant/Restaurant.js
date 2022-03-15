@@ -14,7 +14,7 @@ const Restaurant = () => {
         <div>
             {restaurantDetails.restaurant && 
             
-            <p>restaurantDetails.restaurant.name</p>}
+            <p>{restaurantDetails.restaurant.name}</p>}
         </div>
     )
 };
