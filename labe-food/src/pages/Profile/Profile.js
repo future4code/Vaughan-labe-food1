@@ -7,9 +7,11 @@ import axios from "axios";
 import useRequestData from "../../hooks/useRequestData"
 import { TrendingUpOutlined } from "@mui/icons-material";
 import { DivPerfil, PersonaInformation, Title } from "./styled-profile";
-import { Container } from "./styled-profile";
+import { Container, AddressContainer, TextNew } from "./styled-profile";
 import EditIcon from '@mui/icons-material/Edit';
-import { TextNew, TextI } from "./styled-profile";
+import { Typography } from "@mui/material";
+import Header from "../../components/Header/Header";
+
 
 
 const Profile = () => {
@@ -19,7 +21,7 @@ const Profile = () => {
 
     const [userData] = useRequestData([], `${baseURL}/profile`)
     // const [history] = useRequestData([], `${baseURL}/orders/history`)
-    const history = [ {totalPrice :21, name: "McDonald", date:21  }, {totalPrice :21, name: "McDonald", date:22  }]
+    const history = [ {totalPrice :21, name: "McDonald", date:"21 outubro 2021"  }, {totalPrice :21, name: "McDonald", date:22  }]
     console.log(userData)
     console.log(history)
     const changeProfile = () => {
@@ -45,8 +47,13 @@ const Profile = () => {
 
 
 return (
+    <>
+    <Header title="Meu Perfil"
+    goBack ={true}
+    
+    />
    <Container>
-       <Title>Meu perfil</Title>
+      
     
     <div>
    {userData.user ?
@@ -62,17 +69,29 @@ return (
     <EditIcon onClick ={changeProfile}/>
     </div>
 
-    <TextI>
-    <p> Endereço cadastrado</p>
-    <p>{userData.adress}</p>
-    <EditIcon onClick ={changeAdress}/>
-    </TextI>
+    <AddressContainer>
+        <div>
+        <Typography mb={0.5} color="secondary">
+          Endereço cadastrado
+        </Typography>
+        <Typography color="primary.textcontrast">
+          {userData.user && userData.user.address}
+        </Typography>
+        </div>
+        <div>
+        <EditIcon onClick ={changeAdress}/>
+        </div>
+      </AddressContainer>
+      
+
+  
 
     <p>Histórico de pedidos</p>
     </div>
     
 
 </Container>
+</>
     
 
     

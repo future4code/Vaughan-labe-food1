@@ -12,15 +12,15 @@ export const DivPerfil = styled.div`
     }
 `
 
-export const TextI = styled.div`
-  width: 22.5rem;
-  height: 4.75rem;
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: #eee;
- 
-
+export const AddressContainer = styled.div`
+    background-color: #eeeeee;
+    min-height: 4.75rem;
+       padding: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
 `
+
 export const Title = styled.div`
   width: 4.25rem;
   height: 1.188rem;
