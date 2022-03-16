@@ -2,11 +2,14 @@ import React from "react";
 import Address from "../../components/AdressPage/Address";
 
 
+
 const AddAddress = () => {
-  return ( 
+  return ( <>
 
     <Address 
-    title="Meu Endereço"/>
+     title2="Meu enderenço"
+    />
+    </>
   )
 };
 

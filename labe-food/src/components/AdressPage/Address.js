@@ -2,13 +2,14 @@ import React from "react";
 import {useNavigate} from 'react-router-dom';
 import { Button, TextField, Typography } from "@mui/material";
 import { StyledForm} from "./styled-address";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
 import { goToHome } from "../../routes/coordinator";
+import Header from "../Header/Header";
+import SubHeader from "../Header/SubHeader";
 
 
-const Address = ({title}) => {
+const Address = ({title, title2}) => {
   const navigate = useNavigate();
   const { form, onChange, clear } = useform({
     street: "",
@@ -47,9 +48,10 @@ const Address = ({title}) => {
 
     <>
     {/* Olhar esta navegacao depois  */}
-      <ArrowBackIosRoundedIcon  onClick={()=>navigate(-1)} />
-      <hr />
-      <Typography align='center'>{title}</Typography>
+     
+      <Header title={title} />
+      <SubHeader title2={title2} />
+      
 
       <StyledForm onSubmit={onSubmit}>
         <TextField

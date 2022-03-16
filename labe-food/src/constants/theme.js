@@ -1,57 +1,63 @@
-import { createTheme } from '@mui/material';
-import { borderRadius } from '@mui/system';
-import { greyish, lipstick } from './colors';
-
+import { createTheme } from "@mui/material";
+import { greyish, lipstick, barMain } from "./colors";
 
 const theme = createTheme({
   palette: {
     primary: {
       main: lipstick,
-      contrastText:"#000"
+      contrastText: "#000",
     },
     secondary: {
       main: greyish,
-    }, 
-      
     },
-    components: {
-      // Name of the component
-      MuiButton: {
-        styleOverrides: {
-          // Name of the slot
-          root: {
-            fontSize: '1rem',
-            padding: "0.6rem",
-            marginTop:"0.65rem",
-            borderRadius: 2,
-            textTransform: "capitalize",
-          },
-
+    bar: {
+      main: barMain,
+      contrastText: "#000",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          main: greyish,
+          fontSize: "1rem",
+          padding: "0.6rem",
+          marginTop: "0.65rem",
+          borderRadius: 2,
+          letterSpacing:2,
+          textTransform: "capitalize",
         },
-      },MuiTextField:{ 
-        styleOverrides :{
-          root:{ 
-            // margin:"0.8rem",
-            // fontSize: '1rem',
-       
-          }
-        },
-      },MuiInputBase:{ 
-        styleOverrides: { 
-          root:{ 
-            padding: 0,
-            borderRadius:2,
-          }, input:{ 
-            fontsize:"1rem",
-
-          }
-
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          fontsize: "1rem",
+          borderRadius: 2,
+        },input:{ 
+          color: "secondary",
         }
-      }
-      
-      
+      },
     },
-        
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          fontsize: "1rem",
+          borderRadius: 2,
+        },fieldset:{ 
+          color: "primary",
+        }
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          borderRadius: 2,
+          color: greyish,
+        },
+      },
+    },
+  },
 });
 
 export default theme;
