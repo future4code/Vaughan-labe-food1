@@ -27,7 +27,7 @@ const Feed = ({ isSearch }) => {
         .map((restaurant) => {
             return (
                 <div key={restaurant.id}>
-                    <ButtonNoStyle onClick={() => {goToDetails(navigate, restaurant.id)}}>
+                    <ButtonNoStyle onClick={() => { goToDetails(navigate, restaurant.id) }}>
                         <CardStyled>
 
                             <CardMedia
@@ -50,12 +50,14 @@ const Feed = ({ isSearch }) => {
                 </div>
             )
         })
+
     return (
         <DivStyled>
 
             {isSearch ? <TextField
                 id="input-with-icon-textfield"
                 placeholder="Restaurante..."
+                onChange={onChangeValue}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">

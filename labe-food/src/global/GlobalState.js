@@ -1,11 +1,12 @@
 import { GlobalStateContext } from './GlobalStateContext';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import useRequestData from '../hooks/useRequestData';
 import { baseURL } from '../constants/baseurl';
 
 const GlobalState = (props) => {
     const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`);
     const [productsInCart, setProductsInCart] = useState([]);
+    // const [addButton, setAddButton] = useState(productsInCart.map(product => product.quantity > 0) ? "Adicionar" : "Remover")
 
     const data = {
         restaurants,
@@ -13,7 +14,9 @@ const GlobalState = (props) => {
         isLoading,
         error,
         productsInCart,
-        setProductsInCart
+        setProductsInCart,
+        // addButton,
+        // setAddButton
     }
     
     return (

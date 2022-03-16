@@ -6,22 +6,25 @@ import { goToAddress, goToEditProfile } from "../../routes/coordinator";
 import axios from "axios";
 import useRequestData from "../../hooks/useRequestData"
 import { TrendingUpOutlined } from "@mui/icons-material";
-import { DivPerfil, PersonaInformation, Title } from "./styled-profile";
+import { DivPerfil, NewContainer, OrderHistory, PersonaInformation, Title } from "./styled-profile";
 import { Container, AddressContainer, TextNew } from "./styled-profile";
 import EditIcon from '@mui/icons-material/Edit';
 import { Typography } from "@mui/material";
 import Header from "../../components/Header/Header";
 
+<<<<<<< HEAD
 
 
+
+=======
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
 const Profile = () => {
     const navigate = useNavigate()
-    // const [user, setUser] = useState({})
-    const [ordersHistory, setOrdersHistory] = useState([])
+   
 
     const [userData] = useRequestData([], `${baseURL}/profile`)
     // const [history] = useRequestData([], `${baseURL}/orders/history`)
-    const history = [ {totalPrice :21, name: "McDonald", date:"21 outubro 2021"  }, {totalPrice :21, name: "McDonald", date:22  }]
+    const history = [{ totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }, { totalPrice: 21, name: "McDonald", date: 22 }]
     console.log(userData)
     console.log(history)
     const changeProfile = () => {
@@ -34,72 +37,124 @@ const Profile = () => {
 
     }
 
-    const orders = history && history.map((order) => {
-       return(
-       <>  {order.totalPrice} 
-           {order.name}
+<<<<<<< HEAD
+    // useEffect(() => {
+    //     orders()
+    // }, [])
 
-       
-       </>  
+    const orders = history && history.map((order) => {
+        return (
+            <> {order.name}
+                {order.date}
+                {order.totalPrice}
+=======
+    const orders = history && history.map((order) => {
+        return (
+            <>  {order.totalPrice}
+                {order.name}
+
+
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
+            </>
 
         )
     })
 
 
-return (
-    <>
-    <Header title="Meu Perfil"
-    goBack ={true}
-    
-    />
-   <Container>
-      
-    
-    <div>
-   {userData.user ?
-  <TextNew>
-    <p> {userData.user.name}</p>
-     <p>{userData.user.email}</p>
-    <p> {userData.user.cpf}</p>
-    <p>{orders}</p>
-     </TextNew>
+    return (
+        <>
+            <Header title="Meu Perfil"
+                goBack={true}
 
-: <p>carregando </p> }
-    <div>
-    <EditIcon onClick ={changeProfile}/>
-    </div>
+            />
+            <Container>
+<<<<<<< HEAD
+                <div>
 
-    <AddressContainer>
-        <div>
-        <Typography mb={0.5} color="secondary">
-          Endereço cadastrado
-        </Typography>
-        <Typography color="primary.textcontrast">
-          {userData.user && userData.user.address}
-        </Typography>
-        </div>
-        <div>
-        <EditIcon onClick ={changeAdress}/>
-        </div>
-      </AddressContainer>
-      
+                    <NewContainer>
 
-  
-
-    <p>Histórico de pedidos</p>
-    </div>
-    
-
-</Container>
-</>
-    
-
-    
-    
-    
+                        {userData.user ?
+                            <TextNew>
+                                <p> {userData.user.name}</p>
+                                <p>{userData.user.email}</p>
+                                <p> {userData.user.cpf}</p>
+                                <p>{orders}</p>
+                            </TextNew>
 
 
-)
+                            : <p>carregando </p>}
+                        <div>
+                            <EditIcon onClick={changeProfile} />
+                        </div>
+                    </NewContainer>
 
-    }
+=======
+
+
+                <div>
+                    {userData.user ?
+                        <TextNew>
+                            <p> {userData.user.name}</p>
+                            <p>{userData.user.email}</p>
+                            <p> {userData.user.cpf}</p>
+                            <p>{orders}</p>
+                        </TextNew>
+
+                        : <p>carregando </p>}
+                    <div>
+                        <EditIcon onClick={changeProfile} />
+                    </div>
+
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
+                    <AddressContainer>
+                        <div>
+                            <Typography mb={0.5} color="secondary">
+                                Endereço cadastrado
+                            </Typography>
+                            <Typography color="primary.textcontrast">
+                                {userData.user && userData.user.address}
+                            </Typography>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
+                        </div>
+                        <div>
+                            <EditIcon onClick={changeAdress} />
+                        </div>
+                    </AddressContainer>
+
+
+
+<<<<<<< HEAD
+                    {/* <OrderHistory>
+    <p>Histórico de pedidos</p> */}
+                </div>
+                <OrderHistory>
+                    <p>Histórico de pedidos</p>
+                    {history.length > 0 ? orders : <p>Você não realizou nenhum pedido</p>}
+
+                </OrderHistory>
+=======
+
+                    <p>Histórico de pedidos</p>
+                </div>
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
+
+
+            </Container>
+        </>
+
+<<<<<<< HEAD
+
+
+
+
+
+
+=======
+>>>>>>> 1d24169bc06271bb44e9a211ce3ff7de581092fb
+    )
+
+}
 export default Profile;

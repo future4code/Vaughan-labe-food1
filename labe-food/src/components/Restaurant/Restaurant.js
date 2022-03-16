@@ -4,6 +4,9 @@ import {
   Card,
   CardContent,
   CardMedia,
+  FormControl,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
@@ -24,13 +27,38 @@ import {
   TimeStyled,
   TypographyStyled,
 } from "./styled-restaurant";
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 
 const Restaurant = () => {
   const params = useParams();
   const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
   const { productsInCart, setProductsInCart } = useContext(GlobalStateContext);
+  // const { addButton, setAddButton } = useContext(GlobalStateContext);
+  const [open, setOpen] = useState(false);
+  const [quantityNumber, setQuantityNumber] = useState('0');
+
 
   const cardRestaurant = restaurantDetails.restaurant;
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleChange = (event) => {
+    setQuantityNumber(event.target.value);
+  };
 
   // Tentando separar os produtos por categoria!!
 
@@ -53,18 +81,43 @@ const Restaurant = () => {
   // }
 
   const addToCart = (id) => {
-    const productToAdd = restaurantDetails.restaurant.products.find(product => id === product.id)
-    const newProductsCart= [...productsInCart, productToAdd]
-    setProductsInCart(newProductsCart)
+    const cartProduct = productsInCart.find(product => id === product.id)
+
+    if (cartProduct) {
+      const newProductsInCart = productsInCart.map(product => {
+        if (id === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + quantityNumber
+          }
+        }
+        return product
+      })
+
+      setProductsInCart(newProductsInCart)
+    } else {
+      const addProduct = cardRestaurant.products.find(product => id === product.id)
+
+      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: quantityNumber }]
+
+      setProductsInCart(newProductsInCart)
+    }
+    setOpen(false)
   };
 
   const removeFromCart = (id) => {
-    const productsCartCopy = [...productsInCart]
-    const staysInCart = productsCartCopy.filter((product) => {
-      return id !== product.id
-    })
-    setProductsInCart(staysInCart)
-  }
+    const newProductsInCart = productsInCart.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          quantity: product.quantity - 1
+        }
+      }
+      return product
+    }).filter((product) => product.quantity > 0)
+
+    setProductsInCart(newProductsInCart)
+  };
 
   const renderProducts =
     cardRestaurant &&
@@ -89,16 +142,48 @@ const Restaurant = () => {
             </TypographyStyled>
           </ProductText>
           <ButtonDiv>
-            <ButtonAdd variant='outlined' color='inherit' onClick={() => {addToCart(product.id)}}>
+            <ButtonAdd variant='outlined' color='inherit' onClick={handleOpen}>
               Adicionar
             </ButtonAdd>
-            <button onClick={() => {removeFromCart(product.id)}}>remover</button>
+            <button onClick={() => { removeFromCart(product.id) }}>remover</button>
           </ButtonDiv>
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Selecione a quantidade desejada
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Selecione a quantidade desejada
+              </Typography>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select
+                  value={quantityNumber}
+                  onChange={handleChange}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value="0">
+                    <em>0</em>
+                  </MenuItem>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                </Select>
+              </FormControl>
+              <Button onClick={() => addToCart(product.id)}>Adicionar</Button>
+            </Box>
+          </Modal>
         </CardProducts>
       );
     });
 
-    console.log(productsInCart)
+  console.log(productsInCart)
 
   return (
     <>
@@ -136,6 +221,7 @@ const Restaurant = () => {
         )}
         {cardRestaurant && renderProducts}
       </MainDiv>
+
     </>
   );
 };
