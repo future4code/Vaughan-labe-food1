@@ -1,3 +1,4 @@
+import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -5,9 +6,10 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { baseURL } from "../../constants/baseurl";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
 import Header from "../Header/Header";
 import {
@@ -25,10 +27,8 @@ import {
 
 const Restaurant = () => {
   const params = useParams();
-  const [restaurantDetails] = useRequestData(
-    [],
-    `${baseURL}/restaurants/${params.id}`
-  );
+  const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
+  const { productsInCart, setProductsInCart } = useContext(GlobalStateContext);
 
   const cardRestaurant = restaurantDetails.restaurant;
 
@@ -51,6 +51,20 @@ const Restaurant = () => {
   //         console.log(category)
   //     }
   // }
+
+  const addToCart = (id) => {
+    const productToAdd = restaurantDetails.restaurant.products.find(product => id === product.id)
+    const newProductsCart= [...productsInCart, productToAdd]
+    setProductsInCart(newProductsCart)
+  };
+
+  const removeFromCart = (id) => {
+    const productsCartCopy = [...productsInCart]
+    const staysInCart = productsCartCopy.filter((product) => {
+      return id !== product.id
+    })
+    setProductsInCart(staysInCart)
+  }
 
   const renderProducts =
     cardRestaurant &&
@@ -75,13 +89,16 @@ const Restaurant = () => {
             </TypographyStyled>
           </ProductText>
           <ButtonDiv>
-            <ButtonAdd variant='outlined' color='inherit'>
+            <ButtonAdd variant='outlined' color='inherit' onClick={() => {addToCart(product.id)}}>
               Adicionar
             </ButtonAdd>
+            <button onClick={() => {removeFromCart(product.id)}}>remover</button>
           </ButtonDiv>
         </CardProducts>
       );
     });
+
+    console.log(productsInCart)
 
   return (
     <>

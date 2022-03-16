@@ -5,12 +5,15 @@ import { baseURL } from '../constants/baseurl';
 
 const GlobalState = (props) => {
     const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`);
+    const [productsInCart, setProductsInCart] = useState([]);
 
     const data = {
         restaurants,
         getRestaurants,
         isLoading,
-        error
+        error,
+        productsInCart,
+        setProductsInCart
     }
     
     return (
