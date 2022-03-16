@@ -1,5 +1,14 @@
 import React, { useContext } from "react";
-import { Button, Card, CardActionArea, CardContent, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
 import { baseURL } from "../../constants/baseurl";
@@ -10,14 +19,14 @@ import {
   ShippingContainer,
   PaymentContainer,
 } from "./styled-cart";
-import Header from "../../components/Header/Header";
+import Restaurant from "../../components/Restaurant/Restaurant";
 
 const Cart = () => {
   const { restaurants } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const params = useParams();
   const restId = "1";
-  console.log(restaurants);
+
 
   const cardRestaurantDetails =
     restaurants.restaurants &&
@@ -56,13 +65,10 @@ const Cart = () => {
       });
 
   return (
-    <>
-    <Header 
-    title="Meu carrinho" 
-    goBack={true}/>
-
     <div>
-   
+      <Typography align="center" mt={3}>
+        Meu Carrinho
+      </Typography>
       <AddressContainer>
         <Typography mb={0.5} color="secondary">
           Endereço de entrega
@@ -75,26 +81,34 @@ const Cart = () => {
       {cardRestaurantDetails}
 
       <p>CARD DE CADA ITEM</p>
+      <Restaurant/>
+
       {deliveryPrice}
       <p>SUBTOTAL: VALOR TOTAL COM FRETE</p>
       <PaymentContainer>
         <Typography>Forma de pagamento</Typography>
         <hr />
         <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="cartao"
-        name="radio-buttons-group"
-      >
-        <FormControlLabel value="dinheiro" control={<Radio />} label="Dinheiro" />
-        <FormControlLabel value="cartao" control={<Radio />} label="Cartão de crédito" />
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="cartao"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel
+            value="dinheiro"
+            control={<Radio />}
+            label="Dinheiro"
+          />
+          <FormControlLabel
+            value="cartao"
+            control={<Radio />}
+            label="Cartão de crédito"
+          />
         </RadioGroup>
-        <Button fullWidth variant="contained">Confirmar</Button>
+        <Button fullWidth variant="contained">
+          Confirmar
+        </Button>
       </PaymentContainer>
-      
-      
-      
     </div>
-    </>
   );
 };
 
