@@ -53,18 +53,42 @@ const Restaurant = () => {
   // }
 
   const addToCart = (id) => {
-    const productToAdd = restaurantDetails.restaurant.products.find(product => id === product.id)
-    const newProductsCart= [...productsInCart, productToAdd]
-    setProductsInCart(newProductsCart)
+    const cartProduct = productsInCart.find(product => id === product.id)
+
+    if (cartProduct) {
+      const newProductsInCart = productsInCart.map(product => {
+        if (id === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1
+          }
+        }
+        return product
+      })
+
+      setProductsInCart(newProductsInCart)
+    } else {
+      const addProduct = cardRestaurant.products.find(product => id === product.id)
+
+      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: 1 }]
+
+      setProductsInCart(newProductsInCart)
+    }
   };
 
   const removeFromCart = (id) => {
-    const productsCartCopy = [...productsInCart]
-    const staysInCart = productsCartCopy.filter((product) => {
-      return id !== product.id
-    })
-    setProductsInCart(staysInCart)
-  }
+    const newProductsInCart = productsInCart.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          quantity: product.quantity - 1
+        }
+      }
+      return product
+    }).filter((product) => product.quantity > 0)
+
+    setProductsInCart(newProductsInCart)
+  };
 
   const renderProducts =
     cardRestaurant &&
@@ -89,16 +113,16 @@ const Restaurant = () => {
             </TypographyStyled>
           </ProductText>
           <ButtonDiv>
-            <ButtonAdd variant='outlined' color='inherit' onClick={() => {addToCart(product.id)}}>
+            <ButtonAdd variant='outlined' color='inherit' onClick={() => { addToCart(product.id) }}>
               Adicionar
             </ButtonAdd>
-            <button onClick={() => {removeFromCart(product.id)}}>remover</button>
+            <button onClick={() => { removeFromCart(product.id) }}>remover</button>
           </ButtonDiv>
         </CardProducts>
       );
     });
 
-    console.log(productsInCart)
+  console.log(productsInCart)
 
   return (
     <>

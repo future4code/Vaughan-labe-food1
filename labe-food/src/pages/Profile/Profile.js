@@ -12,8 +12,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Typography } from "@mui/material";
 import Header from "../../components/Header/Header";
 
-
-
 const Profile = () => {
     const navigate = useNavigate()
     // const [user, setUser] = useState({})
@@ -21,7 +19,7 @@ const Profile = () => {
 
     const [userData] = useRequestData([], `${baseURL}/profile`)
     // const [history] = useRequestData([], `${baseURL}/orders/history`)
-    const history = [ {totalPrice :21, name: "McDonald", date:"21 outubro 2021"  }, {totalPrice :21, name: "McDonald", date:22  }]
+    const history = [{ totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }, { totalPrice: 21, name: "McDonald", date: 22 }]
     console.log(userData)
     console.log(history)
     const changeProfile = () => {
@@ -35,71 +33,65 @@ const Profile = () => {
     }
 
     const orders = history && history.map((order) => {
-       return(
-       <>  {order.totalPrice} 
-           {order.name}
+        return (
+            <>  {order.totalPrice}
+                {order.name}
 
-       
-       </>  
+
+            </>
 
         )
     })
 
 
-return (
-    <>
-    <Header title="Meu Perfil"
-    goBack ={true}
-    
-    />
-   <Container>
-      
-    
-    <div>
-   {userData.user ?
-  <TextNew>
-    <p> {userData.user.name}</p>
-     <p>{userData.user.email}</p>
-    <p> {userData.user.cpf}</p>
-    <p>{orders}</p>
-     </TextNew>
+    return (
+        <>
+            <Header title="Meu Perfil"
+                goBack={true}
 
-: <p>carregando </p> }
-    <div>
-    <EditIcon onClick ={changeProfile}/>
-    </div>
-
-    <AddressContainer>
-        <div>
-        <Typography mb={0.5} color="secondary">
-          Endereço cadastrado
-        </Typography>
-        <Typography color="primary.textcontrast">
-          {userData.user && userData.user.address}
-        </Typography>
-        </div>
-        <div>
-        <EditIcon onClick ={changeAdress}/>
-        </div>
-      </AddressContainer>
-      
-
-  
-
-    <p>Histórico de pedidos</p>
-    </div>
-    
-
-</Container>
-</>
-    
-
-    
-    
-    
+            />
+            <Container>
 
 
-)
+                <div>
+                    {userData.user ?
+                        <TextNew>
+                            <p> {userData.user.name}</p>
+                            <p>{userData.user.email}</p>
+                            <p> {userData.user.cpf}</p>
+                            <p>{orders}</p>
+                        </TextNew>
 
-    }
+                        : <p>carregando </p>}
+                    <div>
+                        <EditIcon onClick={changeProfile} />
+                    </div>
+
+                    <AddressContainer>
+                        <div>
+                            <Typography mb={0.5} color="secondary">
+                                Endereço cadastrado
+                            </Typography>
+                            <Typography color="primary.textcontrast">
+                                {userData.user && userData.user.address}
+                            </Typography>
+                        </div>
+                        <div>
+                            <EditIcon onClick={changeAdress} />
+                        </div>
+                    </AddressContainer>
+
+
+
+
+                    <p>Histórico de pedidos</p>
+                </div>
+
+
+            </Container>
+        </>
+
+    )
+
+}
 export default Profile;
