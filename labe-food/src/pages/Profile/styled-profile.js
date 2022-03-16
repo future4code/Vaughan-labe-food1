@@ -19,8 +19,30 @@ export const AddressContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+
+
 `
 
+export const OrderHistory = styled.div`
+    padding: 0 1rem 0 1rem;
+    padding-bottom: 5rem;
+    .division-orders {
+        background-color: black;
+        height: 1px;
+    }
+    .noRequests{
+        text-align: center;
+    }
+`
+
+export const NewContainer = styled.div`
+    /* background-color: #eeeeee; */
+    min-height: 4.75rem;
+       padding: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    ` 
 export const Title = styled.div`
   width: 4.25rem;
   height: 1.188rem;
