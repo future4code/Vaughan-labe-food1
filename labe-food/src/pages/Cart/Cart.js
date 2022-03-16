@@ -10,6 +10,7 @@ import {
   ShippingContainer,
   PaymentContainer,
 } from "./styled-cart";
+import Header from "../../components/Header/Header";
 
 const Cart = () => {
   const { restaurants } = useContext(GlobalStateContext);
@@ -55,8 +56,13 @@ const Cart = () => {
       });
 
   return (
+    <>
+    <Header 
+    title="Meu carrinho" 
+    goBack={true}/>
+
     <div>
-      <Typography align="center" mt={3}>Meu Carrinho</Typography>
+   
       <AddressContainer>
         <Typography mb={0.5} color="secondary">
           Endereço de entrega
@@ -88,6 +94,7 @@ const Cart = () => {
       
       
     </div>
+    </>
   );
 };
 

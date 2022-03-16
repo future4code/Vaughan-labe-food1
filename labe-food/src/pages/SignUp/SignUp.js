@@ -6,6 +6,7 @@ import logocolor from "../../assets/images/logocolor.png";
 import useForm from "../../hooks/useform.js";
 import { useNavigate } from "react-router-dom";
 import { MainContainer } from "./styled-signup";
+import Header from "../../components/Header/Header";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -40,8 +41,10 @@ const SignUp = () => {
   };
 
   return (
+    <>
+
+    <Header />
     <MainContainer>
-      <header>HEADER</header>
       <img src={logocolor} />
       <Typography variant="subtitle1" mt={1}>
         Cadastrar
@@ -118,6 +121,7 @@ const SignUp = () => {
         </Button>
       </form>
     </MainContainer>
+    </>
   );
 };
 
