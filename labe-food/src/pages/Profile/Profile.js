@@ -9,7 +9,7 @@ import { TrendingUpOutlined } from "@mui/icons-material";
 import { DivPerfil, NewContainer, OrderHistory, PersonaInformation, Title } from "./styled-profile";
 import { Container, AddressContainer, TextNew } from "./styled-profile";
 import EditIcon from '@mui/icons-material/Edit';
-import { Typography } from "@mui/material";
+import { Typography, CardContent} from "@mui/material";
 import Header from "../../components/Header/Header";
 
 
@@ -92,8 +92,17 @@ const Profile = () => {
     <p>Histórico de pedidos</p> */}
                 </div>
                 <OrderHistory>
-                    <p>Histórico de pedidos</p>
-                    {history.length > 0 ? orders : <p>Você não realizou nenhum pedido</p>}
+                   
+                    
+                    <CardContent>
+          <Typography gutterBottom variant="body2" component="div">
+             Histórico de pedidos
+          </Typography>
+          {history.length > 0 ? orders : <Typography variant="body2" color="text.secondary" >Você não realizou nenhum pedido   </Typography>}
+          <Typography variant="body2" color="text.secondary">
+      
+          </Typography>
+        </CardContent>
 
                 </OrderHistory>
 
