@@ -19,6 +19,7 @@ import {
   ShippingContainer,
   PaymentContainer,
 } from "./styled-cart";
+import Restaurant from "../../components/Restaurant/Restaurant";
 
 const Cart = () => {
   const { restaurants } = useContext(GlobalStateContext);
@@ -31,7 +32,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === restId;
+        return item.id === params.id;
       })
       .map((item) => {
         return (
@@ -53,7 +54,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === restId;
+        return item.id === params.id;
       })
       .map((item) => {
         return (
@@ -80,6 +81,8 @@ const Cart = () => {
       {cardRestaurantDetails}
 
       <p>CARD DE CADA ITEM</p>
+      <Restaurant/>
+
       {deliveryPrice}
       <p>SUBTOTAL: VALOR TOTAL COM FRETE</p>
       <PaymentContainer>
