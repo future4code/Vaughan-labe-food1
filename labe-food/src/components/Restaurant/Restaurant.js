@@ -1,3 +1,4 @@
+import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -53,9 +54,17 @@ const Restaurant = () => {
 
   const addToCart = (id) => {
     const productToAdd = restaurantDetails.restaurant.products.find(product => id === product.id)
-    const productsCartCopy = [...productsInCart, productToAdd]
-    setProductsInCart(productsCartCopy)
+    const newProductsCart= [...productsInCart, productToAdd]
+    setProductsInCart(newProductsCart)
   };
+
+  const removeFromCart = (id) => {
+    const productsCartCopy = [...productsInCart]
+    const staysInCart = productsCartCopy.filter((product) => {
+      return id !== product.id
+    })
+    setProductsInCart(staysInCart)
+  }
 
   const renderProducts =
     cardRestaurant &&
@@ -83,6 +92,7 @@ const Restaurant = () => {
             <ButtonAdd variant='outlined' color='inherit' onClick={() => {addToCart(product.id)}}>
               Adicionar
             </ButtonAdd>
+            <button onClick={() => {removeFromCart(product.id)}}>remover</button>
           </ButtonDiv>
         </CardProducts>
       );
