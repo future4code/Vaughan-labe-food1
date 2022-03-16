@@ -1,7 +1,14 @@
+import { baseURL } from "../../constants/baseurl";
+import useRequestData from "../../hooks/useRequestData";
+import { useState } from "react";
+import {SearchIconStyled} from './styled-search'
 import Feed from "../../components/Feed/Feed";
-import Header from '../../components/Header/Header';
-
+import { goToDetails } from "../../routes/coordinator";
+import { useNavigate, useParams } from "react-router";
+import Header from "../../components/Header/Header"
 const Search = () => {
+    const navigate = useNavigate()
+  
 
     return (
         <>
@@ -9,6 +16,8 @@ const Search = () => {
         <div>
             <Feed
                 isSearch="true"
+                
+                
             />
         </div>
         </>
