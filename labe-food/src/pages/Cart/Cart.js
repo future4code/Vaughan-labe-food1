@@ -19,6 +19,7 @@ import {
   ShippingContainer,
   PaymentContainer,
 } from "./styled-cart";
+import Restaurant from "../../components/Restaurant/Restaurant";
 
 const Cart = () => {
   const { restaurants } = useContext(GlobalStateContext);
@@ -80,6 +81,8 @@ const Cart = () => {
       {cardRestaurantDetails}
 
       <p>CARD DE CADA ITEM</p>
+      <Restaurant/>
+
       {deliveryPrice}
       <p>SUBTOTAL: VALOR TOTAL COM FRETE</p>
       <PaymentContainer>
