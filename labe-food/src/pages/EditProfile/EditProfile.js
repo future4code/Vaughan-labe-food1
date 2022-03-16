@@ -7,6 +7,7 @@ import useForm from "../../hooks/useform.js";
 import { useNavigate } from "react-router-dom";
 import { MainContainer , StyledForm } from "./styled-editprofile"
 import { PutAdress } from "../../services/apiEnd";
+import Header from "../../components/Header/Header";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const EditProfile = () => {
   };
 
   return (
+  <>
+  <Header title="Meu perfil" goBack={true}/>
     <MainContainer>
       <Typography align="center" variant="subtitle1" mt={10}>
         Editar
@@ -86,6 +89,7 @@ const EditProfile = () => {
         </Button>
       </StyledForm>
     </MainContainer>
+    </>
   );
 };
 

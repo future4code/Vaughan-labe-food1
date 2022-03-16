@@ -2,13 +2,14 @@ import React from "react";
 import {useNavigate} from 'react-router-dom';
 import { Button, TextField, Typography } from "@mui/material";
 import { StyledForm} from "./styled-address";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
 import { goToHome } from "../../routes/coordinator";
+import Header from "../Header/Header";
+import SubHeader from "../Header/SubHeader";
 
 
-const Address = ({title}) => {
+const Address = ({title, title2}) => {
   const navigate = useNavigate();
   const { form, onChange, clear } = useform({
     street: "",
@@ -47,9 +48,10 @@ const Address = ({title}) => {
 
     <>
     {/* Olhar esta navegacao depois  */}
-      <ArrowBackIosRoundedIcon  onClick={()=>navigate(-1)} />
-      <hr />
-      <Typography align='center'>{title}</Typography>
+     
+      <Header title={title} />
+      <SubHeader title2={title2} />
+      
 
       <StyledForm onSubmit={onSubmit}>
         <TextField
@@ -58,7 +60,7 @@ const Address = ({title}) => {
           value={form.street}
           onChange={onChange}
           label='Logradouro'
-          color="secondary"
+          color="primary"
           variant='outlined'
           placeholder='Rua / Av'
           margin='dense'
@@ -71,13 +73,13 @@ const Address = ({title}) => {
           label='Número'
           
           variant='outlined'
-          color="secondary"
+          color="primary"
           placeholder='Número'
           margin='dense'
         />
         <TextField
           name='complement'
-          color="secondary"
+          color="primary"
           value={form.complement}
           onChange={onChange}
           label='Complemento'
@@ -90,7 +92,7 @@ const Address = ({title}) => {
           value={form.neighbourhood}
           onChange={onChange}
           label='Bairro'
-          color="secondary"
+          color="primary"
           variant='outlined'
           placeholder='Bairro'
           margin='dense'
@@ -102,7 +104,7 @@ const Address = ({title}) => {
           value={form.city}
           onChange={onChange}
           label='Cidade'
-          color="secondary"
+          color="primary"
           variant='outlined'
           placeholder='Cidade'
           margin='dense'
@@ -113,7 +115,7 @@ const Address = ({title}) => {
           value={form.state}
           onChange={onChange}
           label='Estado'
-          color="secondary"
+          color="primary"
           variant='outlined'
           placeholder='Estado'
           margin='dense'

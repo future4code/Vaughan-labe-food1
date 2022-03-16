@@ -11,14 +11,4 @@ flex-direction: column;
 `
 
 
-export  function BasicCard(props) {
-  return (
-    <Card 
-
-    style={{display: "flex", flexDirection: "column" }}
- >
-     {props.children}
-    </Card>
-  );
-}
 

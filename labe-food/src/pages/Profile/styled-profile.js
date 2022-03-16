@@ -33,7 +33,7 @@ export const Title = styled.div`
   letter-spacing: -0.39px;
   text-align: center;
   color: var(--black);
-}
+
 `
 
 export const TextNew = styled.div`
@@ -52,11 +52,11 @@ export const Container = styled.div`
     flex-direction: column;
     box-sizing: border-box;
     overflow-y: auto;
-    /* div{
+    div{
         display: flex;
     
         width: 80%;
         margin: 2% auto;
-    } */
+    }
    
 `
