@@ -32,7 +32,7 @@ import Modal from '@mui/material/Modal';
 
 const Restaurant = () => {
   const params = useParams();
-  const [restaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
+  const [restaurantDetails, getRestaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
   const { productsInCart, setProductsInCart } = useContext(GlobalStateContext);
   // const { addButton, setAddButton } = useContext(GlobalStateContext);
   const [open, setOpen] = useState(false);
@@ -40,6 +40,9 @@ const Restaurant = () => {
 
 
   const cardRestaurant = restaurantDetails.restaurant;
+
+  useEffect(() => {
+  }, [productsInCart])
 
   const style = {
     position: 'absolute',
@@ -142,10 +145,13 @@ const Restaurant = () => {
             </TypographyStyled>
           </ProductText>
           <ButtonDiv>
-            <ButtonAdd variant='outlined' color='inherit' onClick={handleOpen}>
-              Adicionar
-            </ButtonAdd>
-            <button onClick={() => { removeFromCart(product.id) }}>remover</button>
+            {productsInCart.map(product => product.quantity > 0) ?
+              <ButtonAdd variant='outlined' color='inherit' onClick={handleOpen}>
+                Adicionar
+              </ButtonAdd> :
+              <button onClick={() => { removeFromCart(product.id) }}>remover</button>}
+
+
           </ButtonDiv>
 
           <Modal
