@@ -32,7 +32,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === restId;
+        return item.id === params.id;
       })
       .map((item) => {
         return (
@@ -54,7 +54,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === restId;
+        return item.id === params.id;
       })
       .map((item) => {
         return (
