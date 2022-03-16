@@ -8,14 +8,17 @@ import { useContext } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { AccountCircle } from "@mui/icons-material";
 import Navigation from "../../components/Navigation/Navigation";
+import Header from '../../components/Header/Header';
+
 
 const Home = () => {
     const navigate = useNavigate();
     
     return (
         <div>
+            <Header title="Ifuture"   goBack={true} />
             <MainStyle>
-                <h2>Ifuture</h2>
+             
 
 
                 <ButtonNoStyle onClick={() => { goToSearch(navigate) }
