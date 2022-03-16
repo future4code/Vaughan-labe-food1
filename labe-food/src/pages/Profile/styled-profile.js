@@ -46,17 +46,17 @@ export const TextNew = styled.div`
 `
 
 export const Container = styled.div`
-    max-width: 100vw;
+      max-width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     overflow-y: auto;
-    div{
-        display: flex;
-    
-        width: 80%;
-        margin: 2% auto;
+    .address{
+        background-color: black
+    }
+    .tituloCenter{
+        text-align: center;
     }
    
 `

@@ -18,7 +18,8 @@ const Profile = () => {
     const [ordersHistory, setOrdersHistory] = useState([])
 
     const [userData] = useRequestData([], `${baseURL}/profile`)
-    const [history] = useRequestData([], `${baseURL}/orders/history`)
+    // const [history] = useRequestData([], `${baseURL}/orders/history`)
+    const history = [ {totalPrice :21, name: "McDonald", date:21  }, {totalPrice :21, name: "McDonald", date:22  }]
     console.log(userData)
     console.log(history)
     const changeProfile = () => {
@@ -31,12 +32,16 @@ const Profile = () => {
 
     }
 
-    // const orders = history && history.map((order) => {
-    //    return(
-    //        <p>{order.totalPrice}</p>
+    const orders = history && history.map((order) => {
+       return(
+       <>  {order.totalPrice} 
+           {order.name}
 
-    //     )
-    // })
+       
+       </>  
+
+        )
+    })
 
 
 return (
@@ -49,17 +54,21 @@ return (
     <p> {userData.user.name}</p>
      <p>{userData.user.email}</p>
     <p> {userData.user.cpf}</p>
+    <p>{orders}</p>
      </TextNew>
+
 : <p>carregando </p> }
     <div>
     <EditIcon onClick ={changeProfile}/>
     </div>
 
     <TextI>
-   <br/> <p> Endereço cadastrado</p>
+    <p> Endereço cadastrado</p>
     <p>{userData.adress}</p>
-    <EditIcon onClick ={changeProfile}/>
+    <EditIcon onClick ={changeAdress}/>
     </TextI>
+
+    <p>Histórico de pedidos</p>
     </div>
     
 
