@@ -18,10 +18,10 @@ const SignUp = () => {
     password: "",
   });
 
-  const [fakePassword, setFakePassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onChangeFake = (event) => {
-    setFakePassword(event.target.value);
+    setConfirmPassword(event.target.value);
   };
 
   const signUp = () => {
@@ -98,7 +98,7 @@ const SignUp = () => {
         />
         <TextField
           name={"password"}
-          value={fakePassword}
+          value={confirmPassword}
           onChange={onChangeFake}
           label={"Confirmar"}
           placeholder={"Confirme a senha anterior"}
@@ -107,7 +107,7 @@ const SignUp = () => {
           fullWidth
           required
         />
-        {form.password !== fakePassword  ? 
+        {form.password !== confirmPassword  ? 
             <FormHelperText color="primary" id="component-error-text">Deve ser a mesma que a anterior</FormHelperText> : 
             <></>}
         <Button
