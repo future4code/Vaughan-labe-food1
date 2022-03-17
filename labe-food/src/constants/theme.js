@@ -20,7 +20,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           main: greyish,
-          fontSize: "1rem",
+          fontSize: ".8rem",
           padding: "0.6rem",
           marginTop: "0.65rem",
           borderRadius: 2,

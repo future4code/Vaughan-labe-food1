@@ -5,22 +5,24 @@ import { BoxStyled } from './styled-navigation';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
+import { useNavigate } from 'react-router';
+import { goToCart, goToHome, goToProfile } from '../../routes/coordinator';
 
 const Navigation = () => {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   return (
     <BoxStyled sx={{ width: 500 }}>
       <BottomNavigation
-        showLabels
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction icon={<HomeOutlinedIcon />} />
-        <BottomNavigationAction icon={<ShoppingCartOutlinedIcon />} />
-        <BottomNavigationAction icon={<PermIdentityOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToHome(navigate)} icon={<HomeOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToCart(navigate)} icon={<ShoppingCartOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToProfile(navigate)} icon={<PermIdentityOutlinedIcon />} />
       </BottomNavigation>
     </BoxStyled>
   );

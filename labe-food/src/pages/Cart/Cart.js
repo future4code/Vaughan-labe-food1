@@ -20,6 +20,7 @@ import {
 } from "./styled-cart";
 import Header from '../../components/Header/Header'
 import useForm from "../../hooks/useform";
+import Navigation from "../../components/Navigation/Navigation";
 
 const Cart = () => {
   const { restaurants, productsInCart } = useContext(GlobalStateContext);
@@ -165,6 +166,7 @@ const Cart = () => {
         </form>
         {activeOrder}
       </PaymentContainer>
+      <Navigation />
     </div>
   );
 };

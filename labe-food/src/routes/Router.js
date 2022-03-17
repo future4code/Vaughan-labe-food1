@@ -13,7 +13,6 @@ import Error from '../pages/Error/Error';
 
 const Router = () => {
     return (
-        <BrowserRouter>
             <Routes>
 
                 <Route path='/' element={ <Home />} />
@@ -40,7 +39,6 @@ const Router = () => {
 
 
             </Routes>
-        </BrowserRouter>
     )
 }
 
