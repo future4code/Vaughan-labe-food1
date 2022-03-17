@@ -87,6 +87,7 @@ const Login = () => {
             color='primary'
             placeholder='Minimo 6 caracteres'
             margin='dense'
+            type="password"
           />
 
           <Button

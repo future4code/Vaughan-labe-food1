@@ -7,8 +7,11 @@ import { goToDetails } from "../../routes/coordinator";
 import { useNavigate, useParams } from "react-router";
 import Header from "../../components/Header/Header"
 import Navigation from "../../components/Navigation/Navigation";
+import useProtectedPage from "../../hooks/useProtectedPage";
+
 const Search = () => {
     const navigate = useNavigate()
+    useProtectedPage();
 
 
     return (

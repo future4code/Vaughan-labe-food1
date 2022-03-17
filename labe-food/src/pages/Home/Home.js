@@ -9,10 +9,12 @@ import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { AccountCircle } from "@mui/icons-material";
 import Navigation from "../../components/Navigation/Navigation";
 import Header from '../../components/Header/Header';
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 
 const Home = () => {
     const navigate = useNavigate();
+    useProtectedPage();
     
     return (
         <div>

@@ -25,7 +25,6 @@ const useRequestData = (initialData, url) => {
         try {
             const response = await axios.get(url, config)
             setData(response.data)
-            console.log("userequest")
             setIsLoading(false);
         } catch (error) {
             setError(error.response)
