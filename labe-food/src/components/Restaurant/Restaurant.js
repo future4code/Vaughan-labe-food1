@@ -78,8 +78,17 @@ const Restaurant = () => {
   // }
 
   const handleOpen = (product) => {
+    if(restaurantId && restaurantId !== params.id) {
+      if(window.confirm("Você já tem itens adicionados no seu carrinho de outro restaurante. Deseja limpar o carrinho?")) {
+        setRestaurantId("")
+        setProductsInCart([])
+        setProductToAdd(product);
+        setOpen(true)
+      }
+    } else {
     setOpen(true)
     setProductToAdd(product);
+  }
   };
   const handleClose = () => setOpen(false);
   const handleChange = (event) => {
