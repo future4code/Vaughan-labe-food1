@@ -5,8 +5,11 @@ import { baseURL } from '../constants/baseurl';
 
 const GlobalState = (props) => {
     const [restaurants, getRestaurants, isLoading, error] = useRequestData([], `${baseURL}/restaurants`);
+    const [addressData, getDataAddress, isLoadingAddress, errorAddress] = useRequestData( "", `${baseURL}/profile/address`);
     const [productsInCart, setProductsInCart] = useState([]);
     // const [addButton, setAddButton] = useState(productsInCart.map(product => product.quantity > 0) ? "Adicionar" : "Remover")
+   const dataAdressDown = addressData
+
 
     const data = {
         restaurants,
@@ -16,7 +19,12 @@ const GlobalState = (props) => {
         productsInCart,
         setProductsInCart,
         // addButton,
-        // setAddButton
+        // setAddButton, 
+        addressData, 
+        getDataAddress,
+         isLoadingAddress, 
+         errorAddress,
+         dataAdressDown,
     }
     
     return (
