@@ -13,7 +13,7 @@ import {
   PersonaInformation,
   Title,
 } from "./styled-profile";
-import { Container, AddressContainer, TextNew } from "./styled-profile";
+import { Container, AddressContainer, TextNew, StyledHistory } from "./styled-profile";
 import EditIcon from "@mui/icons-material/Edit";
 import { Typography, CardContent } from "@mui/material";
 import Header from "../../components/Header/Header";
@@ -28,8 +28,8 @@ const Profile = () => {
   const [userData] = useRequestData([], `${baseURL}/profile`);
   // const [history] = useRequestData([], `${baseURL}/orders/history`)
   const history = [
-    { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" },
-    { totalPrice: 21, name: "McDonald", date: 22 },
+    { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }
+    
   ];
 
   // useEffect(() => {
@@ -72,7 +72,7 @@ const Profile = () => {
                 <p> {userData.user.name}</p>
                 <p>{userData.user.email}</p>
                 <p> {userData.user.cpf}</p>
-                <p>{orders}</p>
+               
               </TextNew>
             ) : (
               <p>carregando </p>
@@ -96,10 +96,19 @@ const Profile = () => {
             </div>
           </AddressContainer>
 
+          <StyledHistory>
+         <h3>Histórico de Pedidos </h3>
+         {orders}
+
+
+        </StyledHistory>
+
           {/* <OrderHistory>
     <p>Histórico de pedidos</p> */}
         </div>
-        <OrderHistory>
+
+       
+        {/* <OrderHistory>
           <CardContent>
             <Typography gutterBottom variant='body2' component='div'>
               Histórico de pedidos
@@ -113,7 +122,7 @@ const Profile = () => {
             )}
             <Typography variant='body2' color='text.secondary'></Typography>
           </CardContent>
-        </OrderHistory>
+        </OrderHistory> */}
       </Container>
       <Navigation />
     </>
