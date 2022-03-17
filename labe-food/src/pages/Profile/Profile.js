@@ -23,17 +23,16 @@ import Navigation from "../../components/Navigation/Navigation";
 const Profile = () => {
   const navigate = useNavigate();
 
-  const {userData, getUserData , isLoadingUserData } = useContext(GlobalStateContext)
-//   const [userData] = useRequestData([], `${baseURL}/profile`);
+  const [userData] = useRequestData([], `${baseURL}/profile`);
   // const [history] = useRequestData([], `${baseURL}/orders/history`)
   const history = [
     { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" },
     { totalPrice: 21, name: "McDonald", date: 22 },
   ];
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
 
   const changeProfile = () => {
     goToEditProfile(navigate);
