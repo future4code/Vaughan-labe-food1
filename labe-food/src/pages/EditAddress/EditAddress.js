@@ -5,17 +5,19 @@ import { Button, TextField, Typography } from "@mui/material";
 import { StyledForm} from "./styled-editaddress";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
-import { goToHome } from "../../routes/coordinator";
+import { goToHome, goToProfile } from "../../routes/coordinator";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
 import { baseURL } from "../../constants/baseurl";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 
 const EditAddress = () => {
   const navigate = useNavigate();
   // const [dataAdressDown] = useRequestData([], `${baseURL}/profile/address`)
   const { dataAdressDown } = useContext(GlobalStateContext)
+  useProtectedPage();
 
   const [onChangeStreet, setOnChangeStreet] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.street);
 
@@ -66,7 +68,7 @@ const EditAddress = () => {
     console.log(data.data.user)
     console.log(data.data.user.hasAddress)
      if( data.data.user.hasAddress && data.data.token){ 
-      goToHome(navigate)
+      goToProfile(navigate)
      }else { 
        alert( "Entre com o Endereço ")
        return; 

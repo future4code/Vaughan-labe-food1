@@ -38,7 +38,7 @@ const Restaurant = () => {
   const [open, setOpen] = useState(false);
   const [quantityNumber, setQuantityNumber] = useState('0');
   const [productToAdd, setProductToAdd] = useState({});
-
+  const {restaurantId, setRestaurantId} = useContext(GlobalStateContext);
 
   const cardRestaurant = restaurantDetails.restaurant;
 
@@ -55,16 +55,6 @@ const Restaurant = () => {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
-
-
-  const handleOpen = (product) => {
-    setOpen(true)
-    setProductToAdd(product);
-  };
-  const handleClose = () => setOpen(false);
-  const handleChange = (event) => {
-    setQuantityNumber(event.target.value);
   };
 
   // Tentando separar os produtos por categoria!!
@@ -87,6 +77,15 @@ const Restaurant = () => {
   //     }
   // }
 
+  const handleOpen = (product) => {
+    setOpen(true)
+    setProductToAdd(product);
+  };
+  const handleClose = () => setOpen(false);
+  const handleChange = (event) => {
+    setQuantityNumber(event.target.value);
+  };
+
   const addToCart = (id) => {
     const cartProduct = productsInCart.find(product => id === product.id)
 
@@ -95,9 +94,10 @@ const Restaurant = () => {
         if (id === product.id) {
           return {
             ...product,
-            quantity: product.quantity + quantityNumber
+            quantity: product.quantity + quantityNumber,
           }
         }
+        setRestaurantId(params.id)
         return product
       })
 
@@ -105,9 +105,10 @@ const Restaurant = () => {
     } else {
       const addProduct = cardRestaurant.products.find(product => id === product.id)
 
-      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: quantityNumber }]
+      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: quantityNumber}]
 
       setProductsInCart(newProductsInCart)
+      setRestaurantId(params.id)
     }
     setOpen(false)
   };
@@ -197,7 +198,8 @@ const Restaurant = () => {
       );
     });
 
-  console.log(productsInCart)
+  console.log("produtos no carrinho", productsInCart)
+  console.log("id do restaurante", restaurantId)
 
   return (
     <>

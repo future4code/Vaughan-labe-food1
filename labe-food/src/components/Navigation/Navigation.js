@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router';
 import { goToCart, goToHome, goToProfile } from '../../routes/coordinator';
 
 const Navigation = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("home");
   const navigate = useNavigate();
-
+  
   return (
     <BoxStyled sx={{ width: 500 }}>
       <BottomNavigation
@@ -20,9 +20,9 @@ const Navigation = () => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction onClick={() => goToHome(navigate)} icon={<HomeOutlinedIcon />} />
-        <BottomNavigationAction onClick={() => goToCart(navigate)} icon={<ShoppingCartOutlinedIcon />} />
-        <BottomNavigationAction onClick={() => goToProfile(navigate)} icon={<PermIdentityOutlinedIcon />} />
+        <BottomNavigationAction value="home" onClick={() => goToHome(navigate)} icon={<HomeOutlinedIcon />} />
+        <BottomNavigationAction value="cart" onClick={() => goToCart(navigate)} icon={<ShoppingCartOutlinedIcon />} />
+        <BottomNavigationAction value="profile" onClick={() => goToProfile(navigate)} icon={<PermIdentityOutlinedIcon />} />
       </BottomNavigation>
     </BoxStyled>
   );

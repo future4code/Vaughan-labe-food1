@@ -19,21 +19,22 @@ import { Typography, CardContent } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import Navigation from "../../components/Navigation/Navigation";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const Profile = () => {
   const navigate = useNavigate();
+  useProtectedPage();
 
-  const {userData, getUserData , isLoadingUserData } = useContext(GlobalStateContext)
-//   const [userData] = useRequestData([], `${baseURL}/profile`);
+  const [userData] = useRequestData([], `${baseURL}/profile`);
   // const [history] = useRequestData([], `${baseURL}/orders/history`)
   const history = [
     { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" },
     { totalPrice: 21, name: "McDonald", date: 22 },
   ];
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
 
   const changeProfile = () => {
     goToEditProfile(navigate);

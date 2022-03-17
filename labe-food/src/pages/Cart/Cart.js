@@ -25,8 +25,12 @@ import Navigation from "../../components/Navigation/Navigation";
 import Restaurant from "../../components/Restaurant/Restaurant";
 import { ButtonDiv, CardProducts, ProductImage, ProductText, TypographyStyled } from "../../components/Restaurant/styled-restaurant";
 
+import useProtectedPage from "../../hooks/useProtectedPage";
+
 const Cart = () => {
-  const { restaurants, productsInCart, setProductsInCart } = useContext(GlobalStateContext);
+  useProtectedPage();
+  const { restaurants, productsInCart } = useContext(GlobalStateContext);
+
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const [orderData] = useRequestData([], `${baseURL}/active-order`);
   // const { form, onChange, clear } = useForm({
