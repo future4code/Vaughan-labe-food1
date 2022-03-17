@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const MainContainer = styled.div`
+    margin-bottom: 30vh;
+`
+
 export const AddressContainer = styled.div`
     background-color: #eeeeee;
     min-height: 4.75rem;

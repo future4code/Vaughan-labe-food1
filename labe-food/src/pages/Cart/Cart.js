@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios'
 import {
   Button,
@@ -13,6 +13,7 @@ import useRequestData from "../../hooks/useRequestData";
 import { baseURL } from "../../constants/baseurl";
 import { useParams } from "react-router-dom";
 import {
+  MainContainer,
   AddressContainer,
   RestaurantContainer,
   ShippingContainer,
@@ -21,45 +22,105 @@ import {
 import Header from '../../components/Header/Header'
 import useForm from "../../hooks/useform";
 import Navigation from "../../components/Navigation/Navigation";
+import Restaurant from "../../components/Restaurant/Restaurant";
+import { ButtonDiv, CardProducts, ProductImage, ProductText, TypographyStyled } from "../../components/Restaurant/styled-restaurant";
+
 import useProtectedPage from "../../hooks/useProtectedPage";
 
 const Cart = () => {
   useProtectedPage();
   const { restaurants, productsInCart } = useContext(GlobalStateContext);
+
   const [profile] = useRequestData([], `${baseURL}/profile`);
-  const [orderData] = useRequestData([], `${baseURL}/active-order`)
-  const { form, onChange, clear } = useForm({
-    products: [
-      {
-        id: 'xhq0QgZXklGSmaBDy6KQ',
-        quantity: 1
-      }
-    ],
-    paymentMethod: 'creditcard'
-  });
+  const [orderData] = useRequestData([], `${baseURL}/active-order`);
+  // const { form, onChange, clear } = useForm({
+  //   products: productsInCart && productData,
+  //   paymentMethod: 'money'
+  // });
+  const [paymentValue, setPaymentValue] = useState('')
   const params = useParams();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const token = window.localStorage.getItem("token")
+  const [productData, setProductData] = useState([])
 
   const handleClick = () => {
     setOpen(true);
+    placeOrder()
   };
 
-  const onSubmitForm = (event) => {
-    event.preventDefault();
-    placeOrder();
-    clear();
+  const onChange = (e) => {
+    setPaymentValue(e.target.value)
   };
+
+  // const getProductData = productsInCart.map((product) => {
+  //   return setProductData([...productData, {id: product.id, quantity: product.quantity}])
+  // })
+
+  useEffect(() => {
+    productsInCart.map((product) => {
+      return setProductData([...productData, {id: product.id, quantity: product.quantity}])
+    })
+  }, [])
+
+  console.log(productData)
+
+  const removeFromCart = (id) => {
+    const newProductsInCart = productsInCart.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          quantity: product.quantity - 1
+        }
+      }
+      return product
+    }).filter((product) => product.quantity > 0)
+
+    setProductsInCart(newProductsInCart)
+  };
+
+  const renderProducts = productsInCart.map((product) => {
+    return (
+      <CardProducts key={product.id} variant='outlined'>
+          <ProductImage
+            component='img'
+            height='150'
+            image={product.photoUrl}
+            alt='Foto do Restaurante'
+          />
+          <ProductText>
+            <TypographyStyled variant='body' color='primary'>
+              {product.name}
+            </TypographyStyled>
+            <TypographyStyled variant='body2' color='secondary'>
+              {product.description}
+            </TypographyStyled>
+            <TypographyStyled variant='body'>
+              R${product.price}0
+            </TypographyStyled>
+          </ProductText>
+          <ButtonDiv>
+              <Button variant='outlined' color='inherit' onClick={() => {removeFromCart(product.id)}}>
+                Remover
+              </Button> 
+           </ButtonDiv>
+          </CardProducts>
+    )
+  })
 
   const placeOrder = () => {
-    const body = productsInCart;
+    const body = {
+      products: productData,
+      paymentMethod: paymentValue
+    }
     axios.post(`${baseURL}/restaurants/${params.id}/order`, body, { headers: {
       auth: token
     }}
   ).then((res) => {
-    console.log(res.data)
+    console.log(body)
+    
   }).catch((err) => {
     console.log(err.response)
+    console.log(body)
   })
   }
 
@@ -113,10 +174,10 @@ const Cart = () => {
         );
       });
 
-      
+   console.log(paymentValue)   
 
   return (
-    <div>
+    <MainContainer>
       <Header title="Meu Carrinho"/>
       
       <AddressContainer>
@@ -130,13 +191,11 @@ const Cart = () => {
 
       {cardRestaurantDetails}
 
-      <p>CARD DE CADA ITEM</p>
+      {renderProducts}
       
-
       {deliveryPrice}
       <p>SUBTOTAL: VALOR TOTAL COM FRETE</p>
       <PaymentContainer>
-        <form onSubmit={onSubmitForm}>
         <Typography>Forma de pagamento</Typography>
         <hr />
         <RadioGroup
@@ -145,15 +204,13 @@ const Cart = () => {
           name="radio-buttons-group"
         >
           <FormControlLabel
-            name={'paymentMethod'}
             value={'money'}
             control={<Radio />}
             label="Dinheiro"
             onChange={onChange}
           />
           <FormControlLabel
-            name={"paymentMethod"}
-            value={form.paymentMethod}
+            value={"creditcard"}
             control={<Radio />}
             label="Cartão de crédito"
             onChange={onChange}
@@ -165,11 +222,10 @@ const Cart = () => {
         >
           Confirmar
         </Button>
-        </form>
         {activeOrder}
       </PaymentContainer>
       <Navigation />
-    </div>
+    </MainContainer>
   );
 };
 
