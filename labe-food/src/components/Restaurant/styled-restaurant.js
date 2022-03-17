@@ -7,6 +7,7 @@ export const MainDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 5rem;
 `
 
 export const CardRestaurant = styled(Card)`
