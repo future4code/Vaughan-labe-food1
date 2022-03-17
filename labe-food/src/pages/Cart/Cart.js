@@ -21,8 +21,10 @@ import {
 import Header from '../../components/Header/Header'
 import useForm from "../../hooks/useform";
 import Navigation from "../../components/Navigation/Navigation";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const Cart = () => {
+  useProtectedPage();
   const { restaurants, productsInCart } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const [orderData] = useRequestData([], `${baseURL}/active-order`)
