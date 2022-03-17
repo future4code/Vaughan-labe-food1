@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Card, Select } from "@mui/material";
 import styled from "styled-components";
 
 export const DivStyled = styled.div`
@@ -18,4 +18,13 @@ export const BodyContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+`
+
+export const FilterContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+export const SelectStyled = styled(Select)`
+    width: 40vw;
 `

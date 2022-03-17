@@ -1,21 +1,28 @@
-import { CardContent, CardMedia, InputAdornment, TextField, Typography } from "@mui/material";
+import { Button, CardContent, CardMedia, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
-import { CardStyled, DivStyled, BodyContainer } from "./styled-feed";
+import { CardStyled, DivStyled, BodyContainer, FilterContainer, SelectStyled } from "./styled-feed";
 import SearchIcon from '@mui/icons-material/Search';
 import { goToDetails } from "../../routes/coordinator";
 import { useNavigate } from "react-router";
+import { RestaurantSharp } from "@mui/icons-material";
 
 const Feed = ({ isSearch }) => {
     const navigate = useNavigate();
     const { restaurants, isLoading, error } = useContext(GlobalStateContext);
     const [inputValue, setValue] = useState("")
+    const [categoryValue, setCategoryValue] = useState("")
+
+    const filterCategory = (event) => {
+        setCategoryValue(event.target.value)
+    }
 
     const onChangeValue = (event) => {
         setValue(event.target.value)
     }
 
+    console.log(restaurants.restaurants)
     const renderRestaurants = restaurants.restaurants && restaurants.restaurants.filter(restaurantes => {
         if (isSearch)
             if (!inputValue) {
@@ -23,6 +30,8 @@ const Feed = ({ isSearch }) => {
             }
         return restaurantes.name.toLowerCase().includes(inputValue.toLowerCase())
 
+    }).filter((restaurant) => {
+        return restaurant.category.toLowerCase().includes(categoryValue.toLowerCase())
     })
         .map((restaurant) => {
             return (
@@ -51,6 +60,8 @@ const Feed = ({ isSearch }) => {
             )
         })
 
+    console.log(categoryValue)
+
     return (
         <DivStyled>
 
@@ -67,6 +78,32 @@ const Feed = ({ isSearch }) => {
                 }}
                 variant="outlined"
             /> : <></>}
+            <FilterContainer>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="demo-simple-select-autowidth-label">Filtrar</InputLabel>
+                    <SelectStyled
+                        labelId="demo-simple-select-autowidth-label"
+                        id="demo-simple-select-autowidth"
+                        value={categoryValue}
+                        onChange={filterCategory}
+                        autoWidth
+                        label="Filtrar"
+                    >
+                        <MenuItem value="">
+                            <em>Categoria</em>
+                        </MenuItem>
+                        <MenuItem value={"árabe"}>Árabe</MenuItem>
+                        <MenuItem value={"sorvetes"}>Sorvete</MenuItem>
+                        <MenuItem value={"carnes"}>Carnes</MenuItem>
+                        <MenuItem value={"petiscos"}>Petiscos</MenuItem>
+                        <MenuItem value={"asiática"}>Asiática</MenuItem>
+                        <MenuItem value={"hamburguer"}>Hamburguer</MenuItem>
+                        <MenuItem value={"italiana"}>Italiana</MenuItem>
+                        <MenuItem value={"baiana"}>Baiana</MenuItem>
+                        <MenuItem value={"mexicana"}>Mexicana</MenuItem>
+                    </SelectStyled>
+                </FormControl>
+            </FilterContainer>
             {renderRestaurants}
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
         </DivStyled>
