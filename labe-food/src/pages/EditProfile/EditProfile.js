@@ -40,11 +40,9 @@ const EditProfile = () => {
 
   return (
   <>
-  <Header title="Meu perfil" />
+  <Header title="Editar" />
     <MainContainer>
-      <Typography align="center" variant="subtitle1" mt={10}>
-        Editar
-      </Typography>
+      
       <StyledForm onSubmit={onSubmitForm}>
         <TextField
           id="outlined-required"
