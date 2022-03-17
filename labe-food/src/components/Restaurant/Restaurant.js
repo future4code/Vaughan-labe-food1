@@ -37,6 +37,7 @@ const Restaurant = () => {
   // const { addButton, setAddButton } = useContext(GlobalStateContext);
   const [open, setOpen] = useState(false);
   const [quantityNumber, setQuantityNumber] = useState('0');
+  const [productToAdd, setProductToAdd] = useState({});
 
 
   const cardRestaurant = restaurantDetails.restaurant;
@@ -57,7 +58,10 @@ const Restaurant = () => {
   };
 
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (product) => {
+    setOpen(true)
+    setProductToAdd(product);
+  };
   const handleClose = () => setOpen(false);
   const handleChange = (event) => {
     setQuantityNumber(event.target.value);
@@ -146,7 +150,7 @@ const Restaurant = () => {
           </ProductText>
           <ButtonDiv>
             {productsInCart.map(product => product.quantity > 0) ?
-              <ButtonAdd variant='outlined' color='inherit' onClick={handleOpen}>
+              <ButtonAdd variant='outlined' color='inherit' onClick={() => { handleOpen(product) }}>
                 Adicionar
               </ButtonAdd> :
               <button onClick={() => { removeFromCart(product.id) }}>remover</button>}
@@ -161,9 +165,6 @@ const Restaurant = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Selecione a quantidade desejada
-              </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Selecione a quantidade desejada
               </Typography>
@@ -180,9 +181,16 @@ const Restaurant = () => {
                   <MenuItem value={1}>1</MenuItem>
                   <MenuItem value={2}>2</MenuItem>
                   <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={7}>7</MenuItem>
+                  <MenuItem value={8}>8</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
                 </Select>
               </FormControl>
-              <Button onClick={() => addToCart(product.id)}>Adicionar</Button>
+              <Button onClick={() => addToCart(productToAdd.id)}>Adicionar</Button>
             </Box>
           </Modal>
         </CardProducts>
