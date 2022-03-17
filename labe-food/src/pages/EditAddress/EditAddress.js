@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Address from "../../components/AdressPage/Address";
 import {useNavigate} from 'react-router-dom';
 import { Button, TextField, Typography } from "@mui/material";
@@ -13,10 +13,47 @@ import { baseURL } from "../../constants/baseurl";
 
 
 const EditAddress = () => {
-
-  const { dataAdressDown } = useContext(GlobalStateContext)
-  // const [dataAdressDown] = useRequestData([], `${baseURL}/profile/address`)
   const navigate = useNavigate();
+  // const [dataAdressDown] = useRequestData([], `${baseURL}/profile/address`)
+  const { dataAdressDown } = useContext(GlobalStateContext)
+
+  const [onChangeStreet, setOnChangeStreet] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.street);
+
+  const [onChangeNumber, setOnChangeNumber] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.number);
+  const [onChangeComplement, setOnChangeComplement] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.complement);
+  const [onChangeCity, setOnChangeCity] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.city);
+  const [onChangeNeighbourhood, setOnChangeNeighbourhood] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.neighbourhood);
+  const [onChangeState, setOnChangeState] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.state);
+
+  
+   const onChangeStreetHandler   = (e) =>{ 
+     setOnChangeStreet(e.target.value)
+
+   }
+
+   const  onChangeNumberHandler = (e) =>{
+    setOnChangeNumber(e.target.value)
+
+    }
+   const  onChangeComplementHandler =  (e) =>{ 
+    setOnChangeComplement(e.target.value)
+
+   }
+   const  onChangeCityHandler = (e) =>{ 
+    setOnChangeCity (e.target.value)
+
+   }
+   const  onChangeNeighbourhoodHandler = (e) =>{
+    setOnChangeNeighbourhood(e.target.value)
+
+    }
+   const  onChangeStateHandler  = (e) =>{
+    setOnChangeState(e.target.value)
+
+    }
+
+   
+    
 
       console.log(dataAdressDown)
 
@@ -35,17 +72,31 @@ const EditAddress = () => {
        return; 
      }
   }
-     
+
+ const form = {
+    "street": onChangeStreet,
+    "number":  onChangeNumber,
+    "neighbourhood": onChangeNeighbourhood,
+    "city": onChangeCity,
+    "state": onChangeState,
+    "complement": onChangeComplement
+}
+
+
+
   const onSubmit = (e) => {
     e.preventDefault()
     PutAdress(form, "address" ,response)
   }
 
+  
+  console.log(form)
+  
    console.log("teste", teste)
    const teste1 = teste && teste
    console.log("teste1", teste1)
    
-   const { form, onChange, clear } = useform( dataAdressDown.address && teste.address);
+
      
   return (
 
@@ -63,8 +114,8 @@ const EditAddress = () => {
         <TextField
           required
           name='street'
-          value={form.street}
-          onChange={onChange}
+          value={onChangeStreet}
+          onChange={onChangeStreetHandler}
           label='Logradouro'
           color="primary"
           variant='outlined'
@@ -74,8 +125,8 @@ const EditAddress = () => {
         <TextField
           required
           name='number'
-          value={form.number}
-          onChange={onChange}
+          value={onChangeNumber}
+          onChange={onChangeNumberHandler}
           label='Número'
           
           variant='outlined'
@@ -86,8 +137,8 @@ const EditAddress = () => {
         <TextField
           name='complement'
           color="primary"
-          value={form.complement}
-          onChange={onChange}
+          value={onChangeComplement}
+          onChange={onChangeComplementHandler}
           label='Complemento'
           placeholder='Apto/Bloco'
           margin='dense'
@@ -95,8 +146,8 @@ const EditAddress = () => {
         <TextField
           required
           name='neighbourhood'
-          value={form.neighbourhood}
-          onChange={onChange}
+          value={onChangeNeighbourhood}
+          onChange={onChangeNeighbourhoodHandler}
           label='Bairro'
           color="primary"
           variant='outlined'
@@ -107,8 +158,8 @@ const EditAddress = () => {
         <TextField
           required
           name='city'
-          value={form.city}
-          onChange={onChange}
+          value={onChangeCity}
+          onChange={onChangeCityHandler}
           label='Cidade'
           color="primary"
           variant='outlined'
@@ -118,8 +169,8 @@ const EditAddress = () => {
         <TextField
           required
           name='state'
-          value={form.state}
-          onChange={onChange}
+          value={onChangeState}
+          onChange={onChangeStateHandler}
           label='Estado'
           color="primary"
           variant='outlined'

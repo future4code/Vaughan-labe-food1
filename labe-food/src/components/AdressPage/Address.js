@@ -16,18 +16,18 @@ const Address = ({title, title2}) => {
   const navigate = useNavigate();
 
 
-  // var { form, onChange, clear } = useform(
-  //   {
-  //     street: "",
-  //     number: "",
-  //     neighbourhood: "",
-  //     city: "",
-  //     state: "",
-  //     complement: "",
-  //   }
-  //   );
+  const { form, onChange, clear } = useform(
+    {
+      street: "",
+      number: "",
+      neighbourhood: "",
+      city: "",
+      state: "",
+      complement: "",
+    }
+    );
     
-    const teste  = dataAdressDown && (dataAdressDown)
+    // const teste  = dataAdressDown && (dataAdressDown)
 
   const response =(data)=> 
   { 
@@ -48,11 +48,11 @@ const Address = ({title, title2}) => {
     PutAdress(form, "address" ,response)
   }
 
-   console.log("teste", teste)
-   const teste1 = teste && teste
-   console.log("teste1", teste1)
+  //  console.log("teste", teste)
+  //  const teste1 = teste && teste
+  //  console.log("teste1", teste1)
    
-   const { form, onChange, clear } = useform( dataAdressDown && teste.address);
+  //  const { form, onChange, clear } = useform( dataAdressDown && teste.address);
      
   return (
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { baseURL } from "../../constants/baseurl";
 import { useNavigate } from "react-router";
 import { createRenderer } from "react-dom/test-utils";
-import { goToAddress, goToEditProfile } from "../../routes/coordinator";
+import { goToEditAddress, goToEditProfile } from "../../routes/coordinator";
 import axios from "axios";
 import useRequestData from "../../hooks/useRequestData"
 import { TrendingUpOutlined } from "@mui/icons-material";
@@ -27,7 +27,7 @@ const Profile = () => {
     }
 
     const changeAdress = () => {
-        goToAddress(navigate)
+        goToEditAddress(navigate)
 
     }
 
