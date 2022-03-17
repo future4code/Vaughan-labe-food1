@@ -124,7 +124,7 @@ const Profile = () => {
           </CardContent>
         </OrderHistory> */}
       </Container>
-      <Navigation />
+      <Navigation screen={2}/>
     </>
   );
 };

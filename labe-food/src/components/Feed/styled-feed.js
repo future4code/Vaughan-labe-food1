@@ -5,7 +5,7 @@ export const DivStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 0 1rem 3rem;
 `
 
 export const CardStyled = styled(Card)`

@@ -220,7 +220,7 @@ const Cart = () => {
         </Button>
         {activeOrder}
       </PaymentContainer>
-      <Navigation />
+      <Navigation screen={1}/>
     </MainContainer>
   );
 };
