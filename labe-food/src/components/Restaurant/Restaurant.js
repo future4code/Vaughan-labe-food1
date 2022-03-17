@@ -160,7 +160,7 @@ const Restaurant = () => {
           </ProductText>
           <ButtonDiv>
             {productsInCart.map(product => product.quantity > 0) ?
-              <ButtonAdd variant='outlined' color='inherit' onClick={() => { handleOpen(product) }}>
+              <ButtonAdd variant='outlined' color='primary' onClick={() => { handleOpen(product) }}>
                 Adicionar
               </ButtonAdd> :
               <button onClick={() => { removeFromCart(product.id) }}>remover</button>}

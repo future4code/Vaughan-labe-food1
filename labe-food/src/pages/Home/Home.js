@@ -15,13 +15,12 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 const Home = () => {
     const navigate = useNavigate();
     useProtectedPage();
-    
+
     return (
         <div>
-            <Header title="Ifuture"   goBack={true} />
-            <MainStyle>
-             
+            <Header title="Ifuture" goBack={true} />
 
+            <MainStyle>
 
                 <ButtonNoStyle onClick={() => { goToSearch(navigate) }
                 }>
@@ -42,8 +41,10 @@ const Home = () => {
                 </ButtonNoStyle>
 
             </MainStyle>
+
             <Feed />
-            <Navigation />
+            
+            <Navigation screen={0}/>
         </div>
     )
 };

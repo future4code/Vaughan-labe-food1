@@ -7,9 +7,7 @@ export const MainStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    h2{
-        margin-top: 10px;
-    }
+    padding-bottom: 0;
 `
 
 export const ButtonNoStyle = styled.button`

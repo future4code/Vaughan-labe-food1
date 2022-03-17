@@ -8,21 +8,21 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 import { goToCart, goToHome, goToProfile } from '../../routes/coordinator';
 
-const Navigation = () => {
-  const [value, setValue] = React.useState("home");
+const Navigation = ({screen}) => {
+  const [value, setValue] = React.useState(screen);
   const navigate = useNavigate();
-  
+
   return (
     <BoxStyled sx={{ width: 500 }}>
       <BottomNavigation
         value={value}
         onChange={(event, newValue) => {
-          setValue(newValue);
+          setValue(newValue)
         }}
       >
-        <BottomNavigationAction value="home" onClick={() => goToHome(navigate)} icon={<HomeOutlinedIcon />} />
-        <BottomNavigationAction value="cart" onClick={() => goToCart(navigate)} icon={<ShoppingCartOutlinedIcon />} />
-        <BottomNavigationAction value="profile" onClick={() => goToProfile(navigate)} icon={<PermIdentityOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToHome(navigate)} icon={<HomeOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToCart(navigate)} icon={<ShoppingCartOutlinedIcon />} />
+        <BottomNavigationAction onClick={() => goToProfile(navigate)} icon={<PermIdentityOutlinedIcon />} />
       </BottomNavigation>
     </BoxStyled>
   );
