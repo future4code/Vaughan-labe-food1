@@ -7,15 +7,20 @@ import axios from "axios";
 import useRequestData from "../../hooks/useRequestData";
 import { TrendingUpOutlined } from "@mui/icons-material";
 import {
+  CardStyled,
   DivPerfil,
   NewContainer,
+  OrderContainer,
   OrderHistory,
   PersonaInformation,
+  TextUltimate,
   Title,
+  TypographyMargin,
+  TypographyStyled,
 } from "./styled-profile";
 import { Container, AddressContainer, TextNew, StyledHistory } from "./styled-profile";
 import EditIcon from "@mui/icons-material/Edit";
-import { Typography, CardContent } from "@mui/material";
+import { Typography, CardContent, Card } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import Navigation from "../../components/Navigation/Navigation";
@@ -52,12 +57,13 @@ const Profile = () => {
     history &&
     history.map((order) => {
       return (
-        <>
-          {" "}
-          {order.name}
-          {order.date}
-          {order.totalPrice}
-        </>
+        <CardStyled> 
+        <CardContent>
+          <TypographyMargin color ="primary"> {order.name}</TypographyMargin>
+          <TypographyMargin variant = "caption">{order.date}</TypographyMargin> <br/>
+          <TypographyStyled>SUBTOTAL R${order.totalPrice},00</TypographyStyled>
+        </CardContent>
+      </CardStyled>
       );
     });
 
@@ -95,20 +101,17 @@ const Profile = () => {
               <EditIcon onClick={changeAdress} />
             </div>
           </AddressContainer>
-
-          <StyledHistory>
-         <h3>Histórico de Pedidos </h3>
-         {orders}
-
-
-        </StyledHistory>
-
+          <OrderContainer>
+          <TextUltimate> Histórico de Pedidos</TextUltimate>
+         
+          {orders}
+          </OrderContainer>
           {/* <OrderHistory>
     <p>Histórico de pedidos</p> */}
         </div>
 
-       
-        {/* <OrderHistory>
+{/*        
+        <OrderHistory>
           <CardContent>
             <Typography gutterBottom variant='body2' component='div'>
               Histórico de pedidos

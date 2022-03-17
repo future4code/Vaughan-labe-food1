@@ -1,4 +1,7 @@
+import { Card, Typography } from "@mui/material"
 import styled from "styled-components"
+import { greyish } from "../../constants/colors"
+
 export const DivPerfil = styled.div`
     display: flex;
     align-items: center;
@@ -46,7 +49,7 @@ export const NewContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ` 
+    `
 export const Title = styled.div`
   width: 4.25rem;
   height: 1.188rem;
@@ -61,13 +64,49 @@ export const Title = styled.div`
   color: var(--black);
 
 `
+export const TypographyStyled = styled(Typography)`
+font-weight: bold !important;
+margin: 5px  !important ;
 
+
+`
+
+export const OrderContainer = styled.div`
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+
+`
+
+export const TextUltimate = styled.p`
+margin: 5px;
+margin-bottom: 20px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+    width: 85vw;
+
+`
+export const  CardStyled = styled(Card)`
+width: 85vw;
+border-radius: .5em !important ;
+border: 1px solid greyish !important;
+`
+export const TypographyMargin = styled(Typography)`
+margin: 5px  !important ;
+
+`
 export const TextNew = styled.div`
 
   width: 22.5rem;
-  height: 60px;
+ 
   display: flex;
   flex-direction: column;
+  p{
+      margin: 5px;
+  }
 
 `
 
