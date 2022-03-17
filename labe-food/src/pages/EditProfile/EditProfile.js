@@ -10,8 +10,10 @@ import { PutAdress } from "../../services/apiEnd";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { goToProfile } from "../../routes/coordinator";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const EditProfile = () => {
+  useProtectedPage();
   const navigate = useNavigate();
   const {userData , getUserData} = useContext(GlobalStateContext);
 

@@ -10,12 +10,14 @@ import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
 import { baseURL } from "../../constants/baseurl";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 
 const EditAddress = () => {
   const navigate = useNavigate();
   // const [dataAdressDown] = useRequestData([], `${baseURL}/profile/address`)
   const { dataAdressDown } = useContext(GlobalStateContext)
+  useProtectedPage();
 
   const [onChangeStreet, setOnChangeStreet] = useState( dataAdressDown &&  dataAdressDown.address &&  dataAdressDown.address.street);
 

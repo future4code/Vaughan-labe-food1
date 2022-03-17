@@ -19,9 +19,11 @@ import { Typography, CardContent } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import Navigation from "../../components/Navigation/Navigation";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 const Profile = () => {
   const navigate = useNavigate();
+  useProtectedPage();
 
   const [userData] = useRequestData([], `${baseURL}/profile`);
   // const [history] = useRequestData([], `${baseURL}/orders/history`)
