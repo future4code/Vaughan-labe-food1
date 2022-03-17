@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {useNavigate} from 'react-router-dom';
 import { Button, TextField, Typography } from "@mui/material";
 import { StyledForm} from "./styled-address";
@@ -7,19 +7,27 @@ import useform from '../../hooks/useform';
 import { goToHome } from "../../routes/coordinator";
 import Header from "../Header/Header";
 import SubHeader from "../Header/SubHeader";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
 
 
 const Address = ({title, title2}) => {
-  const navigate = useNavigate();
-  const { form, onChange, clear } = useform({
-    street: "",
-    number: "",
-    neighbourhood: "",
-    city: "",
-    state: "",
-    complement: "",
-  });
 
+  const { dataAdressDown } = useContext(GlobalStateContext)
+  const navigate = useNavigate();
+
+
+  const { form, onChange, clear } = useform(
+    {
+      street: "",
+      number: "",
+      neighbourhood: "",
+      city: "",
+      state: "",
+      complement: "",
+    }
+    );
+    
+    // const teste  = dataAdressDown && (dataAdressDown)
 
   const response =(data)=> 
   { 
@@ -30,6 +38,7 @@ const Address = ({title, title2}) => {
      if( data.data.user.hasAddress && data.data.token){ 
       goToHome(navigate)
      }else { 
+       alert( "Entre com o Endereço ")
        return; 
      }
   }
@@ -39,14 +48,19 @@ const Address = ({title, title2}) => {
     PutAdress(form, "address" ,response)
   }
 
-
-
+  //  console.log("teste", teste)
+  //  const teste1 = teste && teste
+  //  console.log("teste1", teste1)
+   
+  //  const { form, onChange, clear } = useform( dataAdressDown && teste.address);
+     
   return (
 
 
 
 
     <>
+   
     {/* Olhar esta navegacao depois  */}
      
       <Header title={title} />

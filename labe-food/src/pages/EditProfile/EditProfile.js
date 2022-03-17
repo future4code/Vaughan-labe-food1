@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../constants/baseurl";
 import { Button, TextField, Typography } from "@mui/material";
@@ -8,14 +8,17 @@ import { useNavigate } from "react-router-dom";
 import { MainContainer , StyledForm } from "./styled-editprofile"
 import { PutAdress } from "../../services/apiEnd";
 import Header from "../../components/Header/Header";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
+import { goToProfile } from "../../routes/coordinator";
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const {userData , getUserData} = useContext(GlobalStateContext);
 
   const { form, onChange, clear } = useForm({
-    name: "",
-    email: "",
-    cpf: "",
+    name: (userData.user && userData.user && userData.user.name ),
+    email: (userData.user && userData.user && userData.user.email ),
+    cpf: (userData.user && userData.user && userData.user.cpf ),
   });
 
 
@@ -29,13 +32,15 @@ const EditProfile = () => {
   const onSubmitForm = (event) => {
     event.preventDefault();
     PutAdress(form, "profile" ,response)
-    clear();
+
+    goToProfile(navigate)
+ 
     
   };
 
   return (
   <>
-  <Header title="Meu perfil" goBack={true}/>
+  <Header title="Meu perfil" />
     <MainContainer>
       <Typography align="center" variant="subtitle1" mt={10}>
         Editar
