@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { useNavigate } from "react-router-dom";
-import { StyledForm, StyledBoxImag } from "./styled-login";
 import { Button, TextField, Typography } from "@mui/material";
 import useForm from "../../hooks/useform";
 import { goToAddress, goToEditAddress, goToHome, goToSignUp } from "../../routes/coordinator";
 import { LoginData } from "../../services/login";
 import logocolor from "../../assets/images/logocolor.png";
-import { GlobalStateContext } from "../../global/GlobalStateContext";
+import { StyledForm, StyledBoxImag } from "./styled-login";
+import SplashScreenPage from "../SplashScreenPage/SplashScreenPage";
 
 const Login = () => {
   const { addressData, getDataAddress, isLoadingAddress, errorAddress } =
     useContext(GlobalStateContext);
   const navigate = useNavigate();
   const [loginDataUp, setLoginDataUp] = useState("");
+  const [splashScreentime, setSplashScreentime] = useState(true);
   const { form, onChange, clear } = useForm({
     email: "",
     password: "",
@@ -23,6 +25,9 @@ const Login = () => {
 
   }, [])
 
+  setTimeout(()=> {
+    setSplashScreentime(false)
+  }, 3000)
 
 
   const dataUp = (data) => {
@@ -48,8 +53,11 @@ const Login = () => {
 
   return (
     <>
-
-      <StyledBoxImag>
+    { splashScreentime ? 
+      
+       <SplashScreenPage/> :
+       
+       <StyledBoxImag>
         <img src={logocolor} style={{ width: "6.5rem" }} />
 
         <Typography align='center'>Entrar</Typography>
@@ -101,7 +109,7 @@ const Login = () => {
         >
           Não possui cadastro? Clique aqui.
         </Button>
-      </StyledBoxImag>
+      </StyledBoxImag> }
     </>
   );
 };

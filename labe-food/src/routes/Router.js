@@ -35,7 +35,7 @@ const Router = () => {
 
                 <Route path='/profile/edit/user' element={<EditProfile />} />
 
-                {/* <Route path={'*'} element={<Error /> } /> */}
+                <Route path={'/*'} element={<Error /> } />
 
 
             </Routes>
