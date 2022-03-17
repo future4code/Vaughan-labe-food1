@@ -5,7 +5,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { StyledForm} from "./styled-editaddress";
 import { PutAdress } from "../../services/apiEnd";
 import useform from '../../hooks/useform';
-import { goToHome } from "../../routes/coordinator";
+import { goToHome, goToProfile } from "../../routes/coordinator";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
@@ -66,7 +66,7 @@ const EditAddress = () => {
     console.log(data.data.user)
     console.log(data.data.user.hasAddress)
      if( data.data.user.hasAddress && data.data.token){ 
-      goToHome(navigate)
+      goToProfile(navigate)
      }else { 
        alert( "Entre com o Endereço ")
        return; 
