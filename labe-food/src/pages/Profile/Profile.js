@@ -18,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Typography, CardContent } from "@mui/material";
 import Header from "../../components/Header/Header";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
+import Navigation from "../../components/Navigation/Navigation";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -30,6 +31,9 @@ const Profile = () => {
     { totalPrice: 21, name: "McDonald", date: 22 },
   ];
 
+  useEffect(() => {
+    getUserData()
+  }, [])
 
   const changeProfile = () => {
     goToEditProfile(navigate);
@@ -110,6 +114,7 @@ const Profile = () => {
           </CardContent>
         </OrderHistory>
       </Container>
+      <Navigation />
     </>
   );
 };
