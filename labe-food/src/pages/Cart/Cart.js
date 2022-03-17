@@ -29,19 +29,17 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 
 const Cart = () => {
   useProtectedPage();
-  const { restaurants, productsInCart } = useContext(GlobalStateContext);
-
+  const { restaurants, productsInCart, setProductsInCart, restaurantId } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const [orderData] = useRequestData([], `${baseURL}/active-order`);
-  // const { form, onChange, clear } = useForm({
-  //   products: productsInCart && productData,
-  //   paymentMethod: 'money'
-  // });
   const [paymentValue, setPaymentValue] = useState('')
   const params = useParams();
   const [open, setOpen] = useState(false);
   const token = window.localStorage.getItem("token")
   const [productData, setProductData] = useState([])
+
+  console.log(restaurantId)
+  console.log(productData)
 
   const handleClick = () => {
     setOpen(true);
@@ -62,7 +60,6 @@ const Cart = () => {
     })
   }, [])
 
-  console.log(productData)
 
   const removeFromCart = (id) => {
     const newProductsInCart = productsInCart.map((product) => {
@@ -112,15 +109,15 @@ const Cart = () => {
       products: productData,
       paymentMethod: paymentValue
     }
-    axios.post(`${baseURL}/restaurants/${params.id}/order`, body, { headers: {
+    axios.post(`${baseURL}/restaurants/${restaurantId}/order`, body, { headers: {
       auth: token
     }}
   ).then((res) => {
-    console.log(body)
+    console.log(body, res.data)
     
   }).catch((err) => {
-    console.log(err.response)
-    console.log(body)
+
+    console.log(body, err.response)
   })
   }
 
@@ -142,7 +139,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === params.id;
+        return item.id === restaurantId;
       })
       .map((item) => {
         return (
@@ -164,7 +161,7 @@ const Cart = () => {
     restaurants.restaurants &&
     restaurants.restaurants
       .filter((item) => {
-        return item.id === params.id;
+        return item.id === restaurantId;
       })
       .map((item) => {
         return (
@@ -173,8 +170,7 @@ const Cart = () => {
           </ShippingContainer>
         );
       });
-
-   console.log(paymentValue)   
+  
 
   return (
     <MainContainer>
