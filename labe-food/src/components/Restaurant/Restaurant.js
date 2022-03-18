@@ -155,7 +155,7 @@ const Restaurant = () => {
               {product.description}
             </TypographyStyled>
             <TypographyStyled variant='body'>
-              R${product.price}0
+              R${product.price}
             </TypographyStyled>
           </ProductText>
           <ButtonDiv>
