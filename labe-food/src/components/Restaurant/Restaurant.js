@@ -1,4 +1,3 @@
-import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -197,7 +196,6 @@ const Restaurant = () => {
       </ProductsDiv>
     )
   })
-  console.log(productsInCart)
 
   return (
     <>
