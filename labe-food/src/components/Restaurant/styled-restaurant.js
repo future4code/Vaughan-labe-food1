@@ -14,6 +14,19 @@ export const CardRestaurant = styled(Card)`
     width: 95vw;
     margin: 10px;
 `
+export const ProductsDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
+export const CategoryTitle = styled(Typography)`
+    padding: 10px;
+    border-bottom: 1px solid black;
+    width: 95vw;
+    margin: 5px !important;
+`
 
 export const CardProducts = styled(Card)`
     display: flex;
@@ -48,7 +61,7 @@ export const ButtonDiv = styled.div`
 
 export const ButtonAdd = styled(Button)`
     height: 6vh;
-    width: 20vw;
+    min-width: 20vw;
 `
 
 export const ShippingAndTime = styled.div`

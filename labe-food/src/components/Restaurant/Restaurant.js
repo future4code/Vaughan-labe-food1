@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  CircularProgress,
   FormControl,
   MenuItem,
   Select,
@@ -20,8 +21,10 @@ import {
   ButtonDiv,
   CardProducts,
   CardRestaurant,
+  CategoryTitle,
   MainDiv,
   ProductImage,
+  ProductsDiv,
   ProductText,
   ShippingAndTime,
   TimeStyled,
@@ -33,12 +36,12 @@ import Modal from '@mui/material/Modal';
 const Restaurant = () => {
   const params = useParams();
   const [restaurantDetails, getRestaurantDetails] = useRequestData([], `${baseURL}/restaurants/${params.id}`);
-  const { productsInCart, setProductsInCart } = useContext(GlobalStateContext);
+  const { productsInCart, setProductsInCart, restaurantId, setRestaurantId, isLoading } = useContext(GlobalStateContext);
   // const { addButton, setAddButton } = useContext(GlobalStateContext);
   const [open, setOpen] = useState(false);
   const [quantityNumber, setQuantityNumber] = useState('0');
   const [productToAdd, setProductToAdd] = useState({});
-  const {restaurantId, setRestaurantId} = useContext(GlobalStateContext);
+  const { } = useContext(GlobalStateContext);
 
   const cardRestaurant = restaurantDetails.restaurant;
 
@@ -57,35 +60,18 @@ const Restaurant = () => {
     p: 4,
   };
 
-  // const categoryArray = [];
-
-  // const categoryNames = cardRestaurant && cardRestaurant.products.forEach((product) => {
-  //   const repeatCategory = categoryArray.findIndex(item => {
-  //     return product.category == item.category
-  //   }) > -1;
-  //   if (!repeatCategory) {
-  //     categoryArray.push(product)
-  //   }
-  // })
-
-  // const newCategoryArray = categoryArray.map((product) => {
-  //   return product.category
-  // })
-
-  // console.log(newCategoryArray)
-
   const handleOpen = (product) => {
-    if(restaurantId && restaurantId !== params.id) {
-      if(window.confirm("Você já tem itens adicionados no seu carrinho de outro restaurante. Deseja limpar o carrinho?")) {
+    if (restaurantId && restaurantId !== params.id) {
+      if (window.confirm("Você já tem itens adicionados no seu carrinho de outro restaurante. Deseja limpar o carrinho?")) {
         setRestaurantId("")
         setProductsInCart([])
         setProductToAdd(product);
         setOpen(true)
       }
     } else {
-    setOpen(true)
-    setProductToAdd(product);
-  }
+      setOpen(true)
+      setProductToAdd(product);
+    }
   };
   const handleClose = () => setOpen(false);
   const handleChange = (event) => {
@@ -111,7 +97,7 @@ const Restaurant = () => {
     } else {
       const addProduct = cardRestaurant.products.find(product => id === product.id)
 
-      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: quantityNumber}]
+      const newProductsInCart = [...productsInCart, { ...addProduct, quantity: quantityNumber }]
 
       setProductsInCart(newProductsInCart)
       setRestaurantId(params.id)
@@ -119,99 +105,106 @@ const Restaurant = () => {
     setOpen(false)
   };
 
-  const removeFromCart = (id) => {
-    const newProductsInCart = productsInCart.map((product) => {
-      if (product.id === id) {
-        return {
-          ...product,
-          quantity: product.quantity - 1
+  const categoryArray = [];
+
+  cardRestaurant && cardRestaurant.products.forEach((product) => {
+    const repeatCategory = categoryArray.findIndex(item => {
+      return product.category == item.category
+    }) > -1;
+    if (!repeatCategory) {
+      categoryArray.push(product)
+    }
+  })
+
+  const newCategoryArray = categoryArray.map((product) => {
+    return product.category
+  })
+
+
+  const productsByCategories = newCategoryArray && newCategoryArray.map((category) => {
+    return (
+      <ProductsDiv key={category}>
+        <CategoryTitle>{category}</CategoryTitle>
+
+        {cardRestaurant && cardRestaurant.products.filter((product) => {
+          return product.category === category
+
+        }).map((product) => {
+          return (
+            <CardProducts key={product.id} variant='outlined'>
+              <ProductImage
+                component='img'
+                height='150'
+                image={product.photoUrl}
+                alt='Foto do Restaurante'
+              />
+              <ProductText>
+                <TypographyStyled variant='body' color='primary'>
+                  {product.name}
+                </TypographyStyled>
+                <TypographyStyled variant='body2' color='secondary'>
+                  {product.description}
+                </TypographyStyled>
+                <TypographyStyled variant='body'>
+                  R${(product.price).toFixed(2)}
+                </TypographyStyled>
+              </ProductText>
+              <ButtonDiv>
+                <ButtonAdd variant='outlined' color='primary' onClick={() => { handleOpen(product) }}>
+                  Adicionar
+                </ButtonAdd>
+              </ButtonDiv>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Selecione a quantidade desejada
+                  </Typography>
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={quantityNumber}
+                      onChange={handleChange}
+                      displayEmpty
+                      inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                      <MenuItem value="0">
+                        <em>0</em>
+                      </MenuItem>
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={5}>5</MenuItem>
+                      <MenuItem value={6}>6</MenuItem>
+                      <MenuItem value={7}>7</MenuItem>
+                      <MenuItem value={8}>8</MenuItem>
+                      <MenuItem value={9}>9</MenuItem>
+                      <MenuItem value={10}>10</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Button onClick={() => addToCart(productToAdd.id)}>Adicionar</Button>
+                </Box>
+              </Modal>
+            </CardProducts>
+          )
+        })
         }
-      }
-      return product
-    }).filter((product) => product.quantity > 0)
-
-    setProductsInCart(newProductsInCart)
-  };
-
-  const renderProducts =
-    cardRestaurant &&
-    cardRestaurant.products.map((product) => {
-      return (
-        <CardProducts key={product.id} variant='outlined'>
-          <ProductImage
-            component='img'
-            height='150'
-            image={product.photoUrl}
-            alt='Foto do Restaurante'
-          />
-          <ProductText>
-            <TypographyStyled variant='body' color='primary'>
-              {product.name}
-            </TypographyStyled>
-            <TypographyStyled variant='body2' color='secondary'>
-              {product.description}
-            </TypographyStyled>
-            <TypographyStyled variant='body'>
-              R${(product.price).toFixed(2)}
-            </TypographyStyled>
-          </ProductText>
-          <ButtonDiv>
-            {productsInCart.map(product => product.quantity > 0) ?
-              <ButtonAdd variant='outlined' color='primary' onClick={() => { handleOpen(product) }}>
-                Adicionar
-              </ButtonAdd> :
-              <button onClick={() => { removeFromCart(product.id) }}>remover</button>}
-
-
-          </ButtonDiv>
-
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Selecione a quantidade desejada
-              </Typography>
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                  value={quantityNumber}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="0">
-                    <em>0</em>
-                  </MenuItem>
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
-                  <MenuItem value={4}>4</MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={6}>6</MenuItem>
-                  <MenuItem value={7}>7</MenuItem>
-                  <MenuItem value={8}>8</MenuItem>
-                  <MenuItem value={9}>9</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                </Select>
-              </FormControl>
-              <Button onClick={() => addToCart(productToAdd.id)}>Adicionar</Button>
-            </Box>
-          </Modal>
-        </CardProducts>
-      );
-    });
-if (cardRestaurant) {
-  console.log("retaurante", cardRestaurant)
-}
+      </ProductsDiv>
+    )
+  })
+  console.log(productsInCart)
 
   return (
     <>
       <Header title='Restaurante' />
       <MainDiv>
-        {cardRestaurant && (
+        {isLoading && <CircularProgress />}
+        {!isLoading && cardRestaurant && (
           <CardRestaurant>
             <CardMedia
               component='img'
@@ -241,7 +234,7 @@ if (cardRestaurant) {
             </CardContent>
           </CardRestaurant>
         )}
-        {cardRestaurant && renderProducts}
+        {!isLoading && cardRestaurant && productsByCategories}
       </MainDiv>
 
     </>
