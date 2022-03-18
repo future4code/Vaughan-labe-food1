@@ -1,4 +1,4 @@
-import { CardContent, CardMedia, FormControl, InputAdornment, InputLabel, MenuItem, Typography } from "@mui/material";
+import { CardContent, CardMedia, CircularProgress, FormControl, InputAdornment, InputLabel, MenuItem, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
@@ -64,8 +64,8 @@ const Feed = ({ isSearch }) => {
 
     return (
         <DivStyled>
-
-            {isSearch ? < TextFieldStyled
+            {isLoading && <CircularProgress />}
+            {!isLoading && isSearch ? < TextFieldStyled
                 id="input-with-icon-textfield"
                 placeholder="Restaurante..."
                 onChange={onChangeValue}
@@ -78,8 +78,8 @@ const Feed = ({ isSearch }) => {
                 }}
                 variant="outlined"
             /> : <></>}
-            {isSearch && !inputValue && <p>Busque por nomes de restaurantes</p>}
-            {!isSearch &&
+            {!isLoading && isSearch && !inputValue && <p>Busque por nomes de restaurantes</p>}
+            {!isLoading && !isSearch &&
                 <FilterContainer>
                     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel id="demo-simple-select-autowidth-label">Filtrar</InputLabel>
@@ -106,7 +106,7 @@ const Feed = ({ isSearch }) => {
                         </SelectStyled>
                     </FormControl>
                 </FilterContainer>}
-            {renderRestaurants}
+            {!isLoading && renderRestaurants}
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
         </DivStyled>
     )
