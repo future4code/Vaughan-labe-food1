@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import {
   Button,
   FormControlLabel,
   Radio,
   RadioGroup,
   Typography,
-  Snackbar
+  Snackbar,
 } from "@mui/material";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
@@ -18,119 +18,121 @@ import {
   ShippingContainer,
   PaymentContainer,
 } from "./styled-cart";
-import Header from '../../components/Header/Header'
+import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
-import Restaurant from "../../components/Restaurant/Restaurant";
-import { ButtonDiv, CardProducts, ProductImage, ProductText, TypographyStyled } from "../../components/Restaurant/styled-restaurant";
-
+import {
+  ButtonDiv,
+  CardProducts,
+  ProductImage,
+  ProductText,
+  TypographyStyled,
+} from "../../components/Restaurant/styled-restaurant";
 import useProtectedPage from "../../hooks/useProtectedPage";
+import ActiveOrder from "../../components/ActiveOrder/ActiveOrder";
 
 const Cart = () => {
   useProtectedPage();
-  const { restaurants, productsInCart, setProductsInCart, restaurantId } = useContext(GlobalStateContext);
+  const {
+    restaurants,
+    productsInCart,
+    setProductsInCart,
+    restaurantId,
+  } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
-  const [orderData, getOrderData] = useRequestData([], `${baseURL}/active-order`);
-  const [paymentValue, setPaymentValue] = useState('')
-  const [open, setOpen] = useState(false);
-  const token = window.localStorage.getItem("token")
-  const [productData, setProductData] = useState([])
+  const [paymentValue, setPaymentValue] = useState("");
+  const token = window.localStorage.getItem("token");
+  const [productData, setProductData] = useState([]);
 
   const handleClick = () => {
-    setOpen(true);
-    placeOrder()
+    placeOrder();
   };
 
   const onChange = (e) => {
-    setPaymentValue(e.target.value)
+    setPaymentValue(e.target.value);
   };
 
   useEffect(() => {
     productsInCart.map((product) => {
-    productData.push({id: product.id, quantity: product.quantity})
-    })
-  }, [])
-
+      productData.push({ id: product.id, quantity: product.quantity });
+    });
+  }, []);
 
   const total = productsInCart.reduce((soma, item) => {
-    soma = (item.quantity * item.price) + soma
-    return soma
-  }, 0)
-
+    soma = item.quantity * item.price + soma;
+    return soma;
+  }, 0);
 
   const removeFromCart = (id) => {
-    const newProductsInCart = productsInCart.map((product) => {
-      if (product.id === id) {
-        return {
-          ...product,
-          quantity: product.quantity - 1
+    const newProductsInCart = productsInCart
+      .map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            quantity: product.quantity - 1,
+          };
         }
-      }
-      return product
-    }).filter((product) => product.quantity > 0)
-
-    setProductsInCart(newProductsInCart)
+        return product;
+      })
+      .filter((product) => product.quantity > 0);
+    setProductsInCart(newProductsInCart);
   };
 
   const renderProducts = productsInCart.map((product) => {
     return (
-      <CardProducts key={product.id} variant='outlined'>
-          <ProductImage
-            component='img'
-            height='150'
-            image={product.photoUrl}
-            alt='Foto do Restaurante'
-          />
-          <ProductText>
-            <TypographyStyled variant='body' color='primary'>
-              {product.name}
-            </TypographyStyled>
-            <TypographyStyled variant='body2' color='secondary'>
-              {product.description}
-            </TypographyStyled>
-            <TypographyStyled variant='body'>
-              R${product.price}0
-            </TypographyStyled>
-          </ProductText>
-          <ButtonDiv>
-              <Button variant='outlined' color='inherit' onClick={() => {removeFromCart(product.id)}}>
-                Remover
-              </Button> 
-           </ButtonDiv>
-          </CardProducts>
-    )
-  })
+      <CardProducts key={product.id} variant="outlined">
+        <ProductImage
+          component="img"
+          height="150"
+          image={product.photoUrl}
+          alt="Foto do Restaurante"
+        />
+        <ProductText>
+          <TypographyStyled variant="body" color="primary">
+            {product.name}
+          </TypographyStyled>
+          <TypographyStyled variant="body2" color="secondary">
+            {product.description}
+          </TypographyStyled>
+          <TypographyStyled variant="body">
+            R${product.price.toFixed(2)}
+          </TypographyStyled>
+        </ProductText>
+        <ButtonDiv>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => {
+              removeFromCart(product.id);
+            }}
+          >
+            Remover
+          </Button>
+        </ButtonDiv>
+      </CardProducts>
+    );
+  });
 
   const placeOrder = () => {
     const body = {
       products: productData,
-      paymentMethod: paymentValue
-    }
-    axios.post(`${baseURL}/restaurants/${restaurantId}/order`, body, { headers: {
-      auth: token
-    }}
-  ).then((res) => {
-    console.log("parabéns", res.data.message)
-    
-  }).catch((err) => {
+      paymentMethod: paymentValue,
+    };
+    axios
+      .post(`${baseURL}/restaurants/${restaurantId}/order`, body, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then((res) => {
+        console.log("parabéns pela compra", res.data.message);
 
-    console.log(body, err.response)
-  })
-  }
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
 
-  const activeOrder = () => {
-    if(orderData && orderData.order){
-    return (
-      <Snackbar
-          open={open}
-          autoHideDuration={orderData.order.expiresAt - orderData.order.createdAt}
-          message={orderData.order.restaurantName}
-          // color="primary" 
-          // orderData.order.totalPrice
-      />
-    )
-    }}
 
- 
   const cardRestaurantDetails =
     restaurants.restaurants &&
     restaurants.restaurants
@@ -160,21 +162,13 @@ const Cart = () => {
         return item.id === restaurantId;
       })
       .map((item) => {
-        return  item.shipping
-          // <ShippingContainer key={item.id}>
-          //   <Typography>Frete: R${item.shipping}</Typography>
-          // </ShippingContainer>
-        
+        return item.shipping;
       });
-
-  console.log("valor total", deliveryPrice)
-
-  
 
   return (
     <MainContainer>
-      <Header title="Meu Carrinho"/>
-      
+      <Header title="Meu Carrinho" />
+
       <AddressContainer>
         <Typography mb={0.5} color="secondary">
           Endereço de entrega
@@ -186,14 +180,20 @@ const Cart = () => {
 
       {cardRestaurantDetails}
 
-      {productData.length !== 0 ? renderProducts : <Typography>Carrinho vazio</Typography>}
-      
+      {productData.length !== 0 ? (
+        renderProducts
+      ) : (
+        <Typography>Carrinho vazio</Typography>
+      )}
+
       <ShippingContainer>
-          <Typography>Frete: R${(Number(deliveryPrice)).toFixed(2)}</Typography>
+        <Typography>Frete: R${Number(deliveryPrice).toFixed(2)}</Typography>
       </ShippingContainer>
-      
-      <Typography>Subtotal: R${(total + Number(deliveryPrice)).toFixed(2)}</Typography>
-      
+
+      <Typography>
+        Subtotal: R${(total + Number(deliveryPrice)).toFixed(2)}
+      </Typography>
+
       <PaymentContainer>
         <Typography>Forma de pagamento</Typography>
         <hr />
@@ -202,7 +202,7 @@ const Cart = () => {
           name="radio-buttons-group"
         >
           <FormControlLabel
-            value={'money'}
+            value={"money"}
             control={<Radio />}
             label="Dinheiro"
             onChange={onChange}
@@ -214,14 +214,12 @@ const Cart = () => {
             onChange={onChange}
           />
         </RadioGroup>
-        <Button fullWidth variant="contained" 
-        onClick={handleClick}
-        >
+        <Button fullWidth variant="contained" onClick={handleClick}>
           Confirmar
         </Button>
-        {activeOrder}
       </PaymentContainer>
-      <Navigation screen={1}/>
+      <ActiveOrder/>
+      <Navigation screen={1} />
     </MainContainer>
   );
 };

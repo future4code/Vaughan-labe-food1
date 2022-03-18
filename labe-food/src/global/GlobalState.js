@@ -9,6 +9,7 @@ const GlobalState = (props) => {
     const [userData , getUserData ,isLoadingUserData ] = useRequestData([], `${baseURL}/profile`);
     const [productsInCart, setProductsInCart] = useState([]);
     const [restaurantId, setRestaurantId] = useState();
+    const [activeOrder, getActiveOrder] = useRequestData([], `${baseURL}/active-order`);
 
     // const [addButton, setAddButton] = useState(productsInCart.map(product => product.quantity > 0) ? "Adicionar" : "Remover")
    const dataAdressDown = addressData
@@ -32,7 +33,9 @@ const GlobalState = (props) => {
          getUserData,
          isLoadingUserData,
          restaurantId, 
-         setRestaurantId
+         setRestaurantId,
+         activeOrder, 
+         getActiveOrder
     }
     
     return (
