@@ -31,7 +31,9 @@ const Profile = () => {
   useProtectedPage();
 
   const [userData] = useRequestData([], `${baseURL}/profile`);
-  // const [history] = useRequestData([], `${baseURL}/orders/history`)
+  const [historyData] = useRequestData([], `${baseURL}/orders/history`)
+  console.log(historyData.data)
+ 
   const history = [
     { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }
     
