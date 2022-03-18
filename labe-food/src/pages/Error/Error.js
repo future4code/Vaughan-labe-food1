@@ -1,4 +1,4 @@
-import { MainStyled } from "../SplashScreenPage/style-splashScreen";
+import { MainStyled } from "./styled-error"
 import logowhite from "../../assets/images/whitelogo/logowhite.png";
 import { Typography } from "@mui/material";
 import { barMain } from "../../constants/colors";
