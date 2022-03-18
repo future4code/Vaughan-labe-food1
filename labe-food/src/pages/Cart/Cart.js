@@ -51,10 +51,6 @@ const Cart = () => {
     })
   }, [])
 
-  console.log("restaurante", productsInCart)
-
- console.log("carrinho", productData)
-
 
   const removeFromCart = (id) => {
     const newProductsInCart = productsInCart.map((product) => {
