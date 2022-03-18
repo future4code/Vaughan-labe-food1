@@ -31,15 +31,12 @@ const Cart = () => {
   useProtectedPage();
   const { restaurants, productsInCart, setProductsInCart, restaurantId } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
-  const [orderData] = useRequestData([], `${baseURL}/active-order`);
+  const [orderData, getData] = useRequestData([], `${baseURL}/active-order`);
   const [paymentValue, setPaymentValue] = useState('')
-  const params = useParams();
   const [open, setOpen] = useState(false);
   const token = window.localStorage.getItem("token")
   const [productData, setProductData] = useState([])
-
-  console.log(restaurantId)
-  console.log(productData)
+ 
 
   const handleClick = () => {
     setOpen(true);
@@ -50,15 +47,14 @@ const Cart = () => {
     setPaymentValue(e.target.value)
   };
 
-  // const getProductData = productsInCart.map((product) => {
-  //   return setProductData([...productData, {id: product.id, quantity: product.quantity}])
-  // })
-
   useEffect(() => {
     productsInCart.map((product) => {
-      return setProductData([...productData, {id: product.id, quantity: product.quantity}])
+     setProductData(...productData, {id: product.id, quantity: product.quantity})
     })
+    getData()
   }, [])
+
+ console.log("carrinho",productsInCart,  productData)
 
 
   const removeFromCart = (id) => {
@@ -106,21 +102,20 @@ const Cart = () => {
 
   const placeOrder = () => {
     const body = {
-      products: productData,
+      products: [productData],
       paymentMethod: paymentValue
     }
     axios.post(`${baseURL}/restaurants/${restaurantId}/order`, body, { headers: {
       auth: token
     }}
   ).then((res) => {
-    console.log(body, res.data)
+    console.log("parabéns", res.data.message)
     
   }).catch((err) => {
 
     console.log(body, err.response)
   })
   }
-
 
   const activeOrder = () => {
     if(orderData && orderData.order){
@@ -134,6 +129,7 @@ const Cart = () => {
       />
     )
     }}
+
  
   const cardRestaurantDetails =
     restaurants.restaurants &&
@@ -170,7 +166,7 @@ const Cart = () => {
           </ShippingContainer>
         );
       });
-  
+  console.log("valor total", orderData.order)
 
   return (
     <MainContainer>
@@ -187,16 +183,17 @@ const Cart = () => {
 
       {cardRestaurantDetails}
 
-      {renderProducts}
+      {productData.length !== 0 ? renderProducts : <Typography>Carrinho vazio</Typography>}
       
       {deliveryPrice}
-      <p>SUBTOTAL: VALOR TOTAL COM FRETE</p>
+      
+      <Typography>Subtotal: R${orderData.order && orderData.order.totalPrice}</Typography>
+      
       <PaymentContainer>
         <Typography>Forma de pagamento</Typography>
         <hr />
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="creditcard"
           name="radio-buttons-group"
         >
           <FormControlLabel
