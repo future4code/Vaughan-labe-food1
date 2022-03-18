@@ -6,7 +6,6 @@ import {
   Radio,
   RadioGroup,
   Typography,
-  Snackbar,
 } from "@mui/material";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
@@ -37,6 +36,8 @@ const Cart = () => {
     productsInCart,
     setProductsInCart,
     restaurantId,
+    getActiveOrder,
+    activeOrder
   } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const [paymentValue, setPaymentValue] = useState("");
@@ -45,6 +46,7 @@ const Cart = () => {
 
   const handleClick = () => {
     placeOrder();
+    getActiveOrder();
   };
 
   const onChange = (e) => {
@@ -56,6 +58,10 @@ const Cart = () => {
       productData.push({ id: product.id, quantity: product.quantity });
     });
   }, []);
+
+  const onSubmitForm = (e) => {
+    getActiveOrder();
+  }
 
   const total = productsInCart.reduce((soma, item) => {
     soma = item.quantity * item.price + soma;
@@ -112,6 +118,7 @@ const Cart = () => {
     );
   });
 
+
   const placeOrder = () => {
     const body = {
       products: productData,
@@ -125,7 +132,7 @@ const Cart = () => {
       })
       .then((res) => {
         console.log("parabéns pela compra", res.data.message);
-
+        getActiveOrder();
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -164,6 +171,7 @@ const Cart = () => {
       .map((item) => {
         return item.shipping;
       });
+
 
   return (
     <MainContainer>
@@ -214,9 +222,12 @@ const Cart = () => {
             onChange={onChange}
           />
         </RadioGroup>
-        <Button fullWidth variant="contained" onClick={handleClick}>
+        <form onSubmit={onSubmitForm}>
+          <Button fullWidth variant="contained" type="submit" onClick={handleClick}>
           Confirmar
-        </Button>
+          </Button>
+        </form>
+        
       </PaymentContainer>
       <ActiveOrder/>
       <Navigation screen={1} />
