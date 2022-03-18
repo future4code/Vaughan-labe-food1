@@ -2,7 +2,7 @@ import { Button, CardContent, CardMedia, FormControl, InputAdornment, InputLabel
 import { useContext, useState } from "react";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import { ButtonNoStyle } from "../../pages/Home/styled-home";
-import { CardStyled, DivStyled, BodyContainer, FilterContainer, SelectStyled } from "./styled-feed";
+import { CardStyled, DivStyled, BodyContainer, FilterContainer, SelectStyled, TextFieldStyled } from "./styled-feed";
 import SearchIcon from '@mui/icons-material/Search';
 import { goToDetails } from "../../routes/coordinator";
 import { useNavigate } from "react-router";
@@ -75,7 +75,7 @@ const Feed = ({ isSearch }) => {
     return (
         <DivStyled>
 
-            {isSearch ? <TextField
+            {isSearch ? < TextFieldStyled
                 id="input-with-icon-textfield"
                 placeholder="Restaurante..."
                 onChange={onChangeValue}
@@ -88,7 +88,9 @@ const Feed = ({ isSearch }) => {
                 }}
                 variant="outlined"
             /> : <></>}
-            <FilterContainer>
+            {isSearch && !inputValue && <p>Busque por nomes de restaurantes</p>}
+            {!isSearch &&
+                <FilterContainer>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="demo-simple-select-autowidth-label">Filtrar</InputLabel>
                     <SelectStyled
@@ -113,8 +115,8 @@ const Feed = ({ isSearch }) => {
                         <MenuItem value={"mexicana"}>Mexicana</MenuItem>
                     </SelectStyled>
                 </FormControl>
-            </FilterContainer>
-            {renderRestaurants}
+            </FilterContainer>}
+            {renderRestaurants} 
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
         </DivStyled>
     )

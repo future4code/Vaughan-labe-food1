@@ -31,13 +31,10 @@ const Profile = () => {
   useProtectedPage();
 
   const [userData] = useRequestData([], `${baseURL}/profile`);
-  const [historyData] = useRequestData([], `${baseURL}/orders/history`)
-  console.log(historyData.data)
+  const [history] = useRequestData([], `${baseURL}/orders/history`)
+  console.log("histórico, ",history)
  
-  const history = [
-    { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }
-    
-  ];
+  
 
   // useEffect(() => {
   //   getUserData()
@@ -55,15 +52,18 @@ const Profile = () => {
     //   orders()
 //   }, [])
 
-  const orders =
-    history &&
-    history.map((order) => {
+  const ordersHistory =
+    history && history.orders &&
+    history.orders.map((order) => {
+      const date = new Date(order.expiresAt)
+      const fullDate = date.toDateString()
+      
       return (
-        <CardStyled> 
+        <CardStyled key ={order.createdAt}> 
         <CardContent>
-          <TypographyMargin color ="primary"> {order.name}</TypographyMargin>
-          <TypographyMargin variant = "caption">{order.date}</TypographyMargin> <br/>
-          <TypographyStyled>SUBTOTAL R${order.totalPrice},00</TypographyStyled>
+          <TypographyMargin color ="primary"> {order.restaurantName}</TypographyMargin>
+          <TypographyMargin variant = "caption">{fullDate}</TypographyMargin> <br/>
+          <TypographyStyled>SUBTOTAL R${order.totalPrice.toFixed(2)}</TypographyStyled>
         </CardContent>
       </CardStyled>
       );
@@ -106,7 +106,7 @@ const Profile = () => {
           <OrderContainer>
           <TextUltimate> Histórico de Pedidos</TextUltimate>
          
-          {orders}
+          {ordersHistory}
           </OrderContainer>
           {/* <OrderHistory>
     <p>Histórico de pedidos</p> */}
