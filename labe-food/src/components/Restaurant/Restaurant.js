@@ -57,25 +57,22 @@ const Restaurant = () => {
     p: 4,
   };
 
-  // Tentando separar os produtos por categoria!!
+  // const categoryArray = [];
 
-  // useEffect(() => {
-  //     addingCategory()
-  // }, [restaurantDetails])
+  // const categoryNames = cardRestaurant && cardRestaurant.products.forEach((product) => {
+  //   const repeatCategory = categoryArray.findIndex(item => {
+  //     return product.category == item.category
+  //   }) > -1;
+  //   if (!repeatCategory) {
+  //     categoryArray.push(product)
+  //   }
+  // })
 
-  // const addingCategory = () => {
-  //     if (cardRestaurant) {
-  //         let category = []
-  //         let p = 0
-  //         for (let i = 0; i < cardRestaurant.products.length; i++) {
-  //             console.log(cardRestaurant.products[i].category)
-  //             if (cardRestaurant.products[i].category !== category.name) {
-  //                 category.push({ name: cardRestaurant.products[i].category, products: [cardRestaurant.products[i]] })
-  //             }
-  //         }
-  //         console.log(category)
-  //     }
-  // }
+  // const newCategoryArray = categoryArray.map((product) => {
+  //   return product.category
+  // })
+
+  // console.log(newCategoryArray)
 
   const handleOpen = (product) => {
     if(restaurantId && restaurantId !== params.id) {
@@ -206,9 +203,9 @@ const Restaurant = () => {
         </CardProducts>
       );
     });
-
-  console.log("produtos no carrinho", productsInCart)
-  console.log("id do restaurante", restaurantId)
+if (cardRestaurant) {
+  console.log("retaurante", cardRestaurant)
+}
 
   return (
     <>
