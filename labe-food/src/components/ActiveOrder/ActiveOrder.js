@@ -19,18 +19,17 @@ const ActiveOrder = () => {
     const snackbar = () => {
         if (activeOrder !== null && activeOrder.order) {
         return  <Snackbar
+                sx={{mb: 5}}
                 open={true}
                 autoHideDuration={activeOrder.order.expiresAt - activeOrder.order.createdAt}
                 >
-                    <Alert severity="error" sx={{ width: '100%' }}>
-                        <Typography>Pedido em andamento </Typography>
-                        <Typography>{activeOrder.order.restaurantName}</Typography>
-                        <Typography>SUBTOTAL R${activeOrder.order.totalPrice}</Typography>
+                    <Alert severity="success" sx={{ width: '100%' }}>
+                        <Typography> Pedido em andamento </Typography>
+                        <Typography color="primary.contrastText">{activeOrder.order.restaurantName}</Typography>
+                        <Typography fontWeight={600} color="primary.contrastText">SUBTOTAL R${activeOrder.order.totalPrice.toFixed(2)}</Typography>
                     </Alert>
                 </Snackbar>
     }}
-
-    console.log(activeOrder)
 
     return (
        

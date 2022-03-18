@@ -20,7 +20,19 @@ export const ShippingContainer = styled.div`
     width: 100vw;
     display: flex;
     padding: 1rem;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 2rem;
+   
+`
+
+export const TotalContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    // font-size: 1.125rem;
+    align-items: baseline;
+    margin-top: .5rem;
 `
 
 export const PaymentContainer = styled.div` 
