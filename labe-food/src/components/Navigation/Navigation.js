@@ -13,7 +13,7 @@ const Navigation = ({screen}) => {
   const navigate = useNavigate();
 
   return (
-    <BoxStyled sx={{ width: 500 }}>
+    <BoxStyled >
       <BottomNavigation
         value={value}
         onChange={(event, newValue) => {

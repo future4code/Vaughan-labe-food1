@@ -27,7 +27,7 @@ const Login = () => {
 
   setTimeout(()=> {
     setSplashScreentime(false)
-  }, 3000)
+  }, 4000)
 
 
   const dataUp = (data) => {

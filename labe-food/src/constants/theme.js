@@ -1,18 +1,22 @@
 import { createTheme } from "@mui/material";
-import { greyish, lipstick, barMain } from "./colors";
+import { greyish, lipstick, barMain, black } from "./colors";
 
 const theme = createTheme({
   palette: {
     primary: {
       main: lipstick,
-      contrastText: "#000",
+      contrastText: black,
     },
     secondary: {
       main: greyish,
     },
     bar: {
       main: barMain,
-      contrastText: "#000",
+      contrastText: black,
+    },
+    bar2: {
+      main: greyish,
+      contrastText: barMain,
     },
   },
   components: {
@@ -24,7 +28,7 @@ const theme = createTheme({
           padding: "0.6rem",
           marginTop: "0.65rem",
           borderRadius: 2,
-          letterSpacing:2,
+          letterSpacing: 2,
           textTransform: "capitalize",
         },
       },
@@ -34,9 +38,10 @@ const theme = createTheme({
         root: {
           fontsize: "1rem",
           borderRadius: 2,
-        },input:{ 
+        },
+        input: {
           color: "secondary",
-        }
+        },
       },
     },
     MuiFormControl: {
@@ -44,9 +49,10 @@ const theme = createTheme({
         root: {
           fontsize: "1rem",
           borderRadius: 2,
-        },fieldset:{ 
+        },
+        fieldset: {
           color: "primary",
-        }
+        },
       },
     },
     MuiInputLabel: {
