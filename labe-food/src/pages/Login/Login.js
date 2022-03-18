@@ -32,18 +32,11 @@ const Login = () => {
 
   const dataUp = (data) => {
     if (data.token && data.user.hasAddress) {
-      // goToHome(navigate);
-      goToEditAddress(navigate);
-      // goToAddress(navigate);
+      goToHome(navigate);
       return;
     } else if (data.token) {
       goToAddress(navigate);
     } else return;
-
-    console.log(data.user.hasAddress);
-    console.log(data.user);
-    // console.log(data.token)
-    // // goToHome(navigate)
   };
 
   const onSubmit = (e) => {
