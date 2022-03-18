@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router";
 import Feed from "../../components/Feed/Feed";
 import { goToSearch } from "../../routes/coordinator";
-import { ButtonNoStyle, MainStyle, SearchIconStyled, TextFieldStyled, Search } from "./styled-home";
-import { Input, InputAdornment, InputLabel, TextField } from "@mui/material";
+import { ButtonNoStyle, MainStyle, TextFieldStyled, Search } from "./styled-home";
+import { InputAdornment} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import { useContext } from "react";
-import { GlobalStateContext } from "../../global/GlobalStateContext";
-import { AccountCircle } from "@mui/icons-material";
 import Navigation from "../../components/Navigation/Navigation";
 import Header from '../../components/Header/Header';
 import useProtectedPage from "../../hooks/useProtectedPage";
-
 
 const Home = () => {
     const navigate = useNavigate();
@@ -43,8 +39,8 @@ const Home = () => {
             </MainStyle>
 
             <Feed />
-            
-            <Navigation screen={0}/>
+
+            <Navigation screen={0} />
         </div>
     )
 };
