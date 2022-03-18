@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { goToDetails } from "../../routes/coordinator";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import ActiveOrder from "../ActiveOrder/ActiveOrder";
 
 const Feed = ({ isSearch }) => {
     const navigate = useNavigate();
@@ -112,6 +113,7 @@ const Feed = ({ isSearch }) => {
             </FilterContainer>}
             {renderRestaurants} 
             {!isLoading && error && <p>Deu um erro. Tente novamente.</p>}
+            <ActiveOrder/>
         </DivStyled>
     )
 };

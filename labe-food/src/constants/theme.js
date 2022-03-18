@@ -18,6 +18,9 @@ const theme = createTheme({
       main: greyish,
       contrastText: barMain,
     },
+    success: {
+      main: lipstick,
+    }
   },
   components: {
     MuiButton: {

@@ -16,6 +16,7 @@ import {
   RestaurantContainer,
   ShippingContainer,
   PaymentContainer,
+  TotalContainer,
 } from "./styled-cart";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
@@ -37,7 +38,7 @@ const Cart = () => {
     setProductsInCart,
     restaurantId,
     getActiveOrder,
-    activeOrder
+    activeOrder,
   } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
   const [paymentValue, setPaymentValue] = useState("");
@@ -59,9 +60,9 @@ const Cart = () => {
     });
   }, []);
 
-  const onSubmitForm = (e) => {
+  const onSubmitForm = () => {
     getActiveOrder();
-  }
+  };
 
   const total = productsInCart.reduce((soma, item) => {
     soma = item.quantity * item.price + soma;
@@ -118,7 +119,6 @@ const Cart = () => {
     );
   });
 
-
   const placeOrder = () => {
     const body = {
       products: productData,
@@ -138,7 +138,6 @@ const Cart = () => {
         alert(err.response.data.message);
       });
   };
-
 
   const cardRestaurantDetails =
     restaurants.restaurants &&
@@ -172,7 +171,6 @@ const Cart = () => {
         return item.shipping;
       });
 
-
   return (
     <MainContainer>
       <Header title="Meu Carrinho" />
@@ -191,16 +189,22 @@ const Cart = () => {
       {productData.length !== 0 ? (
         renderProducts
       ) : (
-        <Typography>Carrinho vazio</Typography>
+        <Typography align="center" sx={{mt: 3}}>Carrinho vazio</Typography>
       )}
 
       <ShippingContainer>
-        <Typography>Frete: R${Number(deliveryPrice).toFixed(2)}</Typography>
+        <Typography>
+          Frete: R${Number(deliveryPrice).toFixed(2)}
+        </Typography>
+        <TotalContainer mt={2}>
+        <Typography variant="subtitle1">
+          SUBTOTAL
+        </Typography>
+        <Typography variant="h6" color="primary">
+          R${(total + Number(deliveryPrice)).toFixed(2)}
+        </Typography>
+        </TotalContainer>
       </ShippingContainer>
-
-      <Typography>
-        Subtotal: R${(total + Number(deliveryPrice)).toFixed(2)}
-      </Typography>
 
       <PaymentContainer>
         <Typography>Forma de pagamento</Typography>
@@ -223,13 +227,27 @@ const Cart = () => {
           />
         </RadioGroup>
         <form onSubmit={onSubmitForm}>
-          <Button fullWidth variant="contained" type="submit" onClick={handleClick}>
+        {productData.length !== 0 ?
+          <Button
+            fullWidth
+            variant="contained"
+            type="submit"
+            onClick={handleClick}
+          >
+            Confirmar
+          </Button> :
+          <Button
+          fullWidth
+          variant="contained"
+          type="submit"
+          disabled
+        >
           Confirmar
-          </Button>
+        </Button>
+          }
         </form>
-        
       </PaymentContainer>
-      <ActiveOrder/>
+      <ActiveOrder />
       <Navigation screen={1} />
     </MainContainer>
   );
