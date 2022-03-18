@@ -11,7 +11,6 @@ import {
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 import useRequestData from "../../hooks/useRequestData";
 import { baseURL } from "../../constants/baseurl";
-import { useParams } from "react-router-dom";
 import {
   MainContainer,
   AddressContainer,
@@ -20,7 +19,6 @@ import {
   PaymentContainer,
 } from "./styled-cart";
 import Header from '../../components/Header/Header'
-import useForm from "../../hooks/useform";
 import Navigation from "../../components/Navigation/Navigation";
 import Restaurant from "../../components/Restaurant/Restaurant";
 import { ButtonDiv, CardProducts, ProductImage, ProductText, TypographyStyled } from "../../components/Restaurant/styled-restaurant";
@@ -49,12 +47,13 @@ const Cart = () => {
 
   useEffect(() => {
     productsInCart.map((product) => {
-     setProductData(...productData, {id: product.id, quantity: product.quantity})
+    productData.push({id: product.id, quantity: product.quantity})
     })
-    getData()
   }, [])
 
- console.log("carrinho",productsInCart,  productData)
+  console.log("restaurante", productsInCart)
+
+ console.log("carrinho", productData)
 
 
   const removeFromCart = (id) => {
@@ -102,7 +101,7 @@ const Cart = () => {
 
   const placeOrder = () => {
     const body = {
-      products: [productData],
+      products: productData,
       paymentMethod: paymentValue
     }
     axios.post(`${baseURL}/restaurants/${restaurantId}/order`, body, { headers: {
@@ -211,7 +210,6 @@ const Cart = () => {
         </RadioGroup>
         <Button fullWidth variant="contained" 
         onClick={handleClick}
-        type="submit"
         >
           Confirmar
         </Button>
