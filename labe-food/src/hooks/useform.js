@@ -3,9 +3,8 @@ import React, { useState } from "react";
 const useForm = (initialState) => {
   
   const [form, setForm] = useState(initialState);
-  // if (initialState ){
 
-  console.log("form useform component", form)
+
   const onChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -18,9 +17,7 @@ const useForm = (initialState) => {
   };
 
   return { form, onChange, clear };
-// } s
 
-// return { form, onChange, clear };
 
 };
 
