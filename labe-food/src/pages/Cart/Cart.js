@@ -29,12 +29,11 @@ const Cart = () => {
   useProtectedPage();
   const { restaurants, productsInCart, setProductsInCart, restaurantId } = useContext(GlobalStateContext);
   const [profile] = useRequestData([], `${baseURL}/profile`);
-  const [orderData, getData] = useRequestData([], `${baseURL}/active-order`);
+  const [orderData, getOrderData] = useRequestData([], `${baseURL}/active-order`);
   const [paymentValue, setPaymentValue] = useState('')
   const [open, setOpen] = useState(false);
   const token = window.localStorage.getItem("token")
   const [productData, setProductData] = useState([])
- 
 
   const handleClick = () => {
     setOpen(true);
@@ -50,6 +49,12 @@ const Cart = () => {
     productData.push({id: product.id, quantity: product.quantity})
     })
   }, [])
+
+
+  const total = productsInCart.reduce((soma, item) => {
+    soma = (item.quantity * item.price) + soma
+    return soma
+  }, 0)
 
 
   const removeFromCart = (id) => {
@@ -155,13 +160,16 @@ const Cart = () => {
         return item.id === restaurantId;
       })
       .map((item) => {
-        return (
-          <ShippingContainer key={item.id}>
-            <Typography>Frete: R${item.shipping}</Typography>
-          </ShippingContainer>
-        );
+        return  item.shipping
+          // <ShippingContainer key={item.id}>
+          //   <Typography>Frete: R${item.shipping}</Typography>
+          // </ShippingContainer>
+        
       });
-  console.log("valor total", orderData.order)
+
+  console.log("valor total", deliveryPrice)
+
+  
 
   return (
     <MainContainer>
@@ -180,9 +188,11 @@ const Cart = () => {
 
       {productData.length !== 0 ? renderProducts : <Typography>Carrinho vazio</Typography>}
       
-      {deliveryPrice}
+      <ShippingContainer>
+          <Typography>Frete: R${(Number(deliveryPrice)).toFixed(2)}</Typography>
+      </ShippingContainer>
       
-      <Typography>Subtotal: R${orderData.order && orderData.order.totalPrice}</Typography>
+      <Typography>Subtotal: R${(total + Number(deliveryPrice)).toFixed(2)}</Typography>
       
       <PaymentContainer>
         <Typography>Forma de pagamento</Typography>
