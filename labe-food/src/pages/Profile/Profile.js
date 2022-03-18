@@ -31,11 +31,10 @@ const Profile = () => {
   useProtectedPage();
 
   const [userData] = useRequestData([], `${baseURL}/profile`);
-  // const [history] = useRequestData([], `${baseURL}/orders/history`)
-  const history = [
-    { totalPrice: 21, name: "McDonald", date: "21 outubro 2021" }
-    
-  ];
+  const [history] = useRequestData([], `${baseURL}/orders/history`)
+  console.log("histórico, ", history)
+
+
 
   // useEffect(() => {
   //   getUserData()
@@ -49,21 +48,24 @@ const Profile = () => {
     goToEditAddress(navigate);
   };
 
-//   useEffect(() => {
-    //   orders()
-//   }, [])
+  //   useEffect(() => {
+  //   orders()
+  //   }, [])
 
-  const orders =
-    history &&
-    history.map((order) => {
+  const ordersHistory =
+    history && history.orders &&
+    history.orders.map((order) => {
+      const date = new Date(order.expiresAt)
+      const fullDate = date.toDateString()
+
       return (
-        <CardStyled> 
-        <CardContent>
-          <TypographyMargin color ="primary"> {order.name}</TypographyMargin>
-          <TypographyMargin variant = "caption">{order.date}</TypographyMargin> <br/>
-          <TypographyStyled>SUBTOTAL R${order.totalPrice},00</TypographyStyled>
-        </CardContent>
-      </CardStyled>
+        <CardStyled key={order.createdAt}>
+          <CardContent>
+            <TypographyMargin color="primary"> {order.restaurantName}</TypographyMargin>
+            <TypographyMargin variant="caption">{fullDate}</TypographyMargin> <br />
+            <TypographyStyled>SUBTOTAL R${order.totalPrice.toFixed(2)}</TypographyStyled>
+          </CardContent>
+        </CardStyled>
       );
     });
 
@@ -78,7 +80,7 @@ const Profile = () => {
                 <p> {userData.user.name}</p>
                 <p>{userData.user.email}</p>
                 <p> {userData.user.cpf}</p>
-               
+
               </TextNew>
             ) : (
               <p>carregando </p>
@@ -102,15 +104,15 @@ const Profile = () => {
             </div>
           </AddressContainer>
           <OrderContainer>
-          <TextUltimate> Histórico de Pedidos</TextUltimate>
-         
-          {orders}
+            <TextUltimate> Histórico de Pedidos</TextUltimate>
+
+            {ordersHistory}
           </OrderContainer>
           {/* <OrderHistory>
     <p>Histórico de pedidos</p> */}
         </div>
 
-{/*        
+        {/*        
         <OrderHistory>
           <CardContent>
             <Typography gutterBottom variant='body2' component='div'>
@@ -127,7 +129,7 @@ const Profile = () => {
           </CardContent>
         </OrderHistory> */}
       </Container>
-      <Navigation screen={2}/>
+      <Navigation screen={2} />
     </>
   );
 };

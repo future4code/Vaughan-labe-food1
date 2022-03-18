@@ -86,11 +86,11 @@ margin: 5px;
 margin-bottom: 20px;
     padding: 5px;
     border-bottom: 1px solid black;
-    width: 85vw;
+    width: 95vw;
 
 `
 export const  CardStyled = styled(Card)`
-width: 85vw;
+width: 95vw;
 border-radius: .5em !important ;
 border: 1px solid greyish !important;
 `

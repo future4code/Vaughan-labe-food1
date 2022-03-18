@@ -1,5 +1,12 @@
-import { Card, Select } from "@mui/material";
+import { Card, Select, TextField } from "@mui/material";
 import styled from "styled-components";
+
+
+export const TextFieldStyled = styled(TextField)`
+width: 95vw ;
+margin: 20px  !important;
+
+`
 
 export const DivStyled = styled.div`
     display: flex;
