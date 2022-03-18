@@ -7,12 +7,22 @@ import SearchIcon from '@mui/icons-material/Search';
 import { goToDetails } from "../../routes/coordinator";
 import { useNavigate } from "react-router";
 import { RestaurantSharp } from "@mui/icons-material";
+import { useEffect } from "react";
+import useRequestData from "../../hooks/useRequestData";
+import { baseURL } from "../../constants/baseurl";
 
 const Feed = ({ isSearch }) => {
     const navigate = useNavigate();
-    const { restaurants, isLoading, error } = useContext(GlobalStateContext);
+    const { restaurants, getRestaurants , isLoading, error } = useContext(GlobalStateContext);
     const [inputValue, setValue] = useState("")
     const [categoryValue, setCategoryValue] = useState("")
+    
+    
+    useEffect (()=> {
+        getRestaurants()
+    
+       }, [])
+ 
 
     const filterCategory = (event) => {
         setCategoryValue(event.target.value)
