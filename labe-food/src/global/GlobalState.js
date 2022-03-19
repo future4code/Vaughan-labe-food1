@@ -12,7 +12,6 @@ const GlobalState = (props) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [cpf, setCpf] = useState("");
-    const [namePut, setNamePut] = useState("");
     const [activeOrder, getActiveOrder] = useRequestData([], `${baseURL}/active-order`);
 
     // const [addButton, setAddButton] = useState(productsInCart.map(product => product.quantity > 0) ? "Adicionar" : "Remover")
@@ -47,9 +46,7 @@ const GlobalState = (props) => {
          email,
          setName,
          name,
-         namePut,
-         setNamePut,
-        
+  
     }
     
     return (

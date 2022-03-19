@@ -15,7 +15,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 const EditProfile = () => {
   useProtectedPage();
   const navigate = useNavigate();
-  const { userData, getUserData, name, email, cpf, setNamePut } =
+  const { userData, getUserData, name, email, cpf } =
     useContext(GlobalStateContext);
 
   const { form, onChange, clear } = useForm({
@@ -25,8 +25,6 @@ const EditProfile = () => {
   });
 
   const response = (data) => {
-    console.log(data.data.user.name);
-    setNamePut(data.data.user && data.data.user.name);
     getUserData(`${baseURL}/profile`);
   };
 

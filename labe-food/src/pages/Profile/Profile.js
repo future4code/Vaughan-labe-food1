@@ -76,7 +76,6 @@ const Profile = () => {
             {userData.user ? (
               <TextNew>
                 <p> {userData.user.name}</p>
-                <p> {namePut}</p>
                 <p>{userData.user.email}</p>
                 <p> {userData.user.cpf}</p>
 
