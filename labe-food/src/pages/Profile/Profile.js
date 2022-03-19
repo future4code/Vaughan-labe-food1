@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { baseURL } from "../../constants/baseurl";
 import { useNavigate } from "react-router";
 import { goToEditAddress, goToEditProfile } from "../../routes/coordinator";
@@ -18,17 +18,32 @@ import { Typography, CardContent } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import useProtectedPage from "../../hooks/useProtectedPage";
+import { GlobalStateContext } from "../../global/GlobalStateContext";
 
 const Profile = () => {
   const navigate = useNavigate();
   useProtectedPage();
+  const { userData, getUserData, setName, setEmail, setCpf, namePut } = useContext(GlobalStateContext);
 
-  const [userData] = useRequestData([], `${baseURL}/profile`);
+  // const [userData, getUserData,] = useRequestData([], `${baseURL}/profile`);
   const [history] = useRequestData([], `${baseURL}/orders/history`)
 
+ useEffect(()=> { 
+   getUserData(`${baseURL}/profile`)
+   console.log ( "chamando profile"  )
+
+  //  const [userData , getUserData ,isLoadingUserData ] = useRequestData([], `${baseURL}/profile`);
+ },[])
+
   const changeProfile = () => {
-    goToEditProfile(navigate);
-  };
+    if(userData){
+      setName(userData.user && userData.user && userData.user.name )
+      setEmail(userData.user && userData.user && userData.user.email)
+      setCpf(userData.user && userData.user && userData.user.cpf)
+      goToEditProfile(navigate);
+    }
+
+    };
 
   const changeAdress = () => {
     goToEditAddress(navigate);
