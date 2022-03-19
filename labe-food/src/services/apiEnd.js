@@ -16,7 +16,6 @@ export const PutAdress = (form , addressUrl  , dataUp, getUserData ) => {
     .put(
       url,
       form,
-      // { headers: { auth: localStorage.getItem("token") } }
       { headers: { auth: localStorage.getItem("token") } }
     )
     .then((res) => {
