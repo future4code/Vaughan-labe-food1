@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../constants/baseurl";
 import { Button, TextField, Typography } from "@mui/material";
@@ -15,26 +15,29 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 const EditProfile = () => {
   useProtectedPage();
   const navigate = useNavigate();
-  const {userData , getUserData} = useContext(GlobalStateContext);
+  const {userData , getUserData, name, email, cpf  ,setNamePut  } = useContext(GlobalStateContext);
 
   const { form, onChange, clear } = useForm({
-    name: (userData.user && userData.user && userData.user.name ),
-    email: (userData.user && userData.user && userData.user.email ),
-    cpf: (userData.user && userData.user && userData.user.cpf ),
+    name:name,
+    email:email,
+    cpf:cpf,
   });
 
 
+
    const response =(data)=> { 
-       console.log(data)
+   
+       console.log(data.data.user.name)
+      setNamePut(data.data.user && data.data.user.name);
+      getUserData(`${baseURL}/profile`)
 
    }
-  
-  
 
+  
   const onSubmitForm = (event) => {
     event.preventDefault();
-    PutAdress(form, "profile" ,response)
-
+    PutAdress(form, "profile" ,response, getUserData )
+     
     goToProfile(navigate)
  
     
