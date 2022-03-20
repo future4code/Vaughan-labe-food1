@@ -1,134 +1,114 @@
 import React, { useContext } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Button, TextField, Typography } from "@mui/material";
-import { StyledForm} from "./styled-address";
+import { StyledForm } from "./styled-address";
 import { PutAdress } from "../../services/apiEnd";
-import useform from '../../hooks/useform';
+import useform from "../../hooks/useform";
 import { goToHome } from "../../routes/coordinator";
 import Header from "../Header/Header";
 import SubHeader from "../Header/SubHeader";
 import { GlobalStateContext } from "../../global/GlobalStateContext";
 
-
-const Address = ({title, title2}) => {
-
-  const { dataAdressDown } = useContext(GlobalStateContext)
+const Address = ({ title, title2 }) => {
+  const { dataAdressDown } = useContext(GlobalStateContext);
   const navigate = useNavigate();
 
+  const { form, onChange, clear } = useform({
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    complement: "",
+  });
 
-  const { form, onChange, clear } = useform(
-    {
-      street: "",
-      number: "",
-      neighbourhood: "",
-      city: "",
-      state: "",
-      complement: "",
+  const response = (data) => {
+    localStorage.setItem("token", data.data.token);
+    if (data.data.user.hasAddress && data.data.token) {
+      goToHome(navigate);
+    } else {
+      alert("Entre com o Endereço ");
+      return;
     }
-    );
-    
-    // const teste  = dataAdressDown && (dataAdressDown)
+  };
 
-  const response =(data)=> 
-  { 
-    localStorage.setItem("token", data.data.token)
-     if( data.data.user.hasAddress && data.data.token){ 
-      goToHome(navigate)
-     }else { 
-       alert( "Entre com o Endereço ")
-       return; 
-     }
-  }
-     
   const onSubmit = (e) => {
-    e.preventDefault()
-    PutAdress(form, "address" ,response)
-  }
+    e.preventDefault();
+    PutAdress(form, "address", response);
+  };
 
   return (
-
-
-
-
     <>
-   
-    {/* Olhar esta navegacao depois  */}
-     
       <Header title={title} />
       <SubHeader title2={title2} />
-      
 
       <StyledForm onSubmit={onSubmit}>
         <TextField
           required
-          name='street'
+          name="street"
           value={form.street}
           onChange={onChange}
-          label='Logradouro'
+          label="Logradouro"
           color="primary"
-          variant='outlined'
-          placeholder='Rua / Av'
-          margin='dense'
+          variant="outlined"
+          placeholder="Rua / Av"
+          margin="dense"
         />
         <TextField
           required
-          name='number'
+          name="number"
           value={form.number}
           onChange={onChange}
-          label='Número'
-          
-          variant='outlined'
+          label="Número"
+          variant="outlined"
           color="primary"
-          placeholder='Número'
-          margin='dense'
+          placeholder="Número"
+          margin="dense"
         />
         <TextField
-          name='complement'
+          name="complement"
           color="primary"
           value={form.complement}
           onChange={onChange}
-          label='Complemento'
-          placeholder='Apto/Bloco'
-          margin='dense'
+          label="Complemento"
+          placeholder="Apto/Bloco"
+          margin="dense"
         />
         <TextField
           required
-          name='neighbourhood'
+          name="neighbourhood"
           value={form.neighbourhood}
           onChange={onChange}
-          label='Bairro'
+          label="Bairro"
           color="primary"
-          variant='outlined'
-          placeholder='Bairro'
-          margin='dense'
+          variant="outlined"
+          placeholder="Bairro"
+          margin="dense"
         />
 
         <TextField
           required
-          name='city'
+          name="city"
           value={form.city}
           onChange={onChange}
-          label='Cidade'
+          label="Cidade"
           color="primary"
-          variant='outlined'
-          placeholder='Cidade'
-          margin='dense'
+          variant="outlined"
+          placeholder="Cidade"
+          margin="dense"
         />
         <TextField
           required
-          name='state'
+          name="state"
           value={form.state}
           onChange={onChange}
-          label='Estado'
+          label="Estado"
           color="primary"
-          variant='outlined'
-          placeholder='Estado'
-          margin='dense'
+          variant="outlined"
+          placeholder="Estado"
+          margin="dense"
         />
-        <Button type='form' 
-        font="black"
-        color='primary' 
-        variant='contained' >
+        <Button type="form" font="black" color="primary" variant="contained">
           Salvar
         </Button>
       </StyledForm>

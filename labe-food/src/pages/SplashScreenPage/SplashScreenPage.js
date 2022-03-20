@@ -1,16 +1,14 @@
-import {MainStyled} from './style-splashScreen'
-import logowhite from '../../assets/images/whitelogo/logowhite.png'
+import { MainStyled } from "./style-splashScreen";
+import logowhite from "../../assets/images/whitelogo/logowhite.png";
 
-const SplashScreenPage = () => { 
+const SplashScreenPage = () => {
+  return (
+    <MainStyled>
+      <div>
+        <img src={logowhite} />
+      </div>
+    </MainStyled>
+  );
+};
 
-    return (
-        <MainStyled> 
-            <div>
-            <img src={logowhite} />
-            </div>
-
-        </MainStyled>
-     )
-}
-
-export default SplashScreenPage; 
+export default SplashScreenPage;

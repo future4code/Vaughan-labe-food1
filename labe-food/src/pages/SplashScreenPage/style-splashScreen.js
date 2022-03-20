@@ -21,15 +21,14 @@ export const MainStyled = styled.div`
     width: 8.075rem;
     height: 5.063rem;
     object-fit: contain;
-    animation: move 3s  ease-in-out;
+    animation: move 3s ease-in-out;
   }
   @keyframes move {
     0% {
       transform: scale(0.2) rotate(180deg);
     }
     100% {
-      transform: scale(1.0) rotate(720deg);
+      transform: scale(1) rotate(720deg);
     }
-  
   }
 `;

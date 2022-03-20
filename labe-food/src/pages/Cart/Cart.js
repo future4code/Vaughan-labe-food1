@@ -47,7 +47,6 @@ const Cart = () => {
 
   const handleClick = () => {
     placeOrder();
-    getActiveOrder();
   };
 
   const onChange = (e) => {
@@ -131,8 +130,8 @@ const Cart = () => {
         },
       })
       .then((res) => {
-        console.log("parabéns pela compra", res.data.message);
-        getActiveOrder();
+        alert("Pedido realizado!");
+        getActiveOrder(`${baseURL}/active-order`);
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -189,20 +188,18 @@ const Cart = () => {
       {productData.length !== 0 ? (
         renderProducts
       ) : (
-        <Typography align="center" sx={{mt: 3}}>Carrinho vazio</Typography>
+        <Typography align="center" sx={{ mt: 3 }}>
+          Carrinho vazio
+        </Typography>
       )}
 
       <ShippingContainer>
-        <Typography>
-          Frete: R${Number(deliveryPrice).toFixed(2)}
-        </Typography>
+        <Typography>Frete: R${Number(deliveryPrice).toFixed(2)}</Typography>
         <TotalContainer mt={2}>
-        <Typography variant="subtitle1">
-          SUBTOTAL
-        </Typography>
-        <Typography variant="h6" color="primary">
-          R${(total + Number(deliveryPrice)).toFixed(2)}
-        </Typography>
+          <Typography variant="subtitle1">SUBTOTAL</Typography>
+          <Typography variant="h6" color="primary">
+            R${(total + Number(deliveryPrice)).toFixed(2)}
+          </Typography>
         </TotalContainer>
       </ShippingContainer>
 
@@ -226,8 +223,8 @@ const Cart = () => {
             onChange={onChange}
           />
         </RadioGroup>
-        <form onSubmit={onSubmitForm}>
-        {productData.length !== 0 ?
+
+        {productData.length !== 0 ? (
           <Button
             fullWidth
             variant="contained"
@@ -235,17 +232,12 @@ const Cart = () => {
             onClick={handleClick}
           >
             Confirmar
-          </Button> :
-          <Button
-          fullWidth
-          variant="contained"
-          type="submit"
-          disabled
-        >
-          Confirmar
-        </Button>
-          }
-        </form>
+          </Button>
+        ) : (
+          <Button fullWidth variant="contained" type="submit" disabled>
+            Confirmar
+          </Button>
+        )}
       </PaymentContainer>
       <ActiveOrder />
       <Navigation screen={1} />

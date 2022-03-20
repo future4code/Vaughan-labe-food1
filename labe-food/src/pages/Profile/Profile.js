@@ -23,45 +23,47 @@ import { GlobalStateContext } from "../../global/GlobalStateContext";
 const Profile = () => {
   const navigate = useNavigate();
   useProtectedPage();
-  const { userData, getUserData, setName, setEmail, setCpf, namePut } = useContext(GlobalStateContext);
+  const { userData, getUserData, setName, setEmail, setCpf, namePut } =
+    useContext(GlobalStateContext);
 
-  // const [userData, getUserData,] = useRequestData([], `${baseURL}/profile`);
-  const [history] = useRequestData([], `${baseURL}/orders/history`)
+  const [history] = useRequestData([], `${baseURL}/orders/history`);
 
- useEffect(()=> { 
-   getUserData(`${baseURL}/profile`)
-   console.log ( "chamando profile"  )
-
-  //  const [userData , getUserData ,isLoadingUserData ] = useRequestData([], `${baseURL}/profile`);
- },[])
+  useEffect(() => {
+    getUserData(`${baseURL}/profile`);
+  }, []);
 
   const changeProfile = () => {
-    if(userData){
-      setName(userData.user && userData.user && userData.user.name )
-      setEmail(userData.user && userData.user && userData.user.email)
-      setCpf(userData.user && userData.user && userData.user.cpf)
+    if (userData) {
+      setName(userData.user && userData.user && userData.user.name);
+      setEmail(userData.user && userData.user && userData.user.email);
+      setCpf(userData.user && userData.user && userData.user.cpf);
       goToEditProfile(navigate);
     }
-
-    };
+  };
 
   const changeAdress = () => {
     goToEditAddress(navigate);
   };
 
-
   const ordersHistory =
-    history && history.orders &&
+    history &&
+    history.orders &&
     history.orders.map((order) => {
-      const date = new Date(order.expiresAt)
-      const fullDate = date.toDateString()
+      const date = new Date(order.expiresAt);
+      const fullDate = date.toDateString();
 
       return (
         <CardStyled key={order.createdAt}>
           <CardContent>
-            <TypographyMargin color="primary"> {order.restaurantName}</TypographyMargin>
-            <TypographyMargin variant="caption">{fullDate}</TypographyMargin> <br />
-            <TypographyStyled>SUBTOTAL R${order.totalPrice.toFixed(2)}</TypographyStyled>
+            <TypographyMargin color="primary">
+              {" "}
+              {order.restaurantName}
+            </TypographyMargin>
+            <TypographyMargin variant="caption">{fullDate}</TypographyMargin>{" "}
+            <br />
+            <TypographyStyled>
+              SUBTOTAL R${order.totalPrice.toFixed(2)}
+            </TypographyStyled>
           </CardContent>
         </CardStyled>
       );
@@ -69,7 +71,7 @@ const Profile = () => {
 
   return (
     <MainDiv>
-      <Header title='Meu Perfil' goBack={true} />
+      <Header title="Meu Perfil" goBack={true} />
       <Container>
         <div>
           <NewContainer>
@@ -78,7 +80,6 @@ const Profile = () => {
                 <p> {userData.user.name}</p>
                 <p>{userData.user.email}</p>
                 <p> {userData.user.cpf}</p>
-
               </TextNew>
             ) : (
               <p>carregando </p>
@@ -90,10 +91,10 @@ const Profile = () => {
 
           <AddressContainer>
             <div>
-              <Typography mb={0.5} color='secondary'>
+              <Typography mb={0.5} color="secondary">
                 Endereço cadastrado
               </Typography>
-              <Typography color='primary.textcontrast'>
+              <Typography color="primary.textcontrast">
                 {userData.user && userData.user.address}
               </Typography>
             </div>
@@ -107,7 +108,6 @@ const Profile = () => {
             {ordersHistory}
           </OrderContainer>
         </div>
-
       </Container>
       <Navigation screen={2} />
     </MainDiv>

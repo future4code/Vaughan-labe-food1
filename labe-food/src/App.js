@@ -1,7 +1,7 @@
 import { Navigation } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
-import theme from './constants/theme'
+import theme from "./constants/theme";
 import GlobalState from "./global/GlobalState";
 import Router from "./routes/Router";
 import { GlobalStyle } from "./styled-app";
@@ -12,7 +12,7 @@ function App() {
       <GlobalState>
         <GlobalStyle />
         <BrowserRouter>
-        <Router />
+          <Router />
         </BrowserRouter>
       </GlobalState>
     </ThemeProvider>
