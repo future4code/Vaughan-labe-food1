@@ -57,16 +57,12 @@ const EditAddress = () => {
    
     
 
-      console.log(dataAdressDown)
 
     const teste  = dataAdressDown.address && dataAdressDown.address
 
   const response =(data)=> 
   { 
-    console.log(data.data.token)
     localStorage.setItem("token", data.data.token)
-    console.log(data.data.user)
-    console.log(data.data.user.hasAddress)
      if( data.data.user.hasAddress && data.data.token){ 
       goToProfile(navigate)
      }else { 
@@ -92,12 +88,7 @@ const EditAddress = () => {
   }
 
   
-  console.log(form)
   
-   console.log("teste", teste)
-   const teste1 = teste && teste
-   console.log("teste1", teste1)
-   
 
      
   return (
