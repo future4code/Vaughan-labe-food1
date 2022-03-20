@@ -31,10 +31,7 @@ const Address = ({title, title2}) => {
 
   const response =(data)=> 
   { 
-    console.log(data.data.token)
     localStorage.setItem("token", data.data.token)
-    console.log(data.data.user)
-    console.log(data.data.user.hasAddress)
      if( data.data.user.hasAddress && data.data.token){ 
       goToHome(navigate)
      }else { 
@@ -48,12 +45,6 @@ const Address = ({title, title2}) => {
     PutAdress(form, "address" ,response)
   }
 
-  //  console.log("teste", teste)
-  //  const teste1 = teste && teste
-  //  console.log("teste1", teste1)
-   
-  //  const { form, onChange, clear } = useform( dataAdressDown && teste.address);
-     
   return (
 
 
