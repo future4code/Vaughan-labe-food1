@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🍟 Projeto LabeFood
 
-## Available Scripts
+Site desenvolvido para ser uma plataforma semelhante ao iFood. Foi utilizada a API labeFoods para as requisições do projeto.
 
-In the project directory, you can run:
+## 📱 Link Surge
+http://vaughan-labefood1.surge.sh/
 
-### `npm start`
+## 👩‍💻 Desenvolvedores
+- Ana Sue Sammi
+- Gabriel Martins
+- Gabriela Hermenegildo
+- Ronald Santiago
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛠 Tecnologias e Ferramentas
+- React
+- Material UI
+- Styled-components
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## ⚙️ Funcionalidades
+O site foi pensado para ser utilizado em aparelhos mobile, seguindo um design pronto.
+A primeira tela que aparece para o usuário é uma splash screen com o logo do site e uma animação.
+Depois o usuário pode se cadastrar ou fazer login, caso já possua um cadastro. Caso o usuário esteja entrando no site pela primeira vez, após o cadastro dos dados pessoais, ele é levado a uma página para cadastro de seu endereço.
+Após seu cadastro e login, é possível abrir a página inicial com toda a lista de restaurantes, onde é possível buscar pelo nome do restaurante ou filtrar por categoria de comida. Ao clicar no card do restaurante, o usuário é levado até a página de detalhes com todos os produtos, os quais tem botão de adicionar e a quantidade do produto a ser adicionado.
+Na página de carrinho é possível ver o total de seus pedidos e escolher a forma de pagamento. Após confirmar o pagamento aparece uma mensagem de pedido em andamento até o pedido ser entregue (tempo de entrega do restaurante).
+Na página de perfil é possível ver o histórico de pedidos e editar seus dados cadastrais, como nome, e-mail e endereço.
+Nas páginas de perfil, home page (lista dos restaurantes) e carrinho há uma barra de navegação inferior com botões que direcionam para cada uma dessas páginas.
 
-### `npm test`
+## 📷 Imagens
+![image](https://user-images.githubusercontent.com/5093313/159173324-ad7d7e65-569e-4612-89ba-bf49289e4fd9.png)
+![image](https://user-images.githubusercontent.com/5093313/159173338-3753489a-03f1-49a1-b0a4-ea778dfd0d14.png)
+![image](https://user-images.githubusercontent.com/5093313/159173352-8d15fd7d-6a53-41b9-93a8-470b9cc840b9.png)
+![image](https://user-images.githubusercontent.com/5093313/159173438-7c53926d-ba60-42a8-84df-49e2fc711936.png)
+![image](https://user-images.githubusercontent.com/5093313/159173509-54acfdd1-6ff6-4de7-a33b-cca6dbbdba9a.png)
+![image](https://user-images.githubusercontent.com/5093313/159173529-e629651e-bd76-4255-b34e-c6b30783ec0e.png)
+![image](https://user-images.githubusercontent.com/5093313/159173551-9faf2e50-bfbf-49b5-9a1a-ef25ca7f4919.png)
+![image](https://user-images.githubusercontent.com/5093313/159173609-6b6211a4-ab01-442b-bb4c-d5c7e047af72.png)
+![image](https://user-images.githubusercontent.com/5093313/159173631-222d70ab-73ee-42e3-b9ed-c5fa08d8f41d.png)
+![image](https://user-images.githubusercontent.com/5093313/159173817-aff20178-237b-4951-a6aa-44504a074219.png)
+![image](https://user-images.githubusercontent.com/5093313/159173860-b0a5f889-1e8d-4c65-82d3-6e8e65b279e4.png)
+![image](https://user-images.githubusercontent.com/5093313/159173883-6528196a-73ee-4906-8918-935c2ebaf65b.png)
+![image](https://user-images.githubusercontent.com/5093313/159174627-f8f2dfa9-5596-4cfa-8327-839317040715.png)
+![image](https://user-images.githubusercontent.com/5093313/159174131-179cc743-5cd6-4048-ab1d-9c5329cda4ea.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
